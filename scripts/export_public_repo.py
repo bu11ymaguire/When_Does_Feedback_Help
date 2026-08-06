@@ -128,6 +128,9 @@ CONTACT_ALLOWED = {
 # sanitize_public_artifacts.py 는 `DESKTOP-XXXX` 를 정규식 주석에 적는다.
 # 그런 파일은 스스로 이 표식을 선언한다. 표식을 쓴 파일은 export 출력과 manifest 에
 # 드러나므로 조용히 통과하지 않는다.
+PUBLIC_REPOSITORY = "https://github.com/bu11ymaguire/When_Does_Feedback_Help"
+"""선언된 공개 저장소. 갱신 모드에서 대상의 원격이 이것인지 확인한다."""
+
 ALLOW_MARKER = "public-export-allow-tokens"
 # public-export-allow-tokens: 이 파일 자체가 금지 문자열 목록을 담는다.
 # 연락처는 여기 적지 않고 public/CITATION.cff 에서 읽는다 (contact_token 참조).
@@ -276,11 +279,23 @@ def main() -> int:
         print(f"**중단** 대상이 소스 트리 안이다: {dest}")
         print("  공개 staging 은 형제 디렉터리에 둔다. 소스 안에 두면 다음 export 가 자신을 삼킨다.")
         return 1
+    # 대상에 `.git` 이 있으면 **그 원격이 선언된 공개 저장소인지**만 허용한다.
+    # 무조건 거부하면 첫 공개 이후 갱신을 할 수 없고, 무조건 허용하면 private
+    # 이력이 섞이는 사고를 막지 못한다. 원격을 확인하는 것이 정확한 기준이다.
     if (dest / ".git").exists():
-        print(f"**중단** 대상에 .git 이 있다: {dest / '.git'}")
-        print("  private 이력이 섞이는 사고를 막기 위해 거부한다.")
-        print("  검증이 끝난 뒤 그 디렉터리에서만 git init 을 실행한다.")
-        return 1
+        existing = subprocess.run(
+            ["git", "-C", str(dest), "remote", "get-url", "origin"],
+            capture_output=True,
+            text=True,
+            check=False,
+        ).stdout.strip()
+        if existing.removesuffix(".git") != PUBLIC_REPOSITORY.removesuffix(".git"):
+            print(f"**중단** 대상에 .git 이 있고 원격이 공개 저장소가 아니다: {dest}")
+            print(f"  원격     {existing or '(없음)'}")
+            print(f"  기대값   {PUBLIC_REPOSITORY}")
+            print("  private 이력이 섞이는 사고를 막기 위해 거부한다.")
+            return 1
+        print(f"갱신 모드. 대상이 이미 공개 저장소를 가리킨다: {existing}")
     if dest.exists() and any(dest.iterdir()) and not args.force:
         print(f"**중단** 대상이 비어 있지 않다: {dest}")
         print("  내용을 갈아치우려면 --force 를 준다.")
@@ -335,8 +350,9 @@ def main() -> int:
     if dest.exists() and args.force:
         for child in sorted(dest.iterdir()):
             if child.name == ".git":
-                print(f"**중단** 예상하지 못한 .git: {child}")
-                return 1
+                # 갱신 모드에서는 공개 저장소의 이력을 보존한다. 위에서 원격을
+                # 확인했으므로 private 이력이 아니다.
+                continue
             if child.is_dir():
                 shutil.rmtree(child)
             else:
@@ -350,9 +366,9 @@ def main() -> int:
         shutil.copy2(path, target)
         files[rel] = sha256_of(target)
 
-    # 복사 후 `.git` 이 생겼는지 다시 본다. allowlist 로는 불가능하지만 검사는 남긴다.
-    if (dest / ".git").exists():
-        print("**중단** export 후 대상에 .git 이 있다. 중단한다.")
+    # allowlist 가 `.git` 을 담을 수 없으므로 복사로 생길 일은 없다. 그래도 확인한다.
+    if any(rel.startswith(".git/") for rel in files):
+        print("**중단** export 가 .git 아래 파일을 복사했다.")
         return 1
 
     manifest = {
@@ -362,7 +378,7 @@ def main() -> int:
             "branch": git("rev-parse", "--abbrev-ref", "HEAD"),
             "dirty": dirty,
         },
-        "public_repository": "https://github.com/bu11ymaguire/When_Does_Feedback_Help",
+        "public_repository": PUBLIC_REPOSITORY,
         "method": (
             "allowlist export. .git 을 복사하지 않으므로 공개 저장소는 private 이력을 "
             "공유하지 않는다. 아래 files 의 SHA-256 으로 두 트리를 한 방향으로 대조한다."

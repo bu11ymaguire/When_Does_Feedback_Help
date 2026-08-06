@@ -197,6 +197,28 @@ to pair runs across controllers.
 | `dev_pilot.csv` | 324 | early pilot |
 | `manifest.json` | — | source commit, raw checksums, aggregation conventions |
 
+### A note on language
+
+This README, the manuscript, and every code docstring are in English. Several of the
+research records are in Korean, because they were written as working documents during
+the study rather than for publication:
+
+```text
+paper/claim_ledger.md          claim register and protocol deviations
+paper/CITATIONS.md             per-citation content checklist
+paper/evidence_map.md          raw checksums
+docs/reproduce.md              full reproduction commands
+docs/results_stage2.md         generated result tables
+docs/experiment_protocol.md    decisions D1-D32
+```
+
+They are included because the manuscript cites them as artifacts, and a citation to a
+missing file is worse than a citation to a file in another language. The numbers and
+identifiers in them are language-independent. Nothing in the reproduction path above
+requires reading Korean.
+
+### Provenance of the published results
+
 `manifest.json` records the SHA-256 of each private raw file, the SHA-256 of each
 published CSV, and the exact aggregation conventions (median rule, bootstrap count and
 seed, test used). The step-level trajectories and the execution environment records are

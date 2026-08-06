@@ -1,7 +1,7 @@
 {
   "export_version": "public-v1",
   "source": {
-    "commit": "a99a360e39933071a6f93c7ee23789eccd924210",
+    "commit": "bc5335da27b789f414cb6a84dd078c566d68c814",
     "branch": "experiment/reproduction-package",
     "dirty": false
   },
@@ -55,7 +55,7 @@
     ".gitignore": "bd2f1f6f3e8cff540e3256656ca5161bdb7c630d3e33f11ae2b5133b415c0a3e",
     "CITATION.cff": "376398f8cff2083b551bfd6e129890a9dcd29ce5ad9923fd3749b6381a06e13f",
     "LICENSE": "7bad9995ac4f2aa521fc8989a90937318a2c744db4c325c539c48db412370391",
-    "README.md": "a5f61503e550ddcf7c2f755f87569ea9baf6955c7207af0e364951636fb6e709",
+    "README.md": "d625ba5d6b3272c6fda7427cf3ab19f78e28082f44a2cbff41ddd85b2ec7ed24",
     "configs/base.yaml": "a2ab5edd9fa485b735747bd05dd73ec10fdf25ff267b0c2fb7448a1759be3185",
     "configs/cost_model.mnist_mlp.yaml": "28ed4f5f372257d277f933fa44be8fd776b36b9c114309d83ee9d4ae9c7e9794",
     "configs/cost_model.small_cnn.yaml": "4d3878d529a44125ec316ddd539e2b8ae7dec679189cc1c5f9ab52cd8e24c1be",
@@ -131,7 +131,7 @@
     "scripts/compare_controllers.py": "fdab1713f003e7d33986f2f234bc77ddede1caa21b57b5d5a353ad2f0348fff1",
     "scripts/diagnose_excluded_pairs.py": "8b2a7c2d5d4e96816c0558448c57e4a8f346c3fe1158f652c801469dbc123af4",
     "scripts/diagnose_rosen.py": "d68af5ad0af71a79220114857f8224bcda54bfb451df4692825cfad9802b9713",
-    "scripts/export_public_repo.py": "5a6168f977944795527e0c2223d62497aad8a8e7bf2ea7fb0e83e9eaee144d2c",
+    "scripts/export_public_repo.py": "ef70d7ab031798754fae3b60385becffcc50e631b4761d8c129c35d448da6454",
     "scripts/make_figures.py": "8496a4c3f067e5adc21e811cf42db041d49be3dca70ec97b3623f540971809c6",
     "scripts/make_manifest.py": "69761e104f1e141fa7c416669b9fbc50148289ba085d8be0dfdec57c0acae8d6",
     "scripts/make_public_results.py": "174ed121a1ca5596ac62256d9c83834756d692e57121a051a61be6b0476b7111",

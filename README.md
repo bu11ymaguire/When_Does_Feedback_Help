@@ -179,8 +179,12 @@ results/public/           row-level results and a manifest with checksums
 paper/                    manuscript source, tables, figures, bibliography
 docs/reproduce.md         full reproduction commands
 notebooks/                overview and reproduction notebook
-tests/                    465 tests
+tests/                    497 tests
 ```
+
+Of the 497 tests, 465 cover the study's implementation and 32 cover this published
+reproduction package: that the row-level CSVs reproduce the manuscript's headline
+numbers, and that the notebook stays runnable and free of stored output.
 
 ### The published results
 

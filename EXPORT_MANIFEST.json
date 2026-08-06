@@ -1,7 +1,7 @@
 {
   "export_version": "public-v1",
   "source": {
-    "commit": "bc5335da27b789f414cb6a84dd078c566d68c814",
+    "commit": "926a9de69fd675154ae00ffa74965118a96ec3c3",
     "branch": "experiment/reproduction-package",
     "dirty": false
   },
@@ -55,7 +55,7 @@
     ".gitignore": "bd2f1f6f3e8cff540e3256656ca5161bdb7c630d3e33f11ae2b5133b415c0a3e",
     "CITATION.cff": "376398f8cff2083b551bfd6e129890a9dcd29ce5ad9923fd3749b6381a06e13f",
     "LICENSE": "7bad9995ac4f2aa521fc8989a90937318a2c744db4c325c539c48db412370391",
-    "README.md": "d625ba5d6b3272c6fda7427cf3ab19f78e28082f44a2cbff41ddd85b2ec7ed24",
+    "README.md": "39e47ff93236b64cf208259a562d13e343c01957005aa168ab06b01bdf544294",
     "configs/base.yaml": "a2ab5edd9fa485b735747bd05dd73ec10fdf25ff267b0c2fb7448a1759be3185",
     "configs/cost_model.mnist_mlp.yaml": "28ed4f5f372257d277f933fa44be8fd776b36b9c114309d83ee9d4ae9c7e9794",
     "configs/cost_model.small_cnn.yaml": "4d3878d529a44125ec316ddd539e2b8ae7dec679189cc1c5f9ab52cd8e24c1be",
@@ -89,7 +89,7 @@
     "paper/sections/12_nopolicy.tex": "b287c4513551676c20649f2fa7d8ff446f1ac86b562dd83208b83a113154fe15",
     "paper/sections/13_discussion.tex": "2fb4697ab9cb7f46d6c409685196d87ded369272f068486ab02ca81b28605568",
     "paper/sections/14_limitations.tex": "9169b76f3a8d6227af4a5e96acd6ba3ec819baa6d6af9d7411a0af110405ccb9",
-    "paper/sections/15_reproducibility.tex": "dd3087e8bccc4c8e31b0faa9e31608f50ebd60811d4125cc74099542bce09e9b",
+    "paper/sections/15_reproducibility.tex": "a1d47dca19d76582cdbd33e8b2e8117d93056e0b69113e4ff34285023e02e817",
     "paper/tables/acceptance_delta.tex": "ca833fb5f388906668d24f564ece76539622b971960987653fbfe7b70f6d9d22",
     "paper/tables/acceptance_rejection.tex": "b65cdd6d1f35ccb1b009562a9999b9edd538433fbdfa4a7b41b2f367875c16bb",
     "paper/tables/heldout_absolute.tex": "e64a3d5aba72c166e19a63057c5a202fbeb8d81b51a64f784468fa6b02fef129",

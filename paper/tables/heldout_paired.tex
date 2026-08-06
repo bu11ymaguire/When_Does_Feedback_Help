@@ -1,0 +1,20 @@
+% 이 파일은 scripts/make_tables.py 가 생성한다. **손으로 수정하지 않는다.**
+% 표: held-out paired delta
+% raw: headroom_challenge-heldout_step_size_fixed_b8_9a18b6e9.jsonl
+% raw 의 SHA-256 은 paper/evidence_map.md 에 있다.
+% 공개 저장소에는 raw 가 없다. results/public/*.csv 에서 --public-dir 로 만들면
+% 이 파일과 바이트 단위로 같아진다 (scripts/verify_public_results.py).
+\begin{tabular}{llrrrr}
+\toprule
+Gate & Comparison & Median & 95\% CI & $p$ & Positive \\
+\midrule
+A2 & shrinking $-$ best\_static & $+1.690$ & $[+1.462, +2.368]$ & ${<}0.0001$ & 40/40 \\
+C2 & shrinking $-$ onestep & $+0.456$ & $[+0.254, +0.720]$ & ${<}0.0001$ & 35/40 \\
+C3 & shrinking $-$ committed & $+0.010$ & $[-0.033, +0.053]$ & $0.9725$ & 21/40 \\
+B & onestep\_absolute $-$ onestep\_narrow & $+0.005$ & $[-0.002, +0.026]$ & $0.5900$ & 23/40 \\
+B & onestep\_wide $-$ onestep\_narrow & $-0.001$ & $[-0.041, +0.005]$ & $0.3611$ & 18/40 \\
+\midrule
+-- & open\_loop $-$ best\_static & $+0.395$ & $[+0.350, +0.476]$ & ${<}0.0001$ & 40/40 \\
+-- & heuristic $-$ best\_static & $-0.000$ & $[-0.000, +0.000]$ & $0.7750$ & 20/40 \\
+\bottomrule
+\end{tabular}

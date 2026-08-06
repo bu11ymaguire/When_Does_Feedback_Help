@@ -1,0 +1,89 @@
+\section{Acceptance criterion ablation (exploratory)}
+\label{sec:ablation}
+
+\subsection{Motivation}
+
+The R2 results of Section~\ref{sec:mismatch} mix two effects:
+
+\begin{enumerate}
+  \item the initial plan going stale as the minibatch changes;
+  \item steps being rejected because monotone decrease is required on a noisy
+        objective.
+\end{enumerate}
+
+The default acceptance rule requires monotone decrease of the current minibatch
+objective. A step that improves the true objective can be rejected because of
+sample noise.
+
+\subsection{Design}
+
+\begin{quote}
+We replaced minibatch-local monotonic acceptance with a fixed-evaluation-objective
+criterion.
+\end{quote}
+
+Gradients and HVPs are still computed on the minibatch. Only the acceptance test
+changes. A forward pass on the fixed evaluation objective costs
+$n_{\text{samples}} / \text{batch size}$ times more, and that factor is included in
+the GE accounting.
+
+\subsection{Results}
+
+\begin{table}[!ht]
+  \centering
+  \input{tables/acceptance_delta}
+  \caption{Paired differences under the two acceptance criteria, $n = 3$ per
+  regime. Exploratory.}
+  \label{tab:acceptance-delta}
+\end{table}
+
+\begin{figure}[!ht]
+  \centering
+  \includegraphics[width=\textwidth]{figure4_acceptance_ablation.png}
+  \caption{Paired \gate{A2}, \gate{C2} and \gate{C3} effects under minibatch-local
+  and fixed-evaluation acceptance, $n = 3$ per regime. The alternative criterion
+  reduced, but did not eliminate, the apparent advantage of replanning over a
+  committed stale plan, and \ctrl{shrinking} did not establish an advantage over
+  \ctrl{onestep}. Exploratory.}
+  \label{fig:acceptance}
+\end{figure}
+
+\begin{quote}
+This alternative criterion reduced, but did not eliminate, the apparent advantage
+of replanning over a committed stale plan. The estimated $\gate{C3}$ magnitude
+decreased substantially under the alternative acceptance criterion, indicating that
+the original magnitude was partly acceptance-dependent.
+\end{quote}
+
+In R2, \ctrl{shrinking} still does not beat \ctrl{best\_static} (zero of three
+pairs positive) and only draws level with \ctrl{onestep}.
+
+\subsection{The alternative criterion was stricter, not looser}
+\label{sec:stricter}
+
+\begin{table}[!ht]
+  \centering
+  \input{tables/acceptance_rejection}
+  \caption{Median rejection rate under the two acceptance criteria. Rejection rates
+  \emph{rose} under the alternative criterion.}
+  \label{tab:acceptance-rejection}
+\end{table}
+
+Under the default rule, \texttt{loss\_before} and the candidate losses live on
+\emph{the same minibatch}. Reducing the loss of the batch whose gradient was just
+computed is easy. The alternative criterion requires a decrease in the full-data
+loss and therefore blocks steps that overfit the current batch.
+
+\subsection{Limitations of this ablation}
+\label{sec:ablation-limits}
+
+\textbf{This is not a single-factor change.} The acceptance criterion and the
+number of effective steps change together. Excluding the evaluation cost from the
+accounting would hide a real cost, so we included it, and the price is that the two
+effects are entangled. We therefore \emph{do not use absolute comparisons between
+the two columns to argue that one acceptance rule is better}.
+
+The R1 column is not a meaningful comparison. In the full-batch regime the fixed
+evaluation objective and the curvature objective take the same value, so all the
+alternative criterion changes is charging one extra forward pass per step
+(\ctrl{best\_static}: $5.2199 \rightarrow 5.1094$). That is a budget perturbation.

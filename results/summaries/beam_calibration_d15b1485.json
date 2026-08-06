@@ -1,0 +1,101 @@
+{
+  "meta": {
+    "mode": "calibrate-beam",
+    "condition": "step_size_fixed",
+    "phase": "pilot",
+    "seeds": [
+      0
+    ],
+    "budget_ge": 150.0,
+    "beam": 2,
+    "quotas": [
+      1.0,
+      2.0,
+      4.0
+    ],
+    "difficulty": "medium",
+    "n_specs": 1,
+    "narrow_only": true,
+    "environment": {
+      "platform": "Windows 11",
+      "processor": "AMD64 Family 25 Model 33 Stepping 2, AuthenticAMD",
+      "cpu_count": 12,
+      "torch_num_threads": 1,
+      "torch_num_interop_threads": 1,
+      "omp_num_threads": null,
+      "mkl_num_threads": null,
+      "pinned": 1
+    },
+    "concurrent_processes": 1
+  },
+  "selected_beam": 2,
+  "reference_beam": 2,
+  "tolerance": 0.02,
+  "rationale": "beam 2: 모든 (space, quota) 에서 기준 beam 2 대비 효용 상대차 < 0.02 이고 depth>1 비율 차이 <= 0.05",
+  "rows": {
+    "narrow|H1.0|b1": {
+      "log_improvement": 58.75544764165946,
+      "relative_diff": 0.0,
+      "deep_fraction": 0.0,
+      "depth_cap_fraction": 0.0,
+      "wall_clock_sec": 0.0032204999588429928,
+      "deep_diff": 0.0
+    },
+    "narrow|H1.0|b2": {
+      "log_improvement": 58.75544764165946,
+      "relative_diff": 0.0,
+      "deep_fraction": 0.0,
+      "depth_cap_fraction": 0.0,
+      "wall_clock_sec": 0.0009255000040866435,
+      "deep_diff": 0.0
+    },
+    "narrow|H4.0|b1": {
+      "log_improvement": 40.60908654941997,
+      "relative_diff": 0.10656947873036525,
+      "deep_fraction": 1.0,
+      "depth_cap_fraction": 1.0,
+      "wall_clock_sec": 0.0006214000168256462,
+      "deep_diff": 0.0
+    },
+    "narrow|H4.0|b2": {
+      "log_improvement": 45.45298776194849,
+      "relative_diff": 0.0,
+      "deep_fraction": 1.0,
+      "depth_cap_fraction": 1.0,
+      "wall_clock_sec": 0.0005091000348329544,
+      "deep_diff": 0.0
+    },
+    "wide|H1.0|b1": {
+      "log_improvement": 58.75544764165946,
+      "relative_diff": 0.0,
+      "deep_fraction": 0.0,
+      "depth_cap_fraction": 0.0,
+      "wall_clock_sec": 0.00046690000453963876,
+      "deep_diff": 0.0
+    },
+    "wide|H1.0|b2": {
+      "log_improvement": 58.75544764165946,
+      "relative_diff": 0.0,
+      "deep_fraction": 0.0,
+      "depth_cap_fraction": 0.0,
+      "wall_clock_sec": 0.000728100014384836,
+      "deep_diff": 0.0
+    },
+    "wide|H4.0|b1": {
+      "log_improvement": 40.60908654941997,
+      "relative_diff": 0.10656947873036525,
+      "deep_fraction": 1.0,
+      "depth_cap_fraction": 1.0,
+      "wall_clock_sec": 0.0005979999550618231,
+      "deep_diff": 0.0
+    },
+    "wide|H4.0|b2": {
+      "log_improvement": 45.45298776194849,
+      "relative_diff": 0.0,
+      "deep_fraction": 1.0,
+      "depth_cap_fraction": 1.0,
+      "wall_clock_sec": 0.0006676000193692744,
+      "deep_diff": 0.0
+    }
+  }
+}

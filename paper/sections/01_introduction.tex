@@ -1,0 +1,71 @@
+\section{Introduction}
+\label{sec:intro}
+
+Truncated or inexact Newton methods solve the Newton system approximately with an
+iterative solver rather than forming the Hessian
+\citep{dembo1982inexact,steihaug1983cg,nash1984lanczos,nash2000survey}.
+Implementations that access curvature only through Hessian-vector products build
+on the exact product of \citet{pearlmutter1994hvp}; applications at deep-network
+scale are reported by \citet{martens2010hessianfree,martens2011rnn}. Practical
+performance depends strongly on two computational-resource decisions: the
+damping level and the per-step CG iteration budget.
+
+Damping belongs to the Levenberg--Marquardt family of regularizers
+\citep{levenberg1944,marquardt1963} and is related to a trust-region radius
+\citep{steihaug1983cg,conn2000trustregion}. In Hessian-free optimization the
+damping update rule is reported to drive performance
+\citep{martens2010hessianfree,martens2011rnn}. Truncating the CG budget is the
+central design variable of inexact Newton methods
+\citep{dembo1982inexact,nash2000survey}.
+
+Attempts to adapt these two quantities during optimization rather than fixing
+them connect to the learned-optimizer literature
+\citep{andrychowicz2016l2l,metz2019pathologies,metz2020effective,bae2022apo}.
+For reinforcement learning \citep{schulman2017ppo} to be the right tool for
+learning such a controller, observing the state and changing the action in
+response must carry value. The distinction between fixing a plan in advance and
+reacting to the state during execution is the classical distinction between
+open-loop and closed-loop control \citep{bertsekas2017dp}.
+
+Our question is not whether performance improves, but \emph{where the
+improvement comes from}.
+
+\begin{quote}
+In Hessian-free Newton--CG, does the benefit of state-dependent computational
+resource control arise from multi-step planning or from execution-time feedback?
+\end{quote}
+
+We split this into two testable propositions.
+
+\begin{description}
+  \item[Q1] Does a good action sequence exist?
+  \item[Q2] Is it worth revising that sequence with feedback during execution?
+\end{description}
+
+The two questions imply different artifacts. If only \textbf{Q1} holds, what is
+needed is a predictor that fixes a schedule at the initial state. Only if
+\textbf{Q2} holds is a per-step feedback policy justified.
+
+\subsection*{Contributions}
+
+\begin{enumerate}
+  \item We operationalize the control of damping and CG effort as a sequential
+        decision problem.
+  \item We present a controller ladder that separates multi-step planning from
+        execution-time feedback.
+  \item On held-out instances of ill-conditioned SPD quadratics, we confirm an
+        additional value for multi-step planning ($+0.456$~nat, CI $+0.254$ to
+        $+0.720$, $p < 0.0001$, $35/40$) and do not observe a practically large
+        additional value for feedback ($+0.010$~nat, CI $-0.033$ to $+0.053$).
+  \item We document and apply an audit procedure required to make our controller
+        comparisons identifiable.
+\end{enumerate}
+
+Item~1 is not a new MDP formulation. Item~4 is not a general benchmark
+framework; it is a \emph{secondary} contribution, presented as part of the
+methods in Section~\ref{sec:eligibility} and revisited in
+Section~\ref{sec:audit-why}.
+
+The decision not to train a policy is not listed as a contribution.
+Section~\ref{sec:nopolicy} separates the scientific conclusion from the project
+go/no-go decision.

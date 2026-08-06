@@ -1,0 +1,20 @@
+\section{Conditioning (exploratory)}
+\label{sec:conditioning}
+
+\begin{table}[!ht]
+  \centering
+  \input{tables/heldout_conditioning}
+  \caption{\gate{A2} by spec, $n = 10$ each. Exploratory: the specs were not
+  designed as a factorial study of the condition number.}
+  \label{tab:conditioning}
+\end{table}
+
+\begin{quote}
+Adaptive headroom did not increase monotonically with condition number; the largest
+effect was observed at $\kappa = 10^3$. This suggests that condition number alone
+does not explain the headroom.
+\end{quote}
+
+We also do not claim a monotone relation in the opposite direction. The damping
+grid, the CG budget, the initial gradient alignment, and the spectral distribution
+may all contribute.

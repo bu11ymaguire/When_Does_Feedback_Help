@@ -1,0 +1,20 @@
+c_fwd: 0.257440347679545
+c_grad: 1.0
+c_grad_graph: 0.9257071052936215
+c_hvp: 1.584816505304222
+curvature_batch_size: 512
+device: cuda:0
+gpu_name: NVIDIA GeForce RTX 3060 Ti
+grad_batch_size: 512
+host: host-a
+is_launch_bound: true
+model_id: mnist_mlp_b512_cuda
+n_params: 101770
+n_repeat: 300
+notes: {}
+peak_vram_mb: 21.419921875
+t_fwd_ms: 0.1742999884299934
+t_grad_graph_ms: 0.6267499993555248
+t_grad_ms: 0.6770500040147454
+t_hvp_ms: 1.0730000212788582
+torch_version: 2.13.0+cu130

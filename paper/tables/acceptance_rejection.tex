@@ -1,0 +1,24 @@
+% 이 파일은 scripts/make_tables.py 가 생성한다. **손으로 수정하지 않는다.**
+% 표: rejection rate under two acceptance criteria
+% raw: headroom_micro-neural_step_size_fixed_b8_0bec1125.jsonl
+% raw: headroom_micro-neural_step_size_fixed_b8_9f3194be.jsonl
+% raw 의 SHA-256 은 paper/evidence_map.md 에 있다.
+% 공개 저장소에는 raw 가 없다. results/public/*.csv 에서 --public-dir 로 만들면
+% 이 파일과 바이트 단위로 같아진다 (scripts/verify_public_results.py).
+\begin{tabular}{llrr}
+\toprule
+Controller & Regime & Control & Fixed evaluation \\
+\midrule
+\texttt{committed} & R1 full-batch & 0.00 & 0.04 \\
+ & R2 batch 128 & 0.79 & 0.89 \\
+ & R2 batch 64 & 0.66 & 0.92 \\
+\midrule
+\texttt{shrinking} & R1 full-batch & 0.00 & 0.04 \\
+ & R2 batch 128 & 0.04 & 0.42 \\
+ & R2 batch 64 & 0.00 & 0.36 \\
+\midrule
+\texttt{onestep} & R1 full-batch & 0.04 & 0.04 \\
+ & R2 batch 128 & 0.03 & 0.53 \\
+ & R2 batch 64 & 0.00 & 0.57 \\
+\bottomrule
+\end{tabular}

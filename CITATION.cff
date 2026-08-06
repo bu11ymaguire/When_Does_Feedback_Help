@@ -1,0 +1,35 @@
+# Citation metadata. https://citation-file-format.github.io/
+#
+# `version` 과 `date-released` 는 릴리스 태그를 만들 때 확정한다. arXiv 식별자와 DOI 는
+# 제출 후에야 발급되므로 지금 넣지 않는다. **없는 식별자를 미리 적지 않는다.**
+cff-version: 1.2.0
+message: If you use this software or the published results, please cite the manuscript.
+title: >-
+  When Does Feedback Help? Planning and Model Mismatch in Hessian-Free Newton
+  Control
+abstract: >-
+  We study the allocation of damping and conjugate-gradient effort in Hessian-free
+  Newton-CG as a sequential decision problem, and ask whether the benefit comes from
+  multi-step planning or from execution-time state feedback. On held-out instances of
+  ill-conditioned symmetric positive definite quadratics, multi-step lookahead improved
+  over one-step greedy control, while replanning during execution showed no practically
+  large benefit over a plan committed at the initial state. Under stochastic model
+  mismatch the committed plan became fragile and replanning reduced that loss, but the
+  planner did not consistently outperform inexpensive one-step control. Policy learning
+  was a predeclared conditional next stage and was not undertaken on this evidence.
+type: software
+authors:
+  - given-names: Jin-Uk
+    family-names: Kim
+    email: jwkim628@gmail.com
+    affiliation: Department of Data Science, Hanyang University, Seoul, Republic of Korea
+repository-code: https://github.com/bu11ymaguire/When_Does_Feedback_Help
+license: MIT
+keywords:
+  - Hessian-free optimization
+  - truncated Newton
+  - conjugate gradient
+  - model predictive control
+  - open-loop versus closed-loop control
+  - learned optimizers
+  - reproducibility

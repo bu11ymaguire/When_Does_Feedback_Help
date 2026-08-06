@@ -1,0 +1,20 @@
+c_fwd: 0.36468377390260925
+c_grad: 1.0
+c_grad_graph: 0.9992555298361208
+c_hvp: 3.1169969444486
+curvature_batch_size: 128
+device: cuda:0
+gpu_name: NVIDIA GeForce RTX 3060 Ti
+grad_batch_size: 128
+host: host-a
+is_launch_bound: false
+model_id: small_cnn_b128_cuda
+n_params: 2193226
+n_repeat: 150
+notes: {}
+peak_vram_mb: 642.126953125
+t_fwd_ms: 2.0573999790940434
+t_grad_graph_ms: 5.637399997795001
+t_grad_ms: 5.641600000672042
+t_hvp_ms: 17.584849963895977
+torch_version: 2.13.0+cu130

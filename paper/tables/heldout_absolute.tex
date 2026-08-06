@@ -1,0 +1,19 @@
+% 이 파일은 scripts/make_tables.py 가 생성한다. **손으로 수정하지 않는다.**
+% 표: held-out absolute
+% raw: headroom_challenge-heldout_step_size_fixed_b8_9a18b6e9.jsonl
+% raw 의 SHA-256 은 paper/evidence_map.md 에 있다.
+% 공개 저장소에는 raw 가 없다. results/public/*.csv 에서 --public-dir 로 만들면
+% 이 파일과 바이트 단위로 같아진다 (scripts/verify_public_results.py).
+\begin{tabular}{lrrrr}
+\toprule
+Controller & $\kappa = 10^{3}$ & $\kappa = 10^{4}$ & $\kappa = 10^{5}$ & $\kappa = 10^{6}$ \\
+\midrule
+\texttt{best\_static} & 12.741 & 8.825 & 8.980 & 8.724 \\
+\texttt{best\_open\_loop} & 13.656 & 9.332 & 9.251 & 9.086 \\
+\texttt{heuristic} & 12.740 & 8.825 & 8.980 & 8.755 \\
+\texttt{onestep\_narrow} & 17.032 & 10.357 & 9.879 & 9.833 \\
+\texttt{onestep\_absolute} & 17.036 & 10.571 & 9.882 & 9.723 \\
+\texttt{committed\_Q4\_narrow} & 19.417 & 11.345 & 10.205 & 10.123 \\
+\texttt{shrinking\_Q4\_narrow} & 19.911 & 11.222 & 10.186 & 10.032 \\
+\bottomrule
+\end{tabular}

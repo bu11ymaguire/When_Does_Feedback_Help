@@ -1,0 +1,135 @@
+\section{Benchmark eligibility}
+\label{sec:eligibility}
+
+\subsection{Where a numerical-floor criterion fails}
+
+Our initial eligibility condition computed the ceiling from the numerical floor,
+\begin{equation}
+  \text{ceiling} = \log L_0 - \log\!\left(L_0 \cdot 100\varepsilon\right)
+  \approx 31.44 \text{ nat} .
+\end{equation}
+
+By that criterion Rosenbrock ($d = 5$, standard starting point) was eligible: the
+median log improvement of four baselines was $1.8175$~nat, leaving an apparent
+margin of $29.62$~nat to the ceiling.
+
+In fact all four baselines returned \emph{exactly} $1.8175$~nat. We identified the
+cause: the basin of the standard starting point contains a strict local minimum.
+
+The literature distinguishes \emph{two variants} of the extended Rosenbrock
+function \citep{kok2009rosenbrock}. The uncoupled sum of two-dimensional problems,
+defined only in even dimensions, has only the global minimum, whereas the
+coordinate-coupled variant acquires additional stationary points for $d \geq 4$
+\citep{shang2006rosenbrock,kok2009rosenbrock}. We use the latter:
+\begin{equation}
+  L(x) = \sum_{i=1}^{d-1}
+    \left[ 100\,(x_{i+1} - x_i^2)^2 + (1 - x_i)^2 \right].
+  \label{eq:rosenbrock}
+\end{equation}
+
+The point below was obtained by converging our own implementation at $d = 5$; it
+is not transcribed from a published table. Its first coordinate,
+$x_1 = -0.962$, is consistent with the approximate location of the local minimum
+reported in the literature.
+
+\begin{center}
+\begin{tabular}{ll}
+\toprule
+Quantity & Value \\
+\midrule
+$x^\ast$ & $(-0.96205102,\ 0.93573939,\ 0.88071360,\ 0.77787767,\ 0.60509367)$ \\
+Loss & $3.930839434133$ \\
+$\lVert \nabla L \rVert$ & $1.06 \times 10^{-8}$ \\
+Hessian & smallest eigenvalue $+0.595$ (positive definite) \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Converging L-BFGS from the standard starting point reaches this point rather than
+the global minimum. The attainable log improvement is
+$\log(24.2 / 3.930839) = 1.8175$~nat, exactly the observed baseline value. The
+margin was therefore \emph{zero}.
+
+\subsection{Correcting to an attainable ceiling}
+
+\begin{align}
+  L_{\text{ref}} &= \min \text{ over reference runs started from the task's own
+    initial point}, \\
+  J_{\text{achievable}} &= \log L_0 - \log \max(L_{\text{ref}}, L_{\text{floor}}).
+\end{align}
+
+We use a panel of reference solvers and forbid relying on a single one. Evidence
+came from the $\kappa = 10^6$ quadratic:
+
+\begin{center}
+\begin{tabular}{lrrl}
+\toprule
+Solver & Final loss & $\lVert \nabla L \rVert$ & Status \\
+\midrule
+\texttt{lbfgs}  & $1.007485 \times 10^{-6}$  & $3.456 \times 10^{-2}$  & not converged \\
+\texttt{newton} & $3.059391 \times 10^{-32}$ & $2.650 \times 10^{-16}$ & converged \\
+\texttt{sgd}    & \texttt{nan}               & ---                     & failed \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Had we used L-BFGS alone, $J_{\text{achievable}}$ would have been underestimated
+at roughly $28.3$~nat.
+
+\emph{Results from a different initialization do not raise the ceiling.} The
+controller always starts from the task's own initial point, so an optimum in
+another basin is not attainable. We record such results as diagnostics only.
+Starting from $(0.9, \ldots, 0.9)$, Rosenbrock at $d = 5$ reaches the global
+minimum; feeding that value into $L_{\text{ref}}$ inflates
+$J_{\text{achievable}}$ from $2.58$ to $31.44$, admitting a spec that is in fact
+trapped in a local minimum.
+
+Planner-family controllers are excluded from the panel. Including them would leak
+planner results into spec selection.
+
+\subsection{Detecting duplicated seeds}
+
+Because \texttt{initial\_loss} values can coincide by chance, we also compare the
+starting-point vectors. This check revealed that the default configuration of
+Rosenbrock $d = 5$ did not randomize the starting point, so seeds 2, 3, and 4
+produced \emph{the same instance}. Twenty-four runs were bitwise identical in
+every column, and that diagnostic's nominal $n = 3$ was in fact $n = 1$.
+
+\subsection{Final eligibility conditions and verdicts}
+
+\begin{center}
+\begin{tabular}{l}
+\toprule
+Condition \\
+\midrule
+\texttt{failure\_rate} $= 0$ \\
+Joint floor-hit rate $\leq 1/3$ \\
+Median $\JE \geq 1$~nat for every baseline \\
+$J_{\text{achievable}} - \text{median } \JE \geq 3$~nat \\
+Spread among converged reference solvers $\leq 0.5$~nat \\
+Each seed yields a genuinely different instance \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{table}[!ht]
+  \centering
+  \begin{tabular}{llrlr}
+  \toprule
+  Spec & Verdict & $J_{\text{achievable}}$ & Limiting factor & Minimum margin \\
+  \midrule
+  quad $d{=}100$, $\kappa{=}10^3$ & accepted & 31.44 & numerical floor & 13.71 \\
+  quad $d{=}100$, $\kappa{=}10^4$ & accepted & 31.44 & numerical floor & 20.98 \\
+  quad $d{=}100$, $\kappa{=}10^5$ & accepted & 31.44 & numerical floor & 21.88 \\
+  quad $d{=}100$, $\kappa{=}10^6$ & accepted & 31.44 & numerical floor & 21.93 \\
+  rosen $d{=}5$                   & rejected & 1.82  & critical point  & $-0.00$ \\
+  rosen $d{=}5$ (random start)    & rejected & 2.58  & critical point  & 0.00 \\
+  micro-neural full-batch         & accepted & 31.44 & numerical floor & 11.68 \\
+  micro-neural minibatch          & accepted & 31.44 & numerical floor & 28.75 \\
+  \bottomrule
+  \end{tabular}
+  \caption{Eligibility verdicts. The margin for the Rosenbrock family is exactly
+  zero, so those specs cannot discriminate between controllers. We do not
+  interpret this as a failure of the method on nonlinear problems.}
+  \label{tab:eligibility}
+\end{table}

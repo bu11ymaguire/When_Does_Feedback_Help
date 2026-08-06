@@ -1,0 +1,30 @@
+% draft.md Abstract 에 대응한다. CLAIM: scope, C07, C03, C04, C12
+\begin{abstract}
+We study the allocation of damping and conjugate-gradient (CG) effort in
+Hessian-free Newton--CG \citep{martens2010hessianfree,nash2000survey} as a
+sequential decision problem, and ask whether the resulting benefit comes from
+multi-step planning or from execution-time state feedback.
+
+Under a fixed budget of $150$ gradient-equivalent units (GE) we compare, on the
+same ladder, a tuned constant setting, a resource-clock open-loop schedule, a
+one-step greedy controller, a planner that commits to a single plan formed at
+the initial state, and a planner that replans at every step. The configuration
+was fixed once on development seeds and measured on disjoint held-out seeds.
+
+On $40$ instances of ill-conditioned symmetric positive definite quadratics
+($d = 100$, $\kappa \in \{10^3, 10^4, 10^5, 10^6\}$, ten held-out seeds each),
+multi-step lookahead improved over one-step greedy control by
+$+0.456$~nat (95\% CI $+0.254$ to $+0.720$, $p < 0.0001$, $35/40$ instances).
+On the same $40$ instances, replanning during execution differed from the
+committed planner by $+0.010$~nat (95\% CI $-0.033$ to $+0.053$, $p = 0.97$,
+$21/40$). The confidence interval was narrow and included zero, and
+\emph{we did not observe a practically large feedback benefit}.
+
+As an exploratory extension we compared a micro-neural problem in a
+deterministic full-batch regime and in minibatch regimes, changing only the
+samples the optimizer observes for the same model and data
+($n = 3$ per regime). In the minibatch regimes, holding a stale plan was
+costly and replanning reduced that cost, but \emph{the planner did not
+consistently outperform inexpensive one-step control}. Policy learning was a
+predeclared conditional next stage; on this evidence we did not proceed to it.
+\end{abstract}

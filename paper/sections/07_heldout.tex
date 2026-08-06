@@ -1,0 +1,104 @@
+\section{Held-out confirmation}
+\label{sec:heldout}
+
+We applied the pre-fixed \ctrl{shrinking\_Q4\_narrow} to
+4 specs $\times$ seeds 100--109 $=$ \textbf{40 instances}: 960 runs, zero
+failures, zero floor caps. \emph{The configuration was not reselected.}
+
+\begin{table}[!ht]
+  \centering
+  \input{tables/heldout_absolute}
+  \caption{Absolute median $\JE$ in nats on held-out instances ($n = 10$ per
+  spec). Higher is better.}
+  \label{tab:heldout-absolute}
+\end{table}
+
+\begin{table}[!ht]
+  \centering
+  \input{tables/heldout_paired}
+  \caption{Paired differences on held-out instances ($n = 40$). Positive values
+  favour the treatment. Gate verdicts:
+  \gate{A1}~GO, \gate{A2}~GO, \gate{B}~redesign, \gate{C1}~undecidable,
+  \gate{C2}~GO, \gate{C3}~redesign, \gate{D}~GO.}
+  \label{tab:heldout-paired}
+\end{table}
+
+\begin{figure}[!ht]
+  \centering
+  \includegraphics[width=\textwidth]{figure1_ladder.png}
+  \caption{Absolute performance across the ladder. This figure describes levels
+  only. \textbf{Do not subtract bars in panel (b);} the median of paired
+  differences is not linear, so the causal decomposition must be read from
+  Figure~\ref{fig:planning-vs-feedback} instead.}
+  \label{fig:ladder}
+\end{figure}
+
+\subsection{Multi-step lookahead beats one-step}
+\label{sec:c2}
+
+$\gate{C2} = +0.456$~nat with a CI lower bound of $+0.254$, above the GO threshold
+of $0.3$. Both required conditions were met:
+
+\begin{center}
+\begin{tabular}{lr}
+\toprule
+Condition & Value \\
+\midrule
+Improvement & $+0.456$~nat, $35/40$ positive \\
+Adoption rate of depth $> 1$ & 0.84 \\
+Plan-depth cap reached & 0.00 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+No step failed to consume its quota because of a computational cap, so the
+quota-ladder comparison is not compromised.
+
+On development seeds this was conditional ($+0.251$, $p = 0.0771$). At $n = 40$ it
+was promoted to GO.
+
+\subsection{Replanning during execution}
+\label{sec:c3}
+
+$\gate{C3} = +0.010$~nat, 95\% CI $[-0.033, +0.053]$, with 21 wins, 1 tie, and 18
+losses. The CI width of $0.086$~nat is an order of magnitude narrower than the
+$0.906$~nat of \gate{A2}.
+
+\begin{quote}
+In the held-out results the feedback effect was $+0.010$~nat with a 95\%
+confidence interval of $[-0.033, +0.053]$ that narrowly included zero. We
+therefore \emph{did not observe a practically large feedback benefit}.
+\end{quote}
+
+We do not claim equivalence. Because we did not preregister an equivalence margin,
+we cannot report ``the effect is zero'' or ``the effect is smaller than
+$0.053$~nat'' as a test result. The two one-sided tests procedure requires bounds
+fixed in advance \citep{schuirmann1987tost}, and specifying those bounds ahead of
+time is the recommended practice \citep{lakens2017equivalence}.
+
+\subsection{The action space is not the bottleneck}
+\label{sec:actionspace}
+
+\ctrl{absolute} (132 actions, $\log_{10}$ range 15.27) gains $+0.005$~nat over
+\ctrl{narrow} (12 actions, range 0.95), and $\ctrl{wide} - \ctrl{narrow}$ is
+$-0.001$~nat; see Table~\ref{tab:heldout-paired} for intervals. Letting damping be
+chosen freely does not raise one-step performance. \emph{This is a negative result,
+but it justifies the inexpensive narrow action space.}
+
+The GO threshold for \gate{B} was $0.5$~nat and the observation is two orders of
+magnitude smaller, so the verdict is \emph{redesign}. The interval includes zero,
+but we make no equivalence claim, for the reason given in Section~\ref{sec:c3}.
+
+\Needspace{6\baselineskip}
+\subsection{Search cost}
+\label{sec:cost}
+
+\begin{table}[!ht]
+  \centering
+  \input{tables/heldout_cost}
+  \caption{Median decision-search cost on held-out instances, relative to the
+  $150$~GE deployment budget. The reported headroom was obtained by an oracle that
+  consumed $1{,}294$ times the deployment budget; Section~\ref{sec:cheap} discusses
+  what that cost gap implies.}
+  \label{tab:heldout-cost}
+\end{table}

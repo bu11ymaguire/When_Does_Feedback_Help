@@ -1,0 +1,98 @@
+\section{Discussion}
+\label{sec:discussion}
+
+\subsection{Planning is not feedback}
+\label{sec:planning-not-feedback}
+
+Each rung of the ladder measures the value of a different capability:
+
+\begin{center}
+\begin{tabular}{ll}
+\toprule
+Rung & Capability measured \\
+\midrule
+constant $\rightarrow$ one-step   & value of immediate per-state selection \\
+one-step $\rightarrow$ committed  & value of multi-step lookahead \\
+committed $\rightarrow$ replanning & value of revising the plan during execution \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\textbf{We do not decompose these values arithmetically.} The median of paired
+differences is not linear. In our measurements \ctrl{committed} is $+2.090$ and
+replanning is $+1.690$ against the tuned constant, yet the directly measured
+$\text{replanning} - \ctrl{committed}$ is $+0.010$. By spec the values are
+$+0.472 / -0.019 / +0.009 / +0.000$, so the two planners are effectively tied and
+the marginal gap arises because the pooled medians fall on different instances.
+\emph{Comparisons are made only with direct paired statistics}
+(Section~\ref{sec:no-subtraction}, Figure~\ref{fig:planning-vs-feedback}).
+
+\textbf{Q1} (does a good sequence exist?) is supported; \textbf{Q2} (is it worth
+revising during execution?) is not supported under these conditions. On a
+deterministic objective the planner's internal model is exact, so the plan formed at
+the initial state is already the optimal prediction and replanning gains no new
+information.
+
+\subsection{Model error raises the risk of long-horizon plans}
+\label{sec:model-error}
+
+The exploratory micro-neural results summarize as follows.
+
+\begin{quote}
+Long-horizon plans are valuable when the internal predictive model is accurate; when
+the model is wrong, the risk of a stale plan grows.
+\end{quote}
+
+In the minibatch regimes the rejection rate of the committed plan rose from $0.00$ to
+$0.66$--$0.79$ and terminal improvement fell below the tuned constant. Replanning
+reduced that loss.
+
+\textbf{Yet under the same conditions replanning is worse than one-step control.}
+$\text{replanning} - \text{one-step}$ is $-1.111$ and $-0.716$ in the two minibatch
+conditions, and $\text{replanning} - \text{tuned constant}$ is $-0.900$ and $-0.277$.
+So one must not read the positive $\ctrl{committed} \rightarrow \text{replanning}$
+value as evidence for a learned feedback policy. \emph{That positive value is
+stale-plan avoidance, not an advantage over inexpensive myopic control.}
+
+At $n = 3$ per regime we make no claim about magnitude.
+
+\subsection{Why the benchmark audit was necessary}
+\label{sec:audit-why}
+
+\begin{quote}
+Our benchmark audit was necessary because nominal numerical ceilings and task labels
+did not reliably identify whether a problem could distinguish controllers.
+\end{quote}
+
+These are the problems that actually reversed conclusions in this project:
+
+\begin{itemize}
+  \item joint saturation at the numerical floor (two of three specs in the initial
+        dev subset);
+  \item one-sided saturation, where dropping pairs removed the good results;
+  \item an attainable local minimum of Rosenbrock, which passed the eligibility
+        check;
+  \item identical seeds producing identical instances, so a nominal $n = 3$ was
+        $n = 1$;
+  \item the difference between a ceiling based on the global optimum and one based on
+        the starting-point basin;
+  \item the possibility that a single reference solver fails (L-BFGS did not
+        converge at $\kappa = 10^6$).
+\end{itemize}
+
+Both of our initial rules --- ``judge saturation from the task name'' and ``compute
+the ceiling from the numerical floor'' --- were wrong. That is why we introduced the
+reference-solver panel and the attainable ceiling.
+
+\textbf{We are not proposing a general benchmark framework.} This is an empirical
+procedure that corrected this project's benchmark, and we intend it to be read as a
+checklist to consult when designing similar controller comparisons.
+
+\subsection{What the cheap method misses}
+\label{sec:cheap}
+
+\ctrl{onestep} spends $7.9$ times the budget on search --- $1/164$ of the planner
+--- and gains $+1.155$~nat over the tuned constant. The planner gains $+1.690$~nat
+but spends $1{,}294$ times the budget. The directly measured increment of
+$+0.456$~nat is statistically robust, but this cost gap is its price. From a
+practical standpoint this is the most direct implication of the present results.

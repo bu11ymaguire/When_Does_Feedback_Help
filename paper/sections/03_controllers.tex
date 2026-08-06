@@ -1,0 +1,50 @@
+\section{Controllers and oracles}
+\label{sec:controllers}
+
+We define the ladder from the bottom up. Every controller receives the same GE
+budget.
+
+% 설명 열은 가변 폭이다. `{ll}` 로 두면 onestep 행이 본문 폭을 23.9pt 넘친다.
+\begin{center}
+\begin{tabularx}{\linewidth}{@{}lX@{}}
+\toprule
+Controller & Description \\
+\midrule
+\ctrl{best\_static}     & Constant action; best of six candidates tuned on dev seeds \\
+\ctrl{best\_open\_loop} & Four-segment schedule with boundaries at consumed-GE fractions; state-blind \\
+\ctrl{heuristic}        & Rule-based damping adjustment \\
+\ctrl{onestep}          & Enumerates candidates each step and takes the immediately most efficient action \\
+\ctrl{committed}        & Forms one plan at the initial state and \emph{executes it unchanged} \\
+\ctrl{shrinking}        & Replans at every step with the remaining quota \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\ctrl{shrinking} follows the receding-horizon structure of model predictive
+control \citep{rawlings2017mpc}, with the horizon shrinking as the remaining
+budget is consumed. The contrast between \ctrl{committed} and \ctrl{shrinking}
+corresponds to the distinction between an open-loop plan and a closed-loop policy
+\citep{bertsekas2017dp}.
+
+\subsection{How \ctrl{committed} differs from \ctrl{best\_open\_loop}}
+\label{sec:committed-vs-openloop}
+
+Neither observes the state during execution. However, \ctrl{committed} is an
+oracle \emph{conditioned on the initial state of that instance}, whereas
+\ctrl{best\_open\_loop} is a single schedule tuned over a set of instances.
+
+This distinction is the core of \textbf{Q2}. That
+$\ctrl{shrinking} - \ctrl{committed}$ is close to zero does not mean ``a schedule
+suffices''; it means \emph{``a plan fixed at the initial state suffices''}.
+
+\subsection{\ctrl{best\_static} and \ctrl{best\_open\_loop} are selection
+outcomes, not controllers}
+
+Both baselines are tuning products, so we record the basis of selection in a
+manifest: the candidate list, per-candidate scores, the selection statistic, the
+tie-break rule, and the selected label. On held-out instances the selected
+configurations were \ctrl{static[2]} and \ctrl{open\_loop[4]}.
+
+We also report the tuning cost. \ctrl{best\_open\_loop} consumed roughly
+$878$~GE per instance. Since the deployment budget is $150$~GE, this baseline is
+not free either.

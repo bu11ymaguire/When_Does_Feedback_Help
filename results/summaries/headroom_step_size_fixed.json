@@ -1,0 +1,284 @@
+{
+  "condition": "step_size_fixed",
+  "n_instances": 12,
+  "cost_budget_ge": 300.0,
+  "static_search_size": 12,
+  "best_static_action": {
+    "damping_multiplier": 1.0,
+    "cg_budget": 20,
+    "step_size": 1.0,
+    "damping_absolute": null
+  },
+  "groups": {
+    "best_static": {
+      "controller": "static[7]",
+      "target": "relative_loss<=1e-06",
+      "n_runs": 12,
+      "n_reached": 8,
+      "median_cost_to_target_ge": 111.5,
+      "median_final_loss_ratio": 1.3235397240675066e-05,
+      "median_log_improvement": 10.859449560094237,
+      "median_total_cost_ge": 309.7,
+      "median_search_cost_ge": 0.0,
+      "mean_rejection_rate": 0.0,
+      "mean_failure_rate": 0.0,
+      "mean_cg_convergence_rate": 0.03571428571428571,
+      "median_damping": 0.01
+    },
+    "best_open_loop": {
+      "controller": "open_loop[7]",
+      "target": "relative_loss<=1e-06",
+      "n_runs": 12,
+      "n_reached": 8,
+      "median_cost_to_target_ge": 111.5,
+      "median_final_loss_ratio": 1.3235397240675066e-05,
+      "median_log_improvement": 10.859449560094237,
+      "median_total_cost_ge": 309.7,
+      "median_search_cost_ge": 0.0,
+      "mean_rejection_rate": 0.0,
+      "mean_failure_rate": 0.0,
+      "mean_cg_convergence_rate": 0.03571428571428571,
+      "median_damping": 0.01
+    },
+    "heuristic": {
+      "controller": "heuristic",
+      "target": "relative_loss<=1e-06",
+      "n_runs": 12,
+      "n_reached": 9,
+      "median_cost_to_target_ge": 172.20000000000002,
+      "median_final_loss_ratio": 3.072228637276847e-05,
+      "median_log_improvement": 9.600305380419568,
+      "median_total_cost_ge": 307.5,
+      "median_search_cost_ge": 0.0,
+      "mean_rejection_rate": 0.0,
+      "mean_failure_rate": 0.0,
+      "mean_cg_convergence_rate": 0.0,
+      "median_damping": 1.881676423158912e-08
+    },
+    "greedy_narrow": {
+      "controller": "greedy_narrow",
+      "target": "relative_loss<=1e-06",
+      "n_runs": 12,
+      "n_reached": 8,
+      "median_cost_to_target_ge": 114.1,
+      "median_final_loss_ratio": 1.9376221343992745e-05,
+      "median_log_improvement": 10.89303363529566,
+      "median_total_cost_ge": 303.2,
+      "median_search_cost_ge": 2134.8,
+      "mean_rejection_rate": 0.0,
+      "mean_failure_rate": 0.0,
+      "mean_cg_convergence_rate": 0.0,
+      "median_damping": 0.0006172839506172834
+    },
+    "greedy_wide": {
+      "controller": "greedy_wide",
+      "target": "relative_loss<=1e-06",
+      "n_runs": 12,
+      "n_reached": 8,
+      "median_cost_to_target_ge": 109.1,
+      "median_final_loss_ratio": 2.5843862467958914e-05,
+      "median_log_improvement": 10.563469749713741,
+      "median_total_cost_ge": 304.4,
+      "median_search_cost_ge": 4957.2,
+      "mean_rejection_rate": 0.0,
+      "mean_failure_rate": 0.0,
+      "mean_cg_convergence_rate": 0.0,
+      "median_damping": 5.5605555555555515e-06
+    },
+    "greedy_absolute": {
+      "controller": "greedy_absolute",
+      "target": "relative_loss<=1e-06",
+      "n_runs": 12,
+      "n_reached": 10,
+      "median_cost_to_target_ge": 101.94999999999999,
+      "median_final_loss_ratio": 4.034001061120641e-06,
+      "median_log_improvement": 11.55577896391632,
+      "median_total_cost_ge": 303.79999999999995,
+      "median_search_cost_ge": 9307.099999999999,
+      "mean_rejection_rate": 0.0,
+      "mean_failure_rate": 0.0,
+      "mean_cg_convergence_rate": 0.0,
+      "median_damping": 5.500000000000001e-06
+    },
+    "lookahead3_narrow": {
+      "controller": "lookahead3_narrow",
+      "target": "relative_loss<=1e-06",
+      "n_runs": 12,
+      "n_reached": 8,
+      "median_cost_to_target_ge": 114.1,
+      "median_final_loss_ratio": 1.968245444598956e-05,
+      "median_log_improvement": 10.840246994858166,
+      "median_total_cost_ge": 303.29999999999995,
+      "median_search_cost_ge": 11922.15,
+      "mean_rejection_rate": 0.0,
+      "mean_failure_rate": 0.0,
+      "mean_cg_convergence_rate": 0.0,
+      "median_damping": 0.0005570797134583138
+    }
+  },
+  "comparisons": [
+    {
+      "baseline": "static[7]",
+      "treatment": "greedy_absolute",
+      "metric": "cost_to_target_ge",
+      "n_pairs": 12,
+      "n_both_reached": 8,
+      "ratio_geometric_mean": 0.9892955531924001,
+      "ratio_ci": [
+        0.9173007391777013,
+        1.072743201855669
+      ],
+      "p_value": 0.921875,
+      "baseline_median": 111.5,
+      "treatment_median": 103.1
+    },
+    {
+      "baseline": "static[7]",
+      "treatment": "greedy_narrow",
+      "metric": "cost_to_target_ge",
+      "n_pairs": 12,
+      "n_both_reached": 8,
+      "ratio_geometric_mean": 0.9668908884631255,
+      "ratio_ci": [
+        0.9303810407166931,
+        1.0096935034755663
+      ],
+      "p_value": 0.1640625,
+      "baseline_median": 111.5,
+      "treatment_median": 114.1
+    },
+    {
+      "baseline": "static[7]",
+      "treatment": "greedy_wide",
+      "metric": "cost_to_target_ge",
+      "n_pairs": 12,
+      "n_both_reached": 8,
+      "ratio_geometric_mean": 0.9767378979194761,
+      "ratio_ci": [
+        0.9056569524174956,
+        1.05982352897096
+      ],
+      "p_value": 0.609375,
+      "baseline_median": 111.5,
+      "treatment_median": 109.1
+    },
+    {
+      "baseline": "greedy_narrow",
+      "treatment": "greedy_wide",
+      "metric": "cost_to_target_ge",
+      "n_pairs": 12,
+      "n_both_reached": 8,
+      "ratio_geometric_mean": 1.0101841992450693,
+      "ratio_ci": [
+        0.9484313345832602,
+        1.0623068800568873
+      ],
+      "p_value": null,
+      "baseline_median": 114.1,
+      "treatment_median": 109.1
+    },
+    {
+      "baseline": "greedy_wide",
+      "treatment": "greedy_absolute",
+      "metric": "cost_to_target_ge",
+      "n_pairs": 12,
+      "n_both_reached": 8,
+      "ratio_geometric_mean": 1.0128567298347622,
+      "ratio_ci": [
+        0.9666877301483153,
+        1.0599804169649827
+      ],
+      "p_value": null,
+      "baseline_median": 109.1,
+      "treatment_median": 103.1
+    },
+    {
+      "baseline": "greedy_narrow",
+      "treatment": "lookahead3_narrow",
+      "metric": "cost_to_target_ge",
+      "n_pairs": 12,
+      "n_both_reached": 8,
+      "ratio_geometric_mean": 0.9932226006631947,
+      "ratio_ci": [
+        0.901953782064296,
+        1.107989955917061
+      ],
+      "p_value": 0.9375,
+      "baseline_median": 114.1,
+      "treatment_median": 114.1
+    },
+    {
+      "baseline": "static[7]",
+      "treatment": "open_loop[7]",
+      "metric": "cost_to_target_ge",
+      "n_pairs": 12,
+      "n_both_reached": 8,
+      "ratio_geometric_mean": 1.0,
+      "ratio_ci": [
+        1.0,
+        1.0
+      ],
+      "p_value": null,
+      "baseline_median": 111.5,
+      "treatment_median": 111.5
+    },
+    {
+      "baseline": "static[7]",
+      "treatment": "heuristic",
+      "metric": "cost_to_target_ge",
+      "n_pairs": 12,
+      "n_both_reached": 7,
+      "ratio_geometric_mean": 0.5930284352326692,
+      "ratio_ci": [
+        0.495036881138749,
+        0.7162418714620002
+      ],
+      "p_value": 0.015625,
+      "baseline_median": 111.5,
+      "treatment_median": 209.10000000000005
+    }
+  ],
+  "gates": [
+    {
+      "name": "A",
+      "question": "적응 제어에 내재적 여지가 있는가 (absolute oracle vs best_static)",
+      "ratio": null,
+      "verdict": "판정불가",
+      "go_threshold": 1.3,
+      "pivot_threshold": 1.1
+    },
+    {
+      "name": "B",
+      "question": "행동 공간이 병목인가 (absolute vs narrow oracle)",
+      "ratio": null,
+      "verdict": "판정불가",
+      "go_threshold": 1.2,
+      "pivot_threshold": 1.05
+    },
+    {
+      "name": "C",
+      "question": "장기 의사결정이 필요한가 (lookahead3 vs greedy)",
+      "ratio": 0.9932226006631947,
+      "verdict": "재설계",
+      "go_threshold": 1.15,
+      "pivot_threshold": 1.03
+    }
+  ],
+  "provenance": {
+    "git_commit": "9855b57d",
+    "git_dirty": true,
+    "config_hash": "2ac5ae71159d7f7b",
+    "python_version": "3.12.12",
+    "platform": "Windows 11",
+    "torch_version": "2.13.0+cu130",
+    "cuda_available": true,
+    "cuda_runtime": "13.0",
+    "gpu_name": "NVIDIA GeForce RTX 3060 Ti",
+    "gpu_capability": "8.6",
+    "gpu_total_memory_mb": 8191.375,
+    "config": {
+      "condition": "step_size_fixed"
+    },
+    "diff": null
+  }
+}

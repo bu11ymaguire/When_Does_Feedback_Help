@@ -1,0 +1,19 @@
+% 이 파일은 scripts/make_tables.py 가 생성한다. **손으로 수정하지 않는다.**
+% 표: micro-neural absolute
+% raw: headroom_micro-neural_step_size_fixed_b8_0bec1125.jsonl
+% raw 의 SHA-256 은 paper/evidence_map.md 에 있다.
+% 공개 저장소에는 raw 가 없다. results/public/*.csv 에서 --public-dir 로 만들면
+% 이 파일과 바이트 단위로 같아진다 (scripts/verify_public_results.py).
+\begin{tabular}{lrrr}
+\toprule
+Controller & R1 full-batch & R2 batch 128 & R2 batch 64 \\
+\midrule
+\texttt{best\_static} & 5.220 & 3.765 & 3.029 \\
+\texttt{best\_open\_loop} & 3.299 & 2.100 & 2.984 \\
+\texttt{heuristic} & 5.105 & 2.162 & 0.986 \\
+\texttt{onestep\_narrow} & 19.886 & 4.296 & 3.468 \\
+\texttt{onestep\_absolute} & 19.460 & 4.642 & 3.732 \\
+\texttt{committed\_Q4\_narrow} & 20.491 & -0.402 & 1.086 \\
+\texttt{shrinking\_Q4\_narrow} & 20.395 & 3.185 & 2.757 \\
+\bottomrule
+\end{tabular}

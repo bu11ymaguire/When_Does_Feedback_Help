@@ -1,0 +1,100 @@
+# 공통 기본 설정. task별 config가 이 파일을 덮어쓴다.
+#
+# 설계 근거는 docs/experiment_protocol.md 의 D1~D8 을 참조한다.
+# target 값은 사전 등록된 것이므로 임의로 바꾸지 않는다 (D6).
+# 변경이 필요하면 프로토콜 §9 변경 이력에 이유와 함께 기록한다.
+
+device: cuda
+precision: fp32          # curvature 누적과 residual은 FP32 (README §15)
+
+# paired design (D7): seed 는 난수 시드가 아니라 실험 조건 식별자다.
+# seed=s 이면 모든 optimizer 가 동일한 task 인스턴스와 minibatch 순서를 본다.
+seeds: [0, 1, 2, 3, 4]
+deterministic_algorithms: false   # 재현성 검증 테스트에서만 true
+
+experiment:
+  total_steps: 200
+  eval_interval: 20
+  gradient_batch_size: 512
+  # D2: B_c/B_g 는 step 비용을 4배 좌우하는 1급 실험 변수다.
+  # 기본은 동일 배치 (선형계 (H+λI)p=-g 의 일관성 유지).
+  curvature_batch_ratio: 1.0
+  curvature_batch_ratio_grid: [0.25, 0.5, 1.0]
+
+newton_cg:
+  initial_damping: 1.0e-2
+  min_damping: 1.0e-6
+  max_damping: 1.0e3
+  cg_tolerance: 1.0e-3
+  cg_max_iters: 20
+  step_size: 1.0
+  pap_eps: 1.0e-12
+  max_loss_increase_ratio: 1.5   # 이 배수 초과 시 step 거절
+  safe_fallback: gradient        # none | gradient | noop
+  reject_damping_multiplier: 3.0
+  nan_damping_multiplier: 10.0
+
+# 모든 컨트롤러가 공유하는 action space (D4).
+# fixed / heuristic / open_loop / rl 이 같은 공간에서 고르므로 비교가 공정하다.
+controller:
+  damping_multipliers: [0.3, 1.0, 3.0]
+  cg_budgets: [3, 5, 10, 20]
+  step_sizes: [0.25, 0.5, 1.0]
+  # 36 = 3 x 4 x 3. 탐색 예산 회계(D5)의 기준 수치이기도 하다.
+  tuning_budget: 36
+
+reward:
+  # D3: log-loss 감소. 리턴이 log(L_0/L_T) - β·총비용 - γ·총실패 로 텔레스코핑된다.
+  form: log_loss           # log_loss | relative_loss (README 원본, ablation용)
+  beta: 0.02               # 연산 1 GE 와 교환할 loss 감소량 (nat)
+  gamma: 1.0               # 실패 1회당 패널티
+  clip: 5.0                # per-step reward clip
+  # β 정규화 기준. B_c=B_g, k=10 인 Newton step 1회의 GE 비용.
+  # task별 config가 실측값으로 덮어쓴다 (configs/cost_model.*.yaml).
+  ge_reference: 17.0
+  loss_floor: 1.0e-30      # log(max(L, loss_floor))
+
+rl:
+  algorithm: ppo
+  policy: MlpPolicy
+  action_space: multidiscrete
+  state_normalization: true
+  # D8: horizon 절단이 정책을 근시안적으로 만드는 것을 막는다.
+  horizon_choices: [30, 50, 80, 120]
+  gamma: 0.995
+  gae_lambda: 0.95
+  n_envs: 8                # Windows 에서는 DummyVecEnv (SubprocVecEnv 금지)
+  vec_env: dummy
+  behavior_cloning_warmup: true   # Stage 2 greedy_oracle trajectory 사용
+
+# D6: 사전 등록된 목표치. 절단 규칙은 metrics 모듈이 강제한다.
+evaluation:
+  primary_cost_metric: cost_ge     # wall-clock 은 보조 지표 (D1)
+  censoring: report_success_rate_and_median
+  statistics:
+    test: wilcoxon_signed_rank
+    effect_size: geometric_mean_ratio
+    n_bootstrap: 10000
+    confidence: 0.95
+    multiple_comparison: holm
+    primary_hypotheses:
+      - rl_vs_fixed
+      - rl_vs_heuristic
+      - rl_vs_open_loop
+
+baselines:
+  - adamw
+  - sgd_momentum
+  - fixed_newton_cg
+  - heuristic_newton_cg
+  - best_static
+  - open_loop
+  - rl_newton_cg
+
+logging:
+  backend: tensorboard
+  save_raw_metrics: true
+  output_dir: results/raw
+  flush_every: 20
+  # 실패한 run 을 덮어쓰지 않는다 (README §15).
+  overwrite: false

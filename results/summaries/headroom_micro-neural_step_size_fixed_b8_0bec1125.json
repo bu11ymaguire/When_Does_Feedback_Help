@@ -1,0 +1,914 @@
+{
+  "meta": {
+    "mode": "micro-neural",
+    "condition": "step_size_fixed",
+    "phase": "challenge",
+    "seeds": [
+      2,
+      3,
+      4
+    ],
+    "budget_ge": 150.0,
+    "beam": 8,
+    "quotas": [
+      4.0
+    ],
+    "difficulty": "medium",
+    "n_specs": 3,
+    "narrow_only": false,
+    "acceptance_loss": "control",
+    "environment": {
+      "platform": "Windows 11",
+      "processor": "AMD64 Family 25 Model 33 Stepping 2, AuthenticAMD",
+      "cpu_count": 12,
+      "torch_num_threads": 1,
+      "torch_num_interop_threads": 1,
+      "omp_num_threads": null,
+      "mkl_num_threads": null,
+      "pinned": 1
+    },
+    "concurrent_processes": 1
+  },
+  "experiment_id": "22ef5baf864b8799",
+  "sweep_id": "da27f6362e5b149b",
+  "aggregation_id": "1fb5800f9248290c",
+  "identity": {
+    "protocol_version": "stage2-v1",
+    "phase": "challenge",
+    "device": "cpu",
+    "cost_budget_ge": 150.0,
+    "max_steps": 200,
+    "initial_damping": 0.01,
+    "min_damping": 1e-08,
+    "max_damping": 100000000.0,
+    "cg_tolerance": 0.001,
+    "pap_eps": 1e-12,
+    "max_loss_increase_ratio": 1.5,
+    "safe_fallback": "gradient",
+    "compute_trust_ratio": true,
+    "quotas": [
+      4.0
+    ],
+    "beam_width": 8,
+    "max_plan_depth": 24,
+    "fresh_diagnostic_seeds": 0,
+    "run_fresh_wide": false,
+    "tuning_budget": 6,
+    "n_schedule_segments": 4,
+    "tuning_seed": 0,
+    "primary_difficulty": "medium",
+    "specs": [
+      "MicroNeuralSpec(input_dim=32, hidden_dim=128, n_classes=5, n_samples=512, regime='full_batch', batch_size=64, teacher_hidden_dim=256, label_noise=0.05, init_scale=1.0)",
+      "MicroNeuralSpec(input_dim=32, hidden_dim=128, n_classes=5, n_samples=512, regime='controlled_stochastic', batch_size=128, teacher_hidden_dim=256, label_noise=0.05, init_scale=1.0)",
+      "MicroNeuralSpec(input_dim=32, hidden_dim=128, n_classes=5, n_samples=512, regime='controlled_stochastic', batch_size=64, teacher_hidden_dim=256, label_noise=0.05, init_scale=1.0)"
+    ],
+    "seeds": [
+      2,
+      3,
+      4
+    ],
+    "targets": {
+      "spd": {
+        "easy": "relative_loss<=0.01",
+        "medium": "relative_loss<=0.0001",
+        "hard": "relative_loss<=1e-06"
+      },
+      "ill_conditioned": {
+        "easy": "relative_loss<=0.01",
+        "medium": "relative_loss<=0.0001",
+        "hard": "relative_loss<=1e-06"
+      },
+      "indefinite": {
+        "easy": "relative_loss<=0.1",
+        "medium": "relative_loss<=0.01",
+        "hard": "relative_loss<=0.001"
+      },
+      "rosenbrock": {
+        "easy": "absolute_loss<=0.1",
+        "medium": "absolute_loss<=0.01",
+        "hard": "absolute_loss<=0.0001"
+      },
+      "micro_neural": {
+        "easy": "relative_loss<=0.5",
+        "medium": "relative_loss<=0.2",
+        "hard": "relative_loss<=0.1"
+      }
+    },
+    "spaces": {
+      "narrow": {
+        "mode": "relative",
+        "damping_values": [
+          0.3333333333333333,
+          1.0,
+          3.0
+        ],
+        "cg_budgets": [
+          3,
+          5,
+          10,
+          20
+        ],
+        "step_sizes": [
+          1.0
+        ]
+      },
+      "wide": {
+        "mode": "relative",
+        "damping_values": [
+          0.037037037037037035,
+          0.1111111111111111,
+          0.3333333333333333,
+          1.0,
+          3.0,
+          9.0,
+          27.0
+        ],
+        "cg_budgets": [
+          3,
+          5,
+          10,
+          20
+        ],
+        "step_sizes": [
+          1.0
+        ]
+      },
+      "absolute": {
+        "mode": "absolute",
+        "damping_values": [
+          2.3230573125418773e-08,
+          6.969171937625632e-08,
+          2.0907515812876897e-07,
+          6.272254743863069e-07,
+          1.8816764231589208e-06,
+          5.645029269476762e-06,
+          1.6935087808430286e-05,
+          5.080526342529086e-05,
+          0.00015241579027587258,
+          0.0004572473708276177,
+          0.0013717421124828531,
+          0.00411522633744856,
+          0.012345679012345678,
+          0.037037037037037035,
+          0.1111111111111111,
+          0.3333333333333333,
+          1.0,
+          3.0,
+          9.0,
+          27.0,
+          81.0,
+          243.0,
+          729.0,
+          2187.0,
+          6561.0,
+          19683.0,
+          59049.0,
+          177147.0,
+          531441.0,
+          1594323.0,
+          4782969.0,
+          14348907.0,
+          43046721.0
+        ],
+        "cg_budgets": [
+          3,
+          5,
+          10,
+          20
+        ],
+        "step_sizes": [
+          1.0
+        ]
+      }
+    },
+    "code_dirty": false,
+    "n_tune": 6,
+    "mode": "headroom"
+  },
+  "execution_provenance": {
+    "git_commit": "",
+    "code_dirty": false,
+    "hostname": "host-a",
+    "platform": "Windows 11",
+    "recorded_at": "2026-08-04T11:05:15.765165+00:00"
+  },
+  "selections": {
+    "static": {
+      "selection_id": "670385aec6e2d66f",
+      "family": "static",
+      "candidate_labels": [
+        "static[0]",
+        "static[2]",
+        "static[4]",
+        "static[6]",
+        "static[8]",
+        "static[10]"
+      ],
+      "candidate_scores": {
+        "static[0]": 0.3100585150188998,
+        "static[2]": 0.26461158084960307,
+        "static[4]": 3.7649476826772226,
+        "static[6]": 2.517034875135988,
+        "static[8]": 0.8027669773108239,
+        "static[10]": 0.8322783188890412
+      },
+      "selection_metric": "median_log_improvement",
+      "tie_break_rule": "lowest_flat_index",
+      "selected_label": "static[4]",
+      "selected_config": {
+        "flat_index": 4,
+        "damping_multiplier": 1.0,
+        "cg_budget": 3,
+        "step_size": 1.0,
+        "damping_absolute": null
+      },
+      "tuning_specs": [
+        "MicroNeuralSpec(input_dim=32, hidden_dim=128, n_classes=5, n_samples=512, regime='full_batch', batch_size=64, teacher_hidden_dim=256, label_noise=0.05, init_scale=1.0)",
+        "MicroNeuralSpec(input_dim=32, hidden_dim=128, n_classes=5, n_samples=512, regime='controlled_stochastic', batch_size=128, teacher_hidden_dim=256, label_noise=0.05, init_scale=1.0)",
+        "MicroNeuralSpec(input_dim=32, hidden_dim=128, n_classes=5, n_samples=512, regime='controlled_stochastic', batch_size=64, teacher_hidden_dim=256, label_noise=0.05, init_scale=1.0)"
+      ],
+      "tuning_seeds": [
+        2,
+        3,
+        4
+      ],
+      "n_tune": 6,
+      "semantics_version": 1,
+      "resolved": true,
+      "n_candidates": 6,
+      "n_tuning_instances": 9,
+      "tuning_object_ge": 7943.899999999998,
+      "tuning_wall_clock_sec": 0.0,
+      "equivalent_static_action": null,
+      "progress_clock": "",
+      "progress_evaluated_at": "before_step",
+      "realized_segment_counts": {},
+      "realized_ge_by_segment": {}
+    },
+    "open_loop": {
+      "selection_id": "945c640e56cf6b8a",
+      "family": "open_loop",
+      "candidate_labels": [
+        "open_loop[0]",
+        "open_loop[1]",
+        "open_loop[2]",
+        "open_loop[3]",
+        "open_loop[4]",
+        "open_loop[5]"
+      ],
+      "candidate_scores": {
+        "open_loop[0]": 2.9843169172987416,
+        "open_loop[1]": 2.025945132113591,
+        "open_loop[2]": 0.5611650096610552,
+        "open_loop[3]": 0.8320971829494386,
+        "open_loop[4]": 2.2646139499928255,
+        "open_loop[5]": 0.8128491006811996
+      },
+      "selection_metric": "median_log_improvement",
+      "tie_break_rule": "lowest_flat_index",
+      "selected_label": "open_loop[0]",
+      "selected_config": {
+        "schedule": [
+          {
+            "flat_index": 6,
+            "damping_multiplier": 1.0,
+            "cg_budget": 10,
+            "step_size": 1.0
+          },
+          {
+            "flat_index": 6,
+            "damping_multiplier": 1.0,
+            "cg_budget": 10,
+            "step_size": 1.0
+          },
+          {
+            "flat_index": 0,
+            "damping_multiplier": 0.3333333333333333,
+            "cg_budget": 3,
+            "step_size": 1.0
+          },
+          {
+            "flat_index": 4,
+            "damping_multiplier": 1.0,
+            "cg_budget": 3,
+            "step_size": 1.0
+          }
+        ],
+        "breakpoints": [
+          0.48733492690653135,
+          0.8764108986066186,
+          0.9189183977257255,
+          1.0
+        ],
+        "n_segments": 4
+      },
+      "tuning_specs": [
+        "MicroNeuralSpec(input_dim=32, hidden_dim=128, n_classes=5, n_samples=512, regime='full_batch', batch_size=64, teacher_hidden_dim=256, label_noise=0.05, init_scale=1.0)",
+        "MicroNeuralSpec(input_dim=32, hidden_dim=128, n_classes=5, n_samples=512, regime='controlled_stochastic', batch_size=128, teacher_hidden_dim=256, label_noise=0.05, init_scale=1.0)",
+        "MicroNeuralSpec(input_dim=32, hidden_dim=128, n_classes=5, n_samples=512, regime='controlled_stochastic', batch_size=64, teacher_hidden_dim=256, label_noise=0.05, init_scale=1.0)"
+      ],
+      "tuning_seeds": [
+        2,
+        3,
+        4
+      ],
+      "n_tune": 6,
+      "semantics_version": 1,
+      "resolved": true,
+      "n_candidates": 6,
+      "n_tuning_instances": 9,
+      "tuning_object_ge": 7969.1,
+      "tuning_wall_clock_sec": 0.0,
+      "equivalent_static_action": null,
+      "progress_clock": "object_ge_fraction",
+      "progress_evaluated_at": "before_step",
+      "realized_segment_counts": {
+        "0": 11,
+        "1": 7,
+        "2": 1,
+        "3": 3
+      },
+      "realized_ge_by_segment": {
+        "0": 72.5,
+        "1": 53.099999999999994,
+        "2": 7.3,
+        "3": 15.899999999999999
+      }
+    }
+  },
+  "n_instances": 9,
+  "tuning_budget": 6,
+  "tuning_runs": {
+    "best_static": 6,
+    "best_open_loop": 6,
+    "heuristic": 1,
+    "onestep_narrow": 0,
+    "onestep_wide": 0,
+    "onestep_absolute": 0,
+    "shrinking_Q4_narrow": 0,
+    "committed_Q4_narrow": 0
+  },
+  "best_static_action": {
+    "damping_multiplier": 1.0,
+    "cg_budget": 3,
+    "step_size": 1.0,
+    "damping_absolute": null
+  },
+  "groups": {
+    "best_static": {
+      "controller": "best_static",
+      "target": "relative_loss<=0.2",
+      "n_runs": 9,
+      "n_reached": 9,
+      "median_cost_to_target_ge": 32.7,
+      "median_final_loss_ratio": 0.023168824334458937,
+      "median_log_improvement": 3.7649476826772226,
+      "median_total_cost_ge": 149.3,
+      "median_search_cost_ge": 0.0,
+      "mean_rejection_rate": 0.10344827586206896,
+      "mean_failure_rate": 0.0,
+      "mean_cg_convergence_rate": 0.0,
+      "median_damping": 0.2699999999999999
+    },
+    "best_open_loop": {
+      "controller": "best_open_loop",
+      "target": "relative_loss<=0.2",
+      "n_runs": 9,
+      "n_reached": 9,
+      "median_cost_to_target_ge": 79.6,
+      "median_final_loss_ratio": 0.050574038003340586,
+      "median_log_improvement": 2.9843169172987416,
+      "median_total_cost_ge": 148.8,
+      "median_search_cost_ge": 0.0,
+      "mean_rejection_rate": 0.2,
+      "mean_failure_rate": 0.0,
+      "mean_cg_convergence_rate": 0.5238095238095238,
+      "median_damping": 0.5399999999999998
+    },
+    "heuristic": {
+      "controller": "heuristic",
+      "target": "relative_loss<=0.2",
+      "n_runs": 9,
+      "n_reached": 9,
+      "median_cost_to_target_ge": 64.0,
+      "median_final_loss_ratio": 0.11514151489628027,
+      "median_log_improvement": 2.1615933428271035,
+      "median_total_cost_ge": 140.99999999999997,
+      "median_search_cost_ge": 0.0,
+      "mean_rejection_rate": 0.23076923076923078,
+      "mean_failure_rate": 0.0,
+      "mean_cg_convergence_rate": 0.5,
+      "median_damping": 0.2699999999999999
+    },
+    "onestep_narrow": {
+      "controller": "onestep_narrow",
+      "target": "relative_loss<=0.2",
+      "n_runs": 9,
+      "n_reached": 9,
+      "median_cost_to_target_ge": 17.9,
+      "median_final_loss_ratio": 0.01362162123875798,
+      "median_log_improvement": 4.296096951662046,
+      "median_total_cost_ge": 148.7,
+      "median_search_cost_ge": 1935.4,
+      "mean_rejection_rate": 0.034482758620689655,
+      "mean_failure_rate": 0.0,
+      "mean_cg_convergence_rate": 0.0,
+      "median_damping": 0.08999999999999998
+    },
+    "onestep_wide": {
+      "controller": "onestep_wide",
+      "target": "relative_loss<=0.2",
+      "n_runs": 9,
+      "n_reached": 9,
+      "median_cost_to_target_ge": 10.6,
+      "median_final_loss_ratio": 0.010115375067161156,
+      "median_log_improvement": 4.593698728757136,
+      "median_total_cost_ge": 148.4,
+      "median_search_cost_ge": 4180.6,
+      "mean_rejection_rate": 0.0,
+      "mean_failure_rate": 0.0,
+      "mean_cg_convergence_rate": 0.0,
+      "median_damping": 0.09000000000000002
+    },
+    "onestep_absolute": {
+      "controller": "onestep_absolute",
+      "target": "relative_loss<=0.2",
+      "n_runs": 9,
+      "n_reached": 9,
+      "median_cost_to_target_ge": 10.6,
+      "median_final_loss_ratio": 0.009637251212971716,
+      "median_log_improvement": 4.642119354903532,
+      "median_total_cost_ge": 148.4,
+      "median_search_cost_ge": 11541.4,
+      "mean_rejection_rate": 0.0,
+      "mean_failure_rate": 0.0,
+      "mean_cg_convergence_rate": 0.0,
+      "median_damping": 0.11111111111111112
+    },
+    "shrinking_Q4_narrow": {
+      "controller": "shrinking_Q4_narrow",
+      "target": "relative_loss<=0.2",
+      "n_runs": 9,
+      "n_reached": 9,
+      "median_cost_to_target_ge": 17.9,
+      "median_final_loss_ratio": 0.04136767289824821,
+      "median_log_improvement": 3.1852555510397593,
+      "median_total_cost_ge": 146.9,
+      "median_search_cost_ge": 265055.7,
+      "mean_rejection_rate": 0.0,
+      "mean_failure_rate": 0.0,
+      "mean_cg_convergence_rate": 0.0,
+      "median_damping": 0.08999999999999998
+    },
+    "committed_Q4_narrow": {
+      "controller": "committed_Q4_narrow",
+      "target": "relative_loss<=0.2",
+      "n_runs": 9,
+      "n_reached": 7,
+      "median_cost_to_target_ge": 17.9,
+      "median_final_loss_ratio": 0.3374457693907031,
+      "median_log_improvement": 1.0863504648673006,
+      "median_total_cost_ge": 148.79999999999995,
+      "median_search_cost_ge": 21448.8,
+      "mean_rejection_rate": 0.6551724137931034,
+      "mean_failure_rate": 0.0,
+      "mean_cg_convergence_rate": 0.0,
+      "median_damping": 0.0007407407407407402
+    },
+    "best_static@easy": {
+      "controller": "best_static@easy",
+      "target": "relative_loss<=0.5",
+      "n_runs": 9,
+      "n_reached": 9,
+      "median_cost_to_target_ge": 5.3,
+      "median_final_loss_ratio": 0.023168824334458937,
+      "median_log_improvement": 3.7649476826772226,
+      "median_total_cost_ge": 149.3,
+      "median_search_cost_ge": 0.0,
+      "mean_rejection_rate": 0.10344827586206896,
+      "mean_failure_rate": 0.0,
+      "mean_cg_convergence_rate": 0.0,
+      "median_damping": 0.2699999999999999
+    },
+    "shrinking_Q4@easy": {
+      "controller": "shrinking_Q4@easy",
+      "target": "relative_loss<=0.5",
+      "n_runs": 9,
+      "n_reached": 9,
+      "median_cost_to_target_ge": 5.3,
+      "median_final_loss_ratio": 0.01362162123875798,
+      "median_log_improvement": 4.296096951662046,
+      "median_total_cost_ge": 148.4,
+      "median_search_cost_ge": 3092.0,
+      "mean_rejection_rate": 0.0,
+      "mean_failure_rate": 0.0,
+      "mean_cg_convergence_rate": 0.0,
+      "median_damping": 0.08999999999999998
+    },
+    "best_static@medium": {
+      "controller": "best_static@medium",
+      "target": "relative_loss<=0.2",
+      "n_runs": 9,
+      "n_reached": 9,
+      "median_cost_to_target_ge": 32.7,
+      "median_final_loss_ratio": 0.023168824334458937,
+      "median_log_improvement": 3.7649476826772226,
+      "median_total_cost_ge": 149.3,
+      "median_search_cost_ge": 0.0,
+      "mean_rejection_rate": 0.10344827586206896,
+      "mean_failure_rate": 0.0,
+      "mean_cg_convergence_rate": 0.0,
+      "median_damping": 0.2699999999999999
+    },
+    "shrinking_Q4@medium": {
+      "controller": "shrinking_Q4@medium",
+      "target": "relative_loss<=0.2",
+      "n_runs": 9,
+      "n_reached": 9,
+      "median_cost_to_target_ge": 15.899999999999999,
+      "median_final_loss_ratio": 0.01362162123875798,
+      "median_log_improvement": 4.296096951662046,
+      "median_total_cost_ge": 148.4,
+      "median_search_cost_ge": 3509.5,
+      "mean_rejection_rate": 0.0,
+      "mean_failure_rate": 0.0,
+      "mean_cg_convergence_rate": 0.0,
+      "median_damping": 0.08999999999999998
+    },
+    "best_static@hard": {
+      "controller": "best_static@hard",
+      "target": "relative_loss<=0.1",
+      "n_runs": 9,
+      "n_reached": 9,
+      "median_cost_to_target_ge": 42.99999999999999,
+      "median_final_loss_ratio": 0.023168824334458937,
+      "median_log_improvement": 3.7649476826772226,
+      "median_total_cost_ge": 149.3,
+      "median_search_cost_ge": 0.0,
+      "mean_rejection_rate": 0.10344827586206896,
+      "mean_failure_rate": 0.0,
+      "mean_cg_convergence_rate": 0.0,
+      "median_damping": 0.2699999999999999
+    },
+    "shrinking_Q4@hard": {
+      "controller": "shrinking_Q4@hard",
+      "target": "relative_loss<=0.1",
+      "n_runs": 9,
+      "n_reached": 9,
+      "median_cost_to_target_ge": 26.5,
+      "median_final_loss_ratio": 0.01362162123875798,
+      "median_log_improvement": 4.296096951662046,
+      "median_total_cost_ge": 147.1,
+      "median_search_cost_ge": 4060.1,
+      "mean_rejection_rate": 0.0,
+      "mean_failure_rate": 0.0,
+      "mean_cg_convergence_rate": 0.0,
+      "median_damping": 0.08999999999999998
+    }
+  },
+  "track_e_deltas": [
+    {
+      "baseline": "best_static",
+      "treatment": "onestep_absolute",
+      "metric": "log_improvement",
+      "n_pairs": 9,
+      "n_valid": 9,
+      "median_delta": 0.8652034856778359,
+      "delta_ci": [
+        0.24260590716588393,
+        14.276963175885957
+      ],
+      "p_value": 0.00390625,
+      "baseline_median": 3.7649476826772226,
+      "treatment_median": 4.642119354903532,
+      "n_joint_saturated": 0,
+      "n_one_sided_saturated": 0,
+      "excluded_pairs": []
+    },
+    {
+      "baseline": "best_static",
+      "treatment": "shrinking_Q4_narrow",
+      "metric": "log_improvement",
+      "n_pairs": 9,
+      "n_valid": 9,
+      "median_delta": 0.6406173197560605,
+      "delta_ci": [
+        -0.9000307926415116,
+        15.17557489366276
+      ],
+      "p_value": 0.359375,
+      "baseline_median": 3.7649476826772226,
+      "treatment_median": 3.1852555510397593,
+      "n_joint_saturated": 0,
+      "n_one_sided_saturated": 0,
+      "excluded_pairs": []
+    },
+    {
+      "baseline": "onestep_narrow",
+      "treatment": "onestep_absolute",
+      "metric": "log_improvement",
+      "n_pairs": 9,
+      "n_valid": 9,
+      "median_delta": 0.1718502757491791,
+      "delta_ci": [
+        -0.6151856313577397,
+        0.4477909685813559
+      ],
+      "p_value": 0.91015625,
+      "baseline_median": 4.296096951662046,
+      "treatment_median": 4.642119354903532,
+      "n_joint_saturated": 0,
+      "n_one_sided_saturated": 0,
+      "excluded_pairs": []
+    },
+    {
+      "baseline": "onestep_narrow",
+      "treatment": "onestep_wide",
+      "metric": "log_improvement",
+      "n_pairs": 9,
+      "n_valid": 9,
+      "median_delta": -0.2501261671872066,
+      "delta_ci": [
+        -0.5212969048107645,
+        0.3969755802400554
+      ],
+      "p_value": 0.734375,
+      "baseline_median": 4.296096951662046,
+      "treatment_median": 4.593698728757136,
+      "n_joint_saturated": 0,
+      "n_one_sided_saturated": 0,
+      "excluded_pairs": []
+    },
+    {
+      "baseline": "onestep_narrow",
+      "treatment": "shrinking_Q4_narrow",
+      "metric": "log_improvement",
+      "n_pairs": 9,
+      "n_valid": 9,
+      "median_delta": -0.11778304890185964,
+      "delta_ci": [
+        -1.3651236819760606,
+        0.8458023811715325
+      ],
+      "p_value": 0.42578125,
+      "baseline_median": 4.296096951662046,
+      "treatment_median": 3.1852555510397593,
+      "n_joint_saturated": 0,
+      "n_one_sided_saturated": 0,
+      "excluded_pairs": []
+    },
+    {
+      "baseline": "committed_Q4_narrow",
+      "treatment": "shrinking_Q4_narrow",
+      "metric": "log_improvement",
+      "n_pairs": 9,
+      "n_valid": 9,
+      "median_delta": 1.6655322851348093,
+      "delta_ci": [
+        -0.095310188474091,
+        3.167586084024941
+      ],
+      "p_value": 0.02734375,
+      "baseline_median": 1.0863504648673006,
+      "treatment_median": 3.1852555510397593,
+      "n_joint_saturated": 0,
+      "n_one_sided_saturated": 0,
+      "excluded_pairs": []
+    },
+    {
+      "baseline": "onestep_narrow",
+      "treatment": "shrinking_Q4_narrow",
+      "metric": "log_improvement",
+      "n_pairs": 9,
+      "n_valid": 9,
+      "median_delta": -0.11778304890185964,
+      "delta_ci": [
+        -1.3651236819760606,
+        0.8458023811715325
+      ],
+      "p_value": 0.42578125,
+      "baseline_median": 4.296096951662046,
+      "treatment_median": 3.1852555510397593,
+      "n_joint_saturated": 0,
+      "n_one_sided_saturated": 0,
+      "excluded_pairs": []
+    },
+    {
+      "baseline": "best_static",
+      "treatment": "best_open_loop",
+      "metric": "log_improvement",
+      "n_pairs": 9,
+      "n_valid": 9,
+      "median_delta": -1.0964629405570978,
+      "delta_ci": [
+        -1.9213531954325838,
+        0.0041842829629987754
+      ],
+      "p_value": 0.01953125,
+      "baseline_median": 3.7649476826772226,
+      "treatment_median": 2.9843169172987416,
+      "n_joint_saturated": 0,
+      "n_one_sided_saturated": 0,
+      "excluded_pairs": []
+    },
+    {
+      "baseline": "best_static",
+      "treatment": "heuristic",
+      "metric": "log_improvement",
+      "n_pairs": 9,
+      "n_valid": 9,
+      "median_delta": -1.603354339850119,
+      "delta_ci": [
+        -2.0569047409132297,
+        -0.09147294407800288
+      ],
+      "p_value": 0.01953125,
+      "baseline_median": 3.7649476826772226,
+      "treatment_median": 2.1615933428271035,
+      "n_joint_saturated": 0,
+      "n_one_sided_saturated": 0,
+      "excluded_pairs": []
+    }
+  ],
+  "track_t_ratios": {
+    "easy": {
+      "baseline": "best_static@easy",
+      "treatment": "shrinking_Q4@easy",
+      "metric": "cost_to_target_ge",
+      "n_pairs": 9,
+      "n_both_reached": 9,
+      "ratio_geometric_mean": 1.3322045177392998,
+      "ratio_ci": [
+        1.0,
+        1.969870790016959
+      ],
+      "p_value": null,
+      "baseline_median": 5.3,
+      "treatment_median": 5.3
+    },
+    "medium": {
+      "baseline": "best_static@medium",
+      "treatment": "shrinking_Q4@medium",
+      "metric": "cost_to_target_ge",
+      "n_pairs": 9,
+      "n_both_reached": 9,
+      "ratio_geometric_mean": 1.7108251625467374,
+      "ratio_ci": [
+        1.4001903508528486,
+        2.0519204872748844
+      ],
+      "p_value": 0.0078125,
+      "baseline_median": 32.7,
+      "treatment_median": 15.899999999999999
+    },
+    "hard": {
+      "baseline": "best_static@hard",
+      "treatment": "shrinking_Q4@hard",
+      "metric": "cost_to_target_ge",
+      "n_pairs": 9,
+      "n_both_reached": 9,
+      "ratio_geometric_mean": 1.7717010500629957,
+      "ratio_ci": [
+        1.5268446852972377,
+        2.02091016957705
+      ],
+      "p_value": 0.00390625,
+      "baseline_median": 42.99999999999999,
+      "treatment_median": 26.5
+    }
+  },
+  "gates": [
+    {
+      "name": "A1",
+      "track": "Track E",
+      "question": "현재 상태에서 좋은 damping 이 존재하는가 (instantaneous absolute-action headroom, H=1)",
+      "statistic": 0.8652034856778359,
+      "unit": "nat",
+      "verdict": "조건부",
+      "go_threshold": 1.0,
+      "pivot_threshold": 0.3,
+      "nonsaturated": "+0.865 nat (n=9)",
+      "detail": "loss 2.38배 차이. 도달성 제약을 완전히 없앤 **순간적** 이득이다. 전역 상한이나 장기 헤드룸이 아니다."
+    },
+    {
+      "name": "A2",
+      "track": "Track E",
+      "question": "현실적인 multiplier action 으로 그 이득에 접근할 수 있는가 (shrinking Q=4xc_max, narrow/wide vs best_static)",
+      "statistic": 0.6406173197560605,
+      "unit": "nat",
+      "verdict": "조건부",
+      "go_threshold": 0.7,
+      "pivot_threshold": 0.2,
+      "nonsaturated": "[1] all-task floor-capped  +0.641 nat  n=9  CI -0.900~+15.176  joint=0 one-sided=0 unsat=9  (+5/0×0/−4)\n      [2] mlp_d32_h128_c5_n512_cs128         median -0.900 n=3 [+1.052, -1.226, -0.900]\n      [2] mlp_d32_h128_c5_n512_cs64          median -0.277 n=3 [-0.277, +0.641, -0.768]\n      [2] mlp_d32_h128_c5_n512_fb            median +15.176 n=3 [+15.176, +14.821, +15.512]\n      [3] pairwise nonsaturated 민감도  +0.641 nat  n=9  (비교마다 n 이 달라진다. primary 아님)",
+      "detail": "narrow +0.641, wide +nan nat. A1 대비 크게 낮으면 행동 공간 도달성이 병목이다."
+    },
+    {
+      "name": "B",
+      "track": "Track E",
+      "question": "행동 공간이 병목인가 (absolute vs narrow, 모두 H=1, 해상도 정렬)",
+      "statistic": 0.1718502757491791,
+      "unit": "nat",
+      "verdict": "조건부",
+      "go_threshold": 0.5,
+      "pivot_threshold": 0.1,
+      "nonsaturated": "+0.172 nat (n=9)",
+      "detail": "참고: wide - narrow = -0.250 nat"
+    },
+    {
+      "name": "C1",
+      "track": "Track E",
+      "question": "쿼터를 매 step 초기화하는 것이 실제 성능을 떨어뜨리는가 (shrinking - fresh)",
+      "statistic": null,
+      "unit": "nat",
+      "verdict": "판정불가",
+      "go_threshold": 0.3,
+      "pivot_threshold": 0.05,
+      "nonsaturated": "",
+      "detail": "쿼터 곡선(narrow): shrinking Q4:3.185 | committed Q4:1.086. **fresh 는 seed 0개에서만 돌린 진단 baseline 이다.** paired 비교는 겹치는 seed 에서만 이루어지므로 이 통계의 표본이 다른 게이트보다 작다. **연구 결과이지만 PPO 착수 게이트가 아니다.** 양수면 receding horizon 이 준비 행동만 반복하며 payoff 를 뒤로 미룬다는 증거다."
+    },
+    {
+      "name": "C2",
+      "track": "Track E",
+      "question": "시간 일관적인 다단계 재계획이 one-step 효율 제어보다 나은가 (shrinking Q=4 - C0)",
+      "statistic": -0.11778304890185964,
+      "unit": "nat",
+      "verdict": "재설계",
+      "go_threshold": 0.3,
+      "pivot_threshold": 0.05,
+      "nonsaturated": "[1] all-task floor-capped  -0.118 nat  n=9  CI -1.365~+0.846  joint=0 one-sided=0 unsat=9  (+4/0×0/−5)\n      [2] mlp_d32_h128_c5_n512_cs128         median -1.111 n=3 [+0.029, -1.503, -1.111]\n      [2] mlp_d32_h128_c5_n512_cs64          median -0.716 n=3 [-0.716, +0.846, -1.365]\n      [2] mlp_d32_h128_c5_n512_fb            median +0.547 n=3 [+0.547, -0.118, +0.916]\n      [3] pairwise nonsaturated 민감도  -0.118 nat  n=9  (비교마다 n 이 달라진다. primary 아님)",
+      "detail": "깊이/상한(shrinking): Q4:d>1=0.96,cap=0.00. 참고 Q=4(depth 1만 가능) - C0 = -0.118 nat. **GO 판정에는 두 조건이 모두 필요하다** (P3). 개선이 있고, 동시에 depth>1 이 실제로 채택돼야 한다. 개선만 있고 depth 가 계속 1 이면 planning 이 아니라 탐색량이 기여한 것이다. ``cap`` 이 0 이 아니면 계산 상한 때문에 쿼터를 다 쓰지 못한 step 이 있으므로 사다리 비교가 훼손된 것으로 보고한다. 이 게이트만으로 PPO 를 시작하지 않는다. P1~P4 를 함께 본다."
+    },
+    {
+      "name": "C3",
+      "track": "Track E",
+      "question": "상태를 관찰하며 재계획하는 것이 고정 실행보다 추가 이득인가 (shrinking - committed)",
+      "statistic": 1.6655322851348093,
+      "unit": "nat",
+      "verdict": "GO",
+      "go_threshold": 0.3,
+      "pivot_threshold": 0.05,
+      "nonsaturated": "[1] all-task floor-capped  +1.666 nat  n=9  CI -0.095~+3.168  joint=0 one-sided=0 unsat=9  (+7/0×0/−2)\n      [2] mlp_d32_h128_c5_n512_cs128         median +2.941 n=3 [+5.210, +2.941, +2.612]\n      [2] mlp_d32_h128_c5_n512_cs64          median +1.666 n=3 [+1.666, +3.168, +0.220]\n      [2] mlp_d32_h128_c5_n512_fb            median -0.095 n=3 [-0.095, -0.588, +0.916]\n      [3] pairwise nonsaturated 민감도  +1.666 nat  n=9  (비교마다 n 이 달라진다. primary 아님)",
+      "detail": "약 0 이면 좋은 sequence 는 존재하지만 feedback 자체의 추가 가치는 작다. 음수면 approximate replanning 이 계획을 훼손한다. **committed 는 초기 상태에 조건화된 oracle 이므로 open_loop baseline 과 다르다.** committed 가 open_loop 보다 좋다고 해서 feedback 이 필요하다는 뜻이 아니다."
+    },
+    {
+      "name": "D",
+      "track": "Track T",
+      "question": "cost-to-target 헤드룸이 있는가 (planner vs best_static, medium)",
+      "statistic": 1.7108251625467374,
+      "unit": "배",
+      "verdict": "GO",
+      "go_threshold": 1.2,
+      "pivot_threshold": 1.05,
+      "nonsaturated": "",
+      "detail": "난이도별 easy:1.332x(도달 9/9), medium:1.711x(도달 9/9), hard:1.772x(도달 9/9). 게이트 A와 결론이 다르면 그 불일치 자체를 결과로 보고한다 (프로토콜 D9)."
+    }
+  ],
+  "n_failures": 0,
+  "raw_path": "results\\raw\\headroom_micro-neural_step_size_fixed_b8_0bec1125.jsonl",
+  "raw_sha256": "be11089349712219a2b2d82a23cec3d022684313b8d2f7827a09826a4d44b543",
+  "raw_n_lines": 216,
+  "provenance": {
+    "git_commit": "b444b890",
+    "git_dirty": true,
+    "config_hash": "90e3bbe2584a4c3b",
+    "python_version": "3.12.12",
+    "platform": "Windows 11",
+    "torch_version": "2.13.0+cu130",
+    "cuda_available": true,
+    "cuda_runtime": "13.0",
+    "gpu_name": "NVIDIA GeForce RTX 3060 Ti",
+    "gpu_capability": "8.6",
+    "gpu_total_memory_mb": 8191.375,
+    "config": {
+      "mode": "micro-neural",
+      "condition": "step_size_fixed",
+      "phase": "challenge",
+      "seeds": [
+        2,
+        3,
+        4
+      ],
+      "budget_ge": 150.0,
+      "beam": 8,
+      "quotas": [
+        4.0
+      ],
+      "difficulty": "medium",
+      "n_specs": 3,
+      "narrow_only": false,
+      "acceptance_loss": "control",
+      "environment": {
+        "platform": "Windows 11",
+        "processor": "AMD64 Family 25 Model 33 Stepping 2, AuthenticAMD",
+        "cpu_count": 12,
+        "torch_num_threads": 1,
+        "torch_num_interop_threads": 1,
+        "omp_num_threads": null,
+        "mkl_num_threads": null,
+        "pinned": 1
+      },
+      "concurrent_processes": 1
+    },
+    "diff": null
+  }
+}

@@ -1,0 +1,106 @@
+\section{Limitations}
+\label{sec:limitations}
+
+\subsection{What we do not claim}
+
+\begin{center}
+\begin{tabular}{p{0.42\textwidth}p{0.52\textwidth}}
+\toprule
+Claim we avoid & Why \\
+\midrule
+``feedback is useless'' / ``we established a zero effect''
+  & No equivalence margin was preregistered. We use only the wording of
+    Section~\ref{sec:c3}. \\
+``exactly half of \gate{C3} was an acceptance artifact''
+  & The reduction differs by regime (62\%, 42\%) and $n = 3$. We use only the wording
+    of Section~\ref{sec:ablation}. \\
+``reinforcement learning fails at optimizer control''
+  & We did not train a policy. \\
+``the deterministic setting is $N$ times better than the stochastic one''
+  & GE does not match FLOPs across batch sizes (Section~\ref{sec:ge}). \\
+``headroom decreases with condition number''
+  & We observed non-monotonicity only. We claim monotonicity in neither direction. \\
+``the method fails on nonlinear problems''
+  & Both Rosenbrock variants were ruled unusable as benchmark defects. \\
+``the micro-neural results overturn the quadratic results''
+  & $n = 3$ exploratory versus $n = 40$ held-out. \\
+Any value formed by adding or subtracting paired medians
+  & The median is not linear. Comparisons use direct paired measurements only
+    (Section~\ref{sec:no-subtraction}). \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\subsection{Protocol deviations}
+\label{sec:deviations}
+
+\begin{description}
+  \item[E1] The configuration selection rule was finalized after inspecting the gate
+    table of a single-instance dry run (Section~\ref{sec:deviation-selection}).
+  \item[E2] (quad $\kappa{=}10^5$, seed 2) overlaps between the initial dev audit and
+    configuration selection (Section~\ref{sec:seeds}).
+  \item[E3] Some executions ran with uncommitted changes, recorded as
+    \texttt{code\_dirty}.
+  \item[E4] Tests ran concurrently with the held-out execution. Wall-clock records are
+    therefore inaccurate, but numerical results and verdicts are unaffected
+    (single-threaded deterministic arithmetic).
+  \item[E5] Summary-level provenance omitted the commit field because of a reporting
+    bug; the corresponding per-run raw records retained the commit, allowing
+    deterministic reconstruction.
+  \item[E6] The acceptance-criterion ablation is not a single-factor change
+    (Section~\ref{sec:ablation-limits}).
+  \item[E7] The R1 column of the alternative criterion is a budget perturbation
+    (Section~\ref{sec:ablation-limits}).
+  \item[E8] Gate \gate{C1} uses a single-seed diagnostic baseline and was not used for
+    any verdict.
+  \item[E9] Three-layer reporting is not applied to gates \gate{A1} and \gate{B},
+    which use a single statistic.
+  \item[E10] An earlier diagnostic script used an upper-middle convention for even
+    sample counts, whereas the main paired analysis used the conventional arithmetic
+    median. All reporting code was unified before manuscript generation; the selected
+    configuration and qualitative conclusions were unchanged.
+  \item[E11] Run identifiers initially embedded the full target table rather than only
+    the targets used by the corresponding task family. Adding a target entry for an
+    unrelated task family therefore invalidated the cost-to-target runs of the
+    quadratic suite. We restricted the identifier to the targets actually used and
+    re-executed those runs; the fixed-budget comparisons were unaffected, and the
+    cost-to-target statistic is a re-aggregation of the same measurements.
+  \item[E12] The protocol specified that a tag be created at the
+    configuration-freeze point. The tag exists in the private repository, but it was
+    created after the confirmatory runs had completed and it points at the final
+    Stage~2 commit rather than at the freeze commit. It therefore cannot attest that
+    the configuration was fixed before the held-out runs; that ordering is attested by
+    the dated decision record and by the freeze commit itself. We did not move the tag
+    retroactively. The tag was not published, because the commit it marks precedes the
+    removal of device names from committed artifacts.
+\end{description}
+
+\subsection{Scope and confounds}
+\label{sec:scope}
+
+\begin{description}
+  \item[L1] The primary confirmatory results are limited to synthetic ill-conditioned
+    SPD quadratics: $d = 100$ fixed, four values of $\kappa$, ten held-out seeds.
+  \item[L2] The micro-neural results are exploratory evidence at $n = 3$ per regime.
+    We do not quote CIs or $p$-values.
+  \item[L3] The acceptance ablation includes the evaluation forward cost and is
+    therefore not a single-factor change; the acceptance criterion and the number of
+    effective steps change together.
+  \item[L4] GE matches oracle calls within a regime, not FLOPs across batch sizes.
+    Cross-regime absolute comparisons are descriptive.
+  \item[L5] The fixed-evaluation criterion is not a relaxation. Measured rejection
+    rates rose under it; it is the stricter rule.
+  \item[L6] Beam-search cost is far larger than the object-level budget:
+    $194{,}095 \GE / 150 \GE = 1{,}294\times$.
+  \item[L7] The selection rule was fixed before the full execution but after
+    inspecting the gate table of a cost-measurement dry run. Recorded as a protocol
+    deviation (E1).
+  \item[L8] We did not run PPO, so we can draw no conclusion about learned-policy
+    performance.
+  \item[L9] The results do not generalize to Hessian-free Newton methods as a family,
+    nor to neural optimization in general.
+\end{description}
+
+The Rosenbrock benchmark defect and the median-convention correction appear in
+Section~\ref{sec:reproducibility} and in the deviation list above and are not
+repeated here.

@@ -1,0 +1,687 @@
+{
+  "meta": {
+    "mode": "pilot",
+    "condition": "step_size_fixed",
+    "phase": "pilot",
+    "seeds": [
+      0,
+      1,
+      2
+    ],
+    "budget_ge": 150.0,
+    "beam": 4,
+    "quotas": [
+      1.0,
+      2.0,
+      4.0
+    ],
+    "difficulty": "medium",
+    "n_specs": 3,
+    "narrow_only": false,
+    "environment": {
+      "platform": "Windows 11",
+      "processor": "AMD64 Family 25 Model 33 Stepping 2, AuthenticAMD",
+      "cpu_count": 12,
+      "torch_num_threads": 1,
+      "torch_num_interop_threads": 1,
+      "omp_num_threads": null,
+      "mkl_num_threads": null,
+      "pinned": 1
+    },
+    "concurrent_processes": 1
+  },
+  "experiment_id": "2ac639d38eb52956",
+  "sweep_id": "f44a46d969f9d414",
+  "aggregation_id": "04cacc21f2256580",
+  "identity": {
+    "protocol_version": "stage2-v1",
+    "phase": "pilot",
+    "device": "cpu",
+    "cost_budget_ge": 150.0,
+    "max_steps": 200,
+    "initial_damping": 0.01,
+    "min_damping": 1e-08,
+    "max_damping": 100000000.0,
+    "cg_tolerance": 0.001,
+    "pap_eps": 1e-12,
+    "max_loss_increase_ratio": 1.5,
+    "safe_fallback": "gradient",
+    "compute_trust_ratio": true,
+    "quotas": [
+      1.0,
+      2.0,
+      4.0
+    ],
+    "beam_width": 4,
+    "max_plan_depth": 24,
+    "fresh_diagnostic_seeds": 1,
+    "run_fresh_wide": false,
+    "tuning_budget": null,
+    "n_schedule_segments": 4,
+    "tuning_seed": 0,
+    "primary_difficulty": "medium",
+    "specs": [
+      "QuadraticSpec(kind='spd', dimension=64, condition_number=100.0, negative_fraction=0.2, initial_scale=1.0)",
+      "QuadraticSpec(kind='ill_conditioned', dimension=100, condition_number=100000.0, negative_fraction=0.2, initial_scale=1.0)",
+      "RosenbrockSpec(dimension=2, scale=100.0, randomize_start=False, start_noise=0.1)"
+    ],
+    "seeds": [
+      0,
+      1,
+      2
+    ],
+    "targets": {
+      "spd": {
+        "easy": "relative_loss<=0.01",
+        "medium": "relative_loss<=0.0001",
+        "hard": "relative_loss<=1e-06"
+      },
+      "ill_conditioned": {
+        "easy": "relative_loss<=0.01",
+        "medium": "relative_loss<=0.0001",
+        "hard": "relative_loss<=1e-06"
+      },
+      "indefinite": {
+        "easy": "relative_loss<=0.1",
+        "medium": "relative_loss<=0.01",
+        "hard": "relative_loss<=0.001"
+      },
+      "rosenbrock": {
+        "easy": "absolute_loss<=0.1",
+        "medium": "absolute_loss<=0.01",
+        "hard": "absolute_loss<=0.0001"
+      }
+    },
+    "spaces": {
+      "narrow": {
+        "mode": "relative",
+        "damping_values": [
+          0.3333333333333333,
+          1.0,
+          3.0
+        ],
+        "cg_budgets": [
+          3,
+          5,
+          10,
+          20
+        ],
+        "step_sizes": [
+          1.0
+        ]
+      },
+      "wide": {
+        "mode": "relative",
+        "damping_values": [
+          0.037037037037037035,
+          0.1111111111111111,
+          0.3333333333333333,
+          1.0,
+          3.0,
+          9.0,
+          27.0
+        ],
+        "cg_budgets": [
+          3,
+          5,
+          10,
+          20
+        ],
+        "step_sizes": [
+          1.0
+        ]
+      },
+      "absolute": {
+        "mode": "absolute",
+        "damping_values": [
+          2.3230573125418773e-08,
+          6.969171937625632e-08,
+          2.0907515812876897e-07,
+          6.272254743863069e-07,
+          1.8816764231589208e-06,
+          5.645029269476762e-06,
+          1.6935087808430286e-05,
+          5.080526342529086e-05,
+          0.00015241579027587258,
+          0.0004572473708276177,
+          0.0013717421124828531,
+          0.00411522633744856,
+          0.012345679012345678,
+          0.037037037037037035,
+          0.1111111111111111,
+          0.3333333333333333,
+          1.0,
+          3.0,
+          9.0,
+          27.0,
+          81.0,
+          243.0,
+          729.0,
+          2187.0,
+          6561.0,
+          19683.0,
+          59049.0,
+          177147.0,
+          531441.0,
+          1594323.0,
+          4782969.0,
+          14348907.0,
+          43046721.0
+        ],
+        "cg_budgets": [
+          3,
+          5,
+          10,
+          20
+        ],
+        "step_sizes": [
+          1.0
+        ]
+      }
+    },
+    "code_dirty": true,
+    "n_tune": 12,
+    "mode": "headroom"
+  },
+  "execution_provenance": {
+    "git_commit": "",
+    "code_dirty": true,
+    "hostname": "host-a",
+    "platform": "Windows 11",
+    "recorded_at": "2026-08-04T01:16:14.258066+00:00"
+  },
+  "selections": {
+    "static": {
+      "selection_id": "649ef8f9878f86db",
+      "family": "static",
+      "candidate_labels": [
+        "static[0]",
+        "static[1]",
+        "static[2]",
+        "static[3]",
+        "static[4]",
+        "static[5]",
+        "static[6]",
+        "static[7]",
+        "static[8]",
+        "static[9]",
+        "static[10]",
+        "static[11]"
+      ],
+      "candidate_scores": {
+        "static[0]": 6.836714115246416,
+        "static[1]": 7.602512584721584,
+        "static[2]": 8.56689458451201,
+        "static[3]": 9.318488083297261,
+        "static[4]": 7.092197119093887,
+        "static[5]": 7.602545501655704,
+        "static[6]": 8.564311689110703,
+        "static[7]": 9.336929382628256,
+        "static[8]": 5.914481996119135,
+        "static[9]": 6.960931979223958,
+        "static[10]": 8.36069395280337,
+        "static[11]": 9.316669644553812
+      },
+      "selection_metric": "median_log_improvement",
+      "tie_break_rule": "lowest_flat_index",
+      "selected_label": "static[7]",
+      "selected_config": {
+        "flat_index": 7,
+        "damping_multiplier": 1.0,
+        "cg_budget": 20,
+        "step_size": 1.0,
+        "damping_absolute": null
+      },
+      "tuning_specs": [
+        "QuadraticSpec(kind='spd', dimension=64, condition_number=100.0, negative_fraction=0.2, initial_scale=1.0)",
+        "QuadraticSpec(kind='ill_conditioned', dimension=100, condition_number=100000.0, negative_fraction=0.2, initial_scale=1.0)",
+        "RosenbrockSpec(dimension=2, scale=100.0, randomize_start=False, start_noise=0.1)"
+      ],
+      "tuning_seeds": [
+        0,
+        1,
+        2
+      ],
+      "n_tune": 12,
+      "semantics_version": 1,
+      "resolved": true,
+      "n_candidates": 12,
+      "n_tuning_instances": 9,
+      "tuning_object_ge": 15747.999999999998,
+      "tuning_wall_clock_sec": 0.0,
+      "equivalent_static_action": null,
+      "progress_clock": "",
+      "progress_evaluated_at": "before_step",
+      "realized_segment_counts": {},
+      "realized_ge_by_segment": {}
+    },
+    "open_loop": {
+      "selection_id": "1b6de46d089f2b2b",
+      "family": "open_loop",
+      "candidate_labels": [
+        "open_loop[0]",
+        "open_loop[1]",
+        "open_loop[2]",
+        "open_loop[3]",
+        "open_loop[4]",
+        "open_loop[5]",
+        "open_loop[6]",
+        "open_loop[7]",
+        "open_loop[8]",
+        "open_loop[9]",
+        "open_loop[10]",
+        "open_loop[11]"
+      ],
+      "candidate_scores": {
+        "open_loop[0]": 8.513473167623609,
+        "open_loop[1]": 8.07243699554314,
+        "open_loop[2]": 8.290706174347587,
+        "open_loop[3]": 7.12816496832131,
+        "open_loop[4]": 9.749704462907042,
+        "open_loop[5]": 7.120521354413173,
+        "open_loop[6]": 8.811947787220447,
+        "open_loop[7]": 25.45610105771343,
+        "open_loop[8]": 9.296632102226305,
+        "open_loop[9]": 7.892892416521659,
+        "open_loop[10]": 8.823029032772977,
+        "open_loop[11]": 9.404016716981811
+      },
+      "selection_metric": "median_log_improvement",
+      "tie_break_rule": "lowest_flat_index",
+      "selected_label": "open_loop[7]",
+      "selected_config": {
+        "schedule": [
+          {
+            "flat_index": 9,
+            "damping_multiplier": 3.0,
+            "cg_budget": 5,
+            "step_size": 1.0
+          },
+          {
+            "flat_index": 7,
+            "damping_multiplier": 1.0,
+            "cg_budget": 20,
+            "step_size": 1.0
+          },
+          {
+            "flat_index": 5,
+            "damping_multiplier": 1.0,
+            "cg_budget": 5,
+            "step_size": 1.0
+          },
+          {
+            "flat_index": 3,
+            "damping_multiplier": 0.3333333333333333,
+            "cg_budget": 20,
+            "step_size": 1.0
+          }
+        ],
+        "breakpoints": [
+          0.10668584683507962,
+          0.6832782915489681,
+          0.7072507187179023,
+          1.0
+        ],
+        "n_segments": 4
+      },
+      "tuning_specs": [
+        "QuadraticSpec(kind='spd', dimension=64, condition_number=100.0, negative_fraction=0.2, initial_scale=1.0)",
+        "QuadraticSpec(kind='ill_conditioned', dimension=100, condition_number=100000.0, negative_fraction=0.2, initial_scale=1.0)",
+        "RosenbrockSpec(dimension=2, scale=100.0, randomize_start=False, start_noise=0.1)"
+      ],
+      "tuning_seeds": [
+        0,
+        1,
+        2
+      ],
+      "n_tune": 12,
+      "semantics_version": 1,
+      "resolved": true,
+      "n_candidates": 12,
+      "n_tuning_instances": 9,
+      "tuning_object_ge": 15739.3,
+      "tuning_wall_clock_sec": 0.0,
+      "equivalent_static_action": null,
+      "progress_clock": "object_ge_fraction",
+      "progress_evaluated_at": "before_step",
+      "realized_segment_counts": {},
+      "realized_ge_by_segment": {}
+    }
+  },
+  "n_instances": 9,
+  "tuning_budget": 12,
+  "tuning_runs": {
+    "best_static": 12,
+    "best_open_loop": 12,
+    "heuristic": 1,
+    "onestep_narrow": 0,
+    "onestep_wide": 0,
+    "onestep_absolute": 0
+  },
+  "best_static_action": {
+    "damping_multiplier": 1.0,
+    "cg_budget": 20,
+    "step_size": 1.0,
+    "damping_absolute": null
+  },
+  "groups": {
+    "best_static": {
+      "controller": "best_static",
+      "target": "relative_loss<=0.0001",
+      "n_runs": 9,
+      "n_reached": 6,
+      "median_cost_to_target_ge": 66.9,
+      "median_final_loss_ratio": 8.810957191484981e-05,
+      "median_log_improvement": 9.336929382628256,
+      "median_total_cost_ge": 133.8,
+      "median_search_cost_ge": 0.0,
+      "mean_rejection_rate": 0.0,
+      "mean_failure_rate": 0.0,
+      "mean_cg_convergence_rate": 0.0,
+      "median_damping": 0.01
+    },
+    "best_open_loop": {
+      "controller": "best_open_loop",
+      "target": "relative_loss<=0.0001",
+      "n_runs": 9,
+      "n_reached": 8,
+      "median_cost_to_target_ge": 120.99999999999994,
+      "median_final_loss_ratio": 8.801481487923364e-12,
+      "median_log_improvement": 25.45610105771343,
+      "median_total_cost_ge": 133.4,
+      "median_search_cost_ge": 0.0,
+      "mean_rejection_rate": 0.0,
+      "mean_failure_rate": 0.0,
+      "mean_cg_convergence_rate": 0.0,
+      "median_damping": 0.2699999999999999
+    },
+    "heuristic": {
+      "controller": "heuristic",
+      "target": "relative_loss<=0.0001",
+      "n_runs": 9,
+      "n_reached": 6,
+      "median_cost_to_target_ge": 73.84999999999997,
+      "median_final_loss_ratio": 1.2971500754728147e-17,
+      "median_log_improvement": 31.438483203129064,
+      "median_total_cost_ge": 147.6,
+      "median_search_cost_ge": 0.0,
+      "mean_rejection_rate": 0.0,
+      "mean_failure_rate": 0.0,
+      "mean_cg_convergence_rate": 0.0,
+      "median_damping": 1.3717421124828502e-05
+    },
+    "onestep_narrow": {
+      "controller": "onestep_narrow",
+      "target": "relative_loss<=0.0001",
+      "n_runs": 9,
+      "n_reached": 6,
+      "median_cost_to_target_ge": 70.85,
+      "median_final_loss_ratio": 8.394967617047628e-05,
+      "median_log_improvement": 9.38529303185762,
+      "median_total_cost_ge": 139.1,
+      "median_search_cost_ge": 1001.0,
+      "mean_rejection_rate": 0.0,
+      "mean_failure_rate": 0.0,
+      "mean_cg_convergence_rate": 0.0,
+      "median_damping": 0.0001234567901234566
+    },
+    "onestep_wide": {
+      "controller": "onestep_wide",
+      "target": "relative_loss<=0.0001",
+      "n_runs": 9,
+      "n_reached": 6,
+      "median_cost_to_target_ge": 68.5,
+      "median_final_loss_ratio": 5.685821001019552e-05,
+      "median_log_improvement": 9.774949932887747,
+      "median_total_cost_ge": 144.0,
+      "median_search_cost_ge": 2223.6,
+      "mean_rejection_rate": 0.0,
+      "mean_failure_rate": 0.0,
+      "mean_cg_convergence_rate": 0.0,
+      "median_damping": 4.572473708276179e-06
+    },
+    "onestep_absolute": {
+      "controller": "onestep_absolute",
+      "target": "relative_loss<=0.0001",
+      "n_runs": 9,
+      "n_reached": 9,
+      "median_cost_to_target_ge": 68.79999999999998,
+      "median_final_loss_ratio": 7.693082553665036e-23,
+      "median_log_improvement": 31.438483203129064,
+      "median_total_cost_ge": 139.1,
+      "median_search_cost_ge": 6900.2,
+      "mean_rejection_rate": 0.0,
+      "mean_failure_rate": 0.0,
+      "mean_cg_convergence_rate": 0.0,
+      "median_damping": 3.763352846317841e-06
+    }
+  },
+  "track_e_deltas": [
+    {
+      "baseline": "best_static",
+      "treatment": "onestep_absolute",
+      "metric": "log_improvement",
+      "n_pairs": 9,
+      "n_valid": 9,
+      "median_delta": 0.27510130099132546,
+      "delta_ci": [
+        0.0,
+        24.346286084035178
+      ],
+      "p_value": 0.0625,
+      "baseline_median": 9.336929382628256,
+      "treatment_median": 31.438483203129064,
+      "n_joint_saturated": 3,
+      "n_one_sided_saturated": 3,
+      "excluded_pairs": []
+    },
+    {
+      "baseline": "onestep_narrow",
+      "treatment": "onestep_absolute",
+      "metric": "log_improvement",
+      "n_pairs": 9,
+      "n_valid": 9,
+      "median_delta": 0.035184586193276246,
+      "delta_ci": [
+        0.0,
+        29.76831284764343
+      ],
+      "p_value": 0.03125,
+      "baseline_median": 9.38529303185762,
+      "treatment_median": 31.438483203129064,
+      "n_joint_saturated": 3,
+      "n_one_sided_saturated": 3,
+      "excluded_pairs": []
+    },
+    {
+      "baseline": "onestep_narrow",
+      "treatment": "onestep_wide",
+      "metric": "log_improvement",
+      "n_pairs": 9,
+      "n_valid": 9,
+      "median_delta": 0.3076020510354187,
+      "delta_ci": [
+        0.0,
+        1.438345691630786
+      ],
+      "p_value": 0.03125,
+      "baseline_median": 9.38529303185762,
+      "treatment_median": 9.774949932887747,
+      "n_joint_saturated": 3,
+      "n_one_sided_saturated": 0,
+      "excluded_pairs": []
+    },
+    {
+      "baseline": "best_static",
+      "treatment": "best_open_loop",
+      "metric": "log_improvement",
+      "n_pairs": 9,
+      "n_valid": 9,
+      "median_delta": -0.13667358708808308,
+      "delta_ci": [
+        -5.9823821454156345,
+        24.346286084035178
+      ],
+      "p_value": 0.90625,
+      "baseline_median": 9.336929382628256,
+      "treatment_median": 25.45610105771343,
+      "n_joint_saturated": 0,
+      "n_one_sided_saturated": 6,
+      "excluded_pairs": []
+    },
+    {
+      "baseline": "best_static",
+      "treatment": "heuristic",
+      "metric": "log_improvement",
+      "n_pairs": 9,
+      "n_valid": 9,
+      "median_delta": 0.0,
+      "delta_ci": [
+        -0.9715810317615485,
+        24.346286084035178
+      ],
+      "p_value": 0.4375,
+      "baseline_median": 9.336929382628256,
+      "treatment_median": 31.438483203129064,
+      "n_joint_saturated": 3,
+      "n_one_sided_saturated": 3,
+      "excluded_pairs": []
+    }
+  ],
+  "track_t_ratios": {},
+  "gates": [
+    {
+      "name": "A1",
+      "track": "Track E",
+      "question": "현재 상태에서 좋은 damping 이 존재하는가 (instantaneous absolute-action headroom, H=1)",
+      "statistic": 0.27510130099132546,
+      "unit": "nat",
+      "verdict": "재설계",
+      "go_threshold": 1.0,
+      "pivot_threshold": 0.3,
+      "nonsaturated": "+0.275 nat (n=3)",
+      "detail": "loss 1.32배 차이. 도달성 제약을 완전히 없앤 **순간적** 이득이다. 전역 상한이나 장기 헤드룸이 아니다."
+    },
+    {
+      "name": "A2",
+      "track": "Track E",
+      "question": "현실적인 multiplier action 으로 그 이득에 접근할 수 있는가 (shrinking Q=4xc_max, narrow/wide vs best_static)",
+      "statistic": null,
+      "unit": "nat",
+      "verdict": "판정불가",
+      "go_threshold": 0.7,
+      "pivot_threshold": 0.2,
+      "nonsaturated": "",
+      "detail": "narrow +nan, wide +nan nat. A1 대비 크게 낮으면 행동 공간 도달성이 병목이다."
+    },
+    {
+      "name": "B",
+      "track": "Track E",
+      "question": "행동 공간이 병목인가 (absolute vs narrow, 모두 H=1, 해상도 정렬)",
+      "statistic": 0.035184586193276246,
+      "unit": "nat",
+      "verdict": "재설계",
+      "go_threshold": 0.5,
+      "pivot_threshold": 0.1,
+      "nonsaturated": "+0.035 nat (n=3)",
+      "detail": "참고: wide - narrow = +0.308 nat"
+    },
+    {
+      "name": "C1",
+      "track": "Track E",
+      "question": "쿼터를 매 step 초기화하는 것이 실제 성능을 떨어뜨리는가 (shrinking - fresh)",
+      "statistic": null,
+      "unit": "nat",
+      "verdict": "판정불가",
+      "go_threshold": 0.3,
+      "pivot_threshold": 0.05,
+      "nonsaturated": "",
+      "detail": "쿼터 곡선(narrow): . **fresh 는 seed 1개에서만 돌린 진단 baseline 이다.** paired 비교는 겹치는 seed 에서만 이루어지므로 이 통계의 표본이 다른 게이트보다 작다. **연구 결과이지만 PPO 착수 게이트가 아니다.** 양수면 receding horizon 이 준비 행동만 반복하며 payoff 를 뒤로 미룬다는 증거다."
+    },
+    {
+      "name": "C2",
+      "track": "Track E",
+      "question": "시간 일관적인 다단계 재계획이 one-step 효율 제어보다 나은가 (shrinking Q=4 - C0)",
+      "statistic": null,
+      "unit": "nat",
+      "verdict": "판정불가",
+      "go_threshold": 0.3,
+      "pivot_threshold": 0.05,
+      "nonsaturated": "",
+      "detail": "깊이/상한(shrinking): . 참고 Q=1(depth 1만 가능) - C0 = +nan nat. **GO 판정에는 두 조건이 모두 필요하다** (P3). 개선이 있고, 동시에 depth>1 이 실제로 채택돼야 한다. 개선만 있고 depth 가 계속 1 이면 planning 이 아니라 탐색량이 기여한 것이다. ``cap`` 이 0 이 아니면 계산 상한 때문에 쿼터를 다 쓰지 못한 step 이 있으므로 사다리 비교가 훼손된 것으로 보고한다. 이 게이트만으로 PPO 를 시작하지 않는다. P1~P4 를 함께 본다."
+    },
+    {
+      "name": "C3",
+      "track": "Track E",
+      "question": "상태를 관찰하며 재계획하는 것이 고정 실행보다 추가 이득인가 (shrinking - committed)",
+      "statistic": null,
+      "unit": "nat",
+      "verdict": "판정불가",
+      "go_threshold": 0.3,
+      "pivot_threshold": 0.05,
+      "nonsaturated": "",
+      "detail": "약 0 이면 좋은 sequence 는 존재하지만 feedback 자체의 추가 가치는 작다. 음수면 approximate replanning 이 계획을 훼손한다. **committed 는 초기 상태에 조건화된 oracle 이므로 open_loop baseline 과 다르다.** committed 가 open_loop 보다 좋다고 해서 feedback 이 필요하다는 뜻이 아니다."
+    },
+    {
+      "name": "D",
+      "track": "Track T",
+      "question": "cost-to-target 헤드룸이 있는가 (planner vs best_static, medium)",
+      "statistic": null,
+      "unit": "배",
+      "verdict": "판정불가",
+      "go_threshold": 1.2,
+      "pivot_threshold": 1.05,
+      "nonsaturated": "",
+      "detail": "난이도별 . 게이트 A와 결론이 다르면 그 불일치 자체를 결과로 보고한다 (프로토콜 D9)."
+    }
+  ],
+  "n_failures": 0,
+  "raw_path": "results\\raw\\headroom_pilot_step_size_fixed_b4_8e9cdd02.jsonl",
+  "raw_sha256": "15c508b6a94a7e4cd316cd7e1cb14f1a3d7b322e529fbebf52171f74314e21ac",
+  "raw_n_lines": 1526,
+  "provenance": {
+    "git_commit": "e78cf8df",
+    "git_dirty": true,
+    "config_hash": "88bbc6a1af9227b9",
+    "python_version": "3.12.12",
+    "platform": "Windows 11",
+    "torch_version": "2.13.0+cu130",
+    "cuda_available": true,
+    "cuda_runtime": "13.0",
+    "gpu_name": "NVIDIA GeForce RTX 3060 Ti",
+    "gpu_capability": "8.6",
+    "gpu_total_memory_mb": 8191.375,
+    "config": {
+      "mode": "pilot",
+      "condition": "step_size_fixed",
+      "phase": "pilot",
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "budget_ge": 150.0,
+      "beam": 4,
+      "quotas": [
+        1.0,
+        2.0,
+        4.0
+      ],
+      "difficulty": "medium",
+      "n_specs": 3,
+      "narrow_only": false,
+      "environment": {
+        "platform": "Windows 11",
+        "processor": "AMD64 Family 25 Model 33 Stepping 2, AuthenticAMD",
+        "cpu_count": 12,
+        "torch_num_threads": 1,
+        "torch_num_interop_threads": 1,
+        "omp_num_threads": null,
+        "mkl_num_threads": null,
+        "pinned": 1
+      },
+      "concurrent_processes": 1
+    },
+    "diff": null
+  }
+}

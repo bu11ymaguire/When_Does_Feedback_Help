@@ -1,0 +1,311 @@
+% Bibliographic entries used by the manuscript.
+%
+% Verification status, source checks, and citation-risk notes are maintained
+% separately in paper/CITATIONS.md and are not included as bibliography fields.
+%
+% **Do not put internal audit metadata in this file.** The `plainnat` style
+% prints the `note` field, so anything recorded here appears in the typeset
+% bibliography. `note` is reserved for bibliographic information meant for the
+% reader, such as a bare arXiv identifier when no volume/issue exists yet.
+%
+% Bibliographic verification provenance (which publisher page, JSTOR stable ID,
+% ADS bibcode, PubMed ID or DOI was consulted for each entry) is recorded in
+% paper/CITATIONS.md section 9. Entries with fields still unconfirmed are
+% listed in paper/CITATIONS.md section 7.
+
+% ---------------------------------------------------------------------------
+% Truncated / inexact Newton and Hessian-free optimization
+% ---------------------------------------------------------------------------
+
+@article{dembo1982inexact,
+  author  = {Dembo, Ron S. and Eisenstat, Stanley C. and Steihaug, Trond},
+  title   = {Inexact {N}ewton Methods},
+  journal = {SIAM Journal on Numerical Analysis},
+  volume  = {19},
+  number  = {2},
+  pages   = {400--408},
+  year    = {1982},
+  doi     = {10.1137/0719025}
+}
+
+@article{steihaug1983cg,
+  author  = {Steihaug, Trond},
+  title   = {The Conjugate Gradient Method and Trust Regions in Large Scale Optimization},
+  journal = {SIAM Journal on Numerical Analysis},
+  volume  = {20},
+  number  = {3},
+  pages   = {626--637},
+  year    = {1983},
+  doi     = {10.1137/0720042}
+}
+
+@article{nash1984lanczos,
+  author  = {Nash, Stephen G.},
+  title   = {Newton-Type Minimization via the {L}anczos Method},
+  journal = {SIAM Journal on Numerical Analysis},
+  volume  = {21},
+  number  = {4},
+  pages   = {770--788},
+  year    = {1984}
+}
+
+@article{nash2000survey,
+  author  = {Nash, Stephen G.},
+  title   = {A survey of truncated-{N}ewton methods},
+  journal = {Journal of Computational and Applied Mathematics},
+  volume  = {124},
+  number  = {1--2},
+  pages   = {45--59},
+  year    = {2000},
+  doi     = {10.1016/S0377-0427(00)00426-X}
+}
+
+@inproceedings{martens2010hessianfree,
+  author    = {Martens, James},
+  title     = {Deep learning via {H}essian-free optimization},
+  booktitle = {Proceedings of the 27th International Conference on Machine Learning},
+  year      = {2010}
+}
+
+@inproceedings{martens2011rnn,
+  author    = {Martens, James and Sutskever, Ilya},
+  title     = {Learning Recurrent Neural Networks with {H}essian-Free Optimization},
+  booktitle = {Proceedings of the 28th International Conference on Machine Learning},
+  year      = {2011}
+}
+
+% ---------------------------------------------------------------------------
+% Hessian-vector products
+% ---------------------------------------------------------------------------
+
+@article{pearlmutter1994hvp,
+  author  = {Pearlmutter, Barak A.},
+  title   = {Fast Exact Multiplication by the {H}essian},
+  journal = {Neural Computation},
+  volume  = {6},
+  number  = {1},
+  pages   = {147--160},
+  year    = {1994}
+}
+
+% ---------------------------------------------------------------------------
+% Stochastic / subsampled curvature
+% ---------------------------------------------------------------------------
+
+@article{byrd2011stochastic,
+  author  = {Byrd, Richard H. and Chin, Gillian M. and Neveitt, Will and Nocedal, Jorge},
+  title   = {On the Use of Stochastic {H}essian Information in Optimization
+             Methods for Machine Learning},
+  journal = {SIAM Journal on Optimization},
+  volume  = {21},
+  number  = {3},
+  pages   = {977--995},
+  year    = {2011},
+  doi     = {10.1137/10079923X}
+}
+
+% ---------------------------------------------------------------------------
+% Learned optimizers / meta-optimization
+% ---------------------------------------------------------------------------
+
+@inproceedings{andrychowicz2016l2l,
+  author    = {Andrychowicz, Marcin and Denil, Misha and G{\'o}mez Colmenarejo, Sergio
+               and Hoffman, Matthew W. and Pfau, David and Schaul, Tom
+               and Shillingford, Brendan and de Freitas, Nando},
+  title     = {Learning to learn by gradient descent by gradient descent},
+  booktitle = {Advances in Neural Information Processing Systems 29},
+  year      = {2016}
+}
+
+@article{metz2020effective,
+  author  = {Metz, Luke and Maheswaranathan, Niru and Freeman, C. Daniel
+             and Poole, Ben and Sohl-Dickstein, Jascha},
+  title   = {Tasks, stability, architecture, and compute:
+             Training more effective learned optimizers and using them to train themselves},
+  journal = {arXiv preprint arXiv:2009.11243},
+  year    = {2020}
+}
+
+@inproceedings{metz2019pathologies,
+  author    = {Metz, Luke and Maheswaranathan, Niru and Nixon, Jeremy
+               and Freeman, C. Daniel and Sohl-Dickstein, Jascha},
+  title     = {Understanding and correcting pathologies in the training of learned optimizers},
+  booktitle = {Proceedings of the 36th International Conference on Machine Learning},
+  year      = {2019}
+}
+
+% ---------------------------------------------------------------------------
+% Reinforcement learning
+% ---------------------------------------------------------------------------
+
+@article{schulman2017ppo,
+  author  = {Schulman, John and Wolski, Filip and Dhariwal, Prafulla
+             and Radford, Alec and Klimov, Oleg},
+  title   = {Proximal Policy Optimization Algorithms},
+  journal = {arXiv preprint arXiv:1707.06347},
+  year    = {2017}
+}
+
+% ---------------------------------------------------------------------------
+% Model predictive control / receding horizon
+% ---------------------------------------------------------------------------
+
+@book{rawlings2017mpc,
+  author    = {Rawlings, James B. and Mayne, David Q. and Diehl, Moritz M.},
+  title     = {Model Predictive Control: Theory, Computation, and Design},
+  publisher = {Nob Hill Publishing},
+  year      = {2017}
+}
+
+% ---------------------------------------------------------------------------
+% Benchmark function structure
+% ---------------------------------------------------------------------------
+
+@article{shang2006rosenbrock,
+  author  = {Shang, Yun-Wei and Qiu, Yu-Huang},
+  title   = {A Note on the Extended {R}osenbrock Function},
+  journal = {Evolutionary Computation},
+  volume  = {14},
+  number  = {1},
+  pages   = {119--126},
+  year    = {2006},
+  doi     = {10.1162/106365606776022733}
+}
+
+@article{kok2009rosenbrock,
+  author  = {Kok, Schalk and Sandrock, Carl},
+  title   = {Locating and Characterizing the Stationary Points of
+             the Extended {R}osenbrock Function},
+  journal = {Evolutionary Computation},
+  volume  = {17},
+  number  = {3},
+  pages   = {437--453},
+  year    = {2009},
+  doi     = {10.1162/evco.2009.17.3.437}
+}
+
+% ---------------------------------------------------------------------------
+% Statistics
+% ---------------------------------------------------------------------------
+
+@article{schuirmann1987tost,
+  author  = {Schuirmann, Donald J.},
+  title   = {A comparison of the two one-sided tests procedure and the power approach
+             for assessing the equivalence of average bioavailability},
+  journal = {Journal of Pharmacokinetics and Biopharmaceutics},
+  volume  = {15},
+  number  = {6},
+  pages   = {657--680},
+  year    = {1987},
+  doi     = {10.1007/BF01068419}
+}
+
+@article{lakens2017equivalence,
+  author  = {Lakens, Dani{\"e}l},
+  title   = {Equivalence Tests: A Practical Primer for $t$ Tests, Correlations,
+             and Meta-Analyses},
+  journal = {Social Psychological and Personality Science},
+  year    = {2017},
+  doi     = {10.1177/1948550617697177}
+}
+
+% ---------------------------------------------------------------------------
+% Conjugate gradient, damping, trust region
+% ---------------------------------------------------------------------------
+
+@article{hestenes1952cg,
+  author  = {Hestenes, Magnus R. and Stiefel, Eduard},
+  title   = {Methods of Conjugate Gradients for Solving Linear Systems},
+  journal = {Journal of Research of the National Bureau of Standards},
+  volume  = {49},
+  number  = {6},
+  pages   = {409--436},
+  year    = {1952}
+}
+
+@article{levenberg1944,
+  author  = {Levenberg, Kenneth},
+  title   = {A Method for the Solution of Certain Non-Linear Problems in Least Squares},
+  journal = {Quarterly of Applied Mathematics},
+  volume  = {2},
+  number  = {2},
+  pages   = {164--168},
+  year    = {1944}
+}
+
+@article{marquardt1963,
+  author  = {Marquardt, Donald W.},
+  title   = {An Algorithm for Least-Squares Estimation of Nonlinear Parameters},
+  journal = {Journal of the Society for Industrial and Applied Mathematics},
+  volume  = {11},
+  number  = {2},
+  pages   = {431--441},
+  year    = {1963},
+  doi     = {10.1137/0111030}
+}
+
+@book{conn2000trustregion,
+  author    = {Conn, Andrew R. and Gould, Nicholas I. M. and Toint, Philippe L.},
+  title     = {Trust-Region Methods},
+  publisher = {SIAM},
+  series    = {MPS-SIAM Series on Optimization},
+  address   = {Philadelphia, PA},
+  year      = {2000},
+  doi       = {10.1137/1.9780898719857}
+}
+
+@book{bertsekas2017dp,
+  author    = {Bertsekas, Dimitri P.},
+  title     = {Dynamic Programming and Optimal Control},
+  volume    = {1},
+  edition   = {4},
+  publisher = {Athena Scientific},
+  address   = {Belmont, MA},
+  year      = {2017},
+  isbn      = {978-1-886529-43-4}
+}
+
+% ---------------------------------------------------------------------------
+% Amortized / meta-learned control of optimizer hyperparameters
+% ---------------------------------------------------------------------------
+
+@article{amos2023amortized,
+  author  = {Amos, Brandon},
+  title   = {Tutorial on Amortized Optimization},
+  journal = {Foundations and Trends in Machine Learning},
+  year    = {2023},
+  note    = {arXiv:2202.00665}
+}
+
+@inproceedings{bae2022apo,
+  author    = {Bae, Juhan and Vicol, Paul and HaoChen, Jeff Z. and Grosse, Roger},
+  title     = {Amortized Proximal Optimization},
+  booktitle = {Advances in Neural Information Processing Systems 35},
+  year      = {2022}
+}
+
+% ---------------------------------------------------------------------------
+% Statistics
+% ---------------------------------------------------------------------------
+
+@article{wilcoxon1945,
+  author  = {Wilcoxon, Frank},
+  title   = {Individual Comparisons by Ranking Methods},
+  journal = {Biometrics Bulletin},
+  volume  = {1},
+  number  = {6},
+  pages   = {80--83},
+  year    = {1945},
+  doi     = {10.2307/3001968}
+}
+
+@article{efron1979bootstrap,
+  author  = {Efron, Bradley},
+  title   = {Bootstrap Methods: Another Look at the Jackknife},
+  journal = {The Annals of Statistics},
+  volume  = {7},
+  number  = {1},
+  pages   = {1--26},
+  year    = {1979},
+  doi     = {10.1214/aos/1176344552}
+}

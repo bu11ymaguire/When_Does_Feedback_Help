@@ -1,0 +1,70 @@
+\section{Where does the headroom come from?}
+\label{sec:decomposition}
+
+\textbf{The median of paired differences is not linear.} The values below therefore
+do not decompose into a single sum, and each must be read as an
+\emph{independently measured statistic}.
+
+\begin{table}[!ht]
+  \centering
+  \input{tables/heldout_ladder}
+  \caption{Held-out results ($n = 40$). The upper block reports each rung against
+  the tuned constant setting; the lower block reports the increments we measured
+  \emph{directly}. \textbf{Do not subtract entries across blocks.}}
+  \label{tab:ladder}
+\end{table}
+
+\begin{figure}[!ht]
+  \centering
+  \includegraphics[width=\textwidth]{figure2_planning_vs_feedback.png}
+  \caption{Causal decomposition. Only directly measured paired statistics appear
+  here. \textbf{Do not subtract bars in panel (a).}}
+  \label{fig:planning-vs-feedback}
+\end{figure}
+
+\subsection{Why the table entries must not be subtracted}
+\label{sec:no-subtraction}
+
+The value of \ctrl{committed} against the constant baseline ($+2.090$) exceeds that
+of \ctrl{shrinking} ($+1.690$). Yet the directly measured
+$\ctrl{shrinking} - \ctrl{committed}$ is $+0.010$. The two statements are not
+contradictory.
+
+\begin{center}
+\begin{tabular}{lrrrr}
+\toprule
+$\ctrl{shrinking} - \ctrl{committed}$ by spec
+  & $\kappa{=}10^3$ & $\kappa{=}10^4$ & $\kappa{=}10^5$ & $\kappa{=}10^6$ \\
+\midrule
+Median & $+0.472$ & $-0.019$ & $+0.009$ & $+0.000$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Within each spec the two planners are effectively tied. The pooled medians fall on
+different instances, which is what produces the marginal gap between $+2.090$ and
+$+1.690$. \emph{Comparisons are made only with direct paired statistics.} The same
+warning appears in Figure~\ref{fig:ladder}.
+
+An earlier version of this manuscript computed the constant-relative value of
+\ctrl{onestep} as $\gate{A2} - \gate{C2} = 1.690 - 0.456 = 1.233$. \textbf{That was
+wrong.} The directly measured value is $+1.155$.
+
+\subsection{Qualitative conclusion}
+
+\begin{center}
+\begin{tabularx}{\linewidth}{@{}Xl@{}}
+\toprule
+Capability & Directly measured value \\
+\midrule
+State-dependent control itself (constant $\rightarrow$ one-step)
+  & $+1.155$, largest single contribution \\
+Increment from multi-step lookahead (one-step $\rightarrow$ planner)
+  & $+0.456$, CI lower bound $+0.254$ \\
+Increment from replanning (committed $\rightarrow$ planner)
+  & $+0.010$, CI $[-0.033, +0.053]$ \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Q1} is supported. \textbf{Q2} is not supported under these conditions.

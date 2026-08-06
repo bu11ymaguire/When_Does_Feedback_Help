@@ -1,0 +1,16 @@
+% 이 파일은 scripts/make_tables.py 가 생성한다. **손으로 수정하지 않는다.**
+% 표: micro-neural paired delta (exploratory, n=3 per regime)
+% raw: headroom_micro-neural_step_size_fixed_b8_0bec1125.jsonl
+% raw 의 SHA-256 은 paper/evidence_map.md 에 있다.
+% 공개 저장소에는 raw 가 없다. results/public/*.csv 에서 --public-dir 로 만들면
+% 이 파일과 바이트 단위로 같아진다 (scripts/verify_public_results.py).
+\begin{tabular}{lrrr}
+\toprule
+Comparison & R1 full-batch & R2 batch 128 & R2 batch 64 \\
+\midrule
+shrinking $-$ best\_static & $+15.176$ (3/3) & $-0.900$ (1/3) & $-0.277$ (1/3) \\
+shrinking $-$ onestep & $+0.547$ (2/3) & $-1.111$ (1/3) & $-0.716$ (1/3) \\
+shrinking $-$ committed & $-0.095$ (1/3) & $+2.941$ (3/3) & $+1.666$ (3/3) \\
+committed $-$ onestep & $+0.470$ (2/3) & $-4.444$ (0/3) & $-2.322$ (0/3) \\
+\bottomrule
+\end{tabular}

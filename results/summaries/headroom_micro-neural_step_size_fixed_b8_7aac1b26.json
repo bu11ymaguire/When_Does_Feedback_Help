@@ -1,0 +1,909 @@
+{
+  "meta": {
+    "mode": "micro-neural",
+    "condition": "step_size_fixed",
+    "phase": "challenge",
+    "seeds": [
+      2,
+      3,
+      4
+    ],
+    "budget_ge": 150.0,
+    "beam": 8,
+    "quotas": [
+      4.0
+    ],
+    "difficulty": "medium",
+    "n_specs": 2,
+    "narrow_only": false,
+    "environment": {
+      "platform": "Windows 11",
+      "processor": "AMD64 Family 25 Model 33 Stepping 2, AuthenticAMD",
+      "cpu_count": 12,
+      "torch_num_threads": 1,
+      "torch_num_interop_threads": 1,
+      "omp_num_threads": null,
+      "mkl_num_threads": null,
+      "pinned": 1
+    },
+    "concurrent_processes": 1
+  },
+  "experiment_id": "b8c83d4059a46d10",
+  "sweep_id": "bd14fe43f7d6bbf1",
+  "aggregation_id": "1fb5800f9248290c",
+  "identity": {
+    "protocol_version": "stage2-v1",
+    "phase": "challenge",
+    "device": "cpu",
+    "cost_budget_ge": 150.0,
+    "max_steps": 200,
+    "initial_damping": 0.01,
+    "min_damping": 1e-08,
+    "max_damping": 100000000.0,
+    "cg_tolerance": 0.001,
+    "pap_eps": 1e-12,
+    "max_loss_increase_ratio": 1.5,
+    "safe_fallback": "gradient",
+    "compute_trust_ratio": true,
+    "quotas": [
+      4.0
+    ],
+    "beam_width": 8,
+    "max_plan_depth": 24,
+    "fresh_diagnostic_seeds": 0,
+    "run_fresh_wide": false,
+    "tuning_budget": 6,
+    "n_schedule_segments": 4,
+    "tuning_seed": 0,
+    "primary_difficulty": "medium",
+    "specs": [
+      "MicroNeuralSpec(input_dim=32, hidden_dim=128, n_classes=5, n_samples=512, regime='full_batch', batch_size=64, teacher_hidden_dim=256, label_noise=0.05, init_scale=1.0)",
+      "MicroNeuralSpec(input_dim=32, hidden_dim=128, n_classes=5, n_samples=512, regime='controlled_stochastic', batch_size=64, teacher_hidden_dim=256, label_noise=0.05, init_scale=1.0)"
+    ],
+    "seeds": [
+      2,
+      3,
+      4
+    ],
+    "targets": {
+      "spd": {
+        "easy": "relative_loss<=0.01",
+        "medium": "relative_loss<=0.0001",
+        "hard": "relative_loss<=1e-06"
+      },
+      "ill_conditioned": {
+        "easy": "relative_loss<=0.01",
+        "medium": "relative_loss<=0.0001",
+        "hard": "relative_loss<=1e-06"
+      },
+      "indefinite": {
+        "easy": "relative_loss<=0.1",
+        "medium": "relative_loss<=0.01",
+        "hard": "relative_loss<=0.001"
+      },
+      "rosenbrock": {
+        "easy": "absolute_loss<=0.1",
+        "medium": "absolute_loss<=0.01",
+        "hard": "absolute_loss<=0.0001"
+      },
+      "micro_neural": {
+        "easy": "relative_loss<=0.5",
+        "medium": "relative_loss<=0.2",
+        "hard": "relative_loss<=0.1"
+      }
+    },
+    "spaces": {
+      "narrow": {
+        "mode": "relative",
+        "damping_values": [
+          0.3333333333333333,
+          1.0,
+          3.0
+        ],
+        "cg_budgets": [
+          3,
+          5,
+          10,
+          20
+        ],
+        "step_sizes": [
+          1.0
+        ]
+      },
+      "wide": {
+        "mode": "relative",
+        "damping_values": [
+          0.037037037037037035,
+          0.1111111111111111,
+          0.3333333333333333,
+          1.0,
+          3.0,
+          9.0,
+          27.0
+        ],
+        "cg_budgets": [
+          3,
+          5,
+          10,
+          20
+        ],
+        "step_sizes": [
+          1.0
+        ]
+      },
+      "absolute": {
+        "mode": "absolute",
+        "damping_values": [
+          2.3230573125418773e-08,
+          6.969171937625632e-08,
+          2.0907515812876897e-07,
+          6.272254743863069e-07,
+          1.8816764231589208e-06,
+          5.645029269476762e-06,
+          1.6935087808430286e-05,
+          5.080526342529086e-05,
+          0.00015241579027587258,
+          0.0004572473708276177,
+          0.0013717421124828531,
+          0.00411522633744856,
+          0.012345679012345678,
+          0.037037037037037035,
+          0.1111111111111111,
+          0.3333333333333333,
+          1.0,
+          3.0,
+          9.0,
+          27.0,
+          81.0,
+          243.0,
+          729.0,
+          2187.0,
+          6561.0,
+          19683.0,
+          59049.0,
+          177147.0,
+          531441.0,
+          1594323.0,
+          4782969.0,
+          14348907.0,
+          43046721.0
+        ],
+        "cg_budgets": [
+          3,
+          5,
+          10,
+          20
+        ],
+        "step_sizes": [
+          1.0
+        ]
+      }
+    },
+    "code_dirty": false,
+    "n_tune": 6,
+    "mode": "headroom"
+  },
+  "execution_provenance": {
+    "git_commit": "",
+    "code_dirty": false,
+    "hostname": "host-a",
+    "platform": "Windows 11",
+    "recorded_at": "2026-08-04T10:08:06.407439+00:00"
+  },
+  "selections": {
+    "static": {
+      "selection_id": "454b4d9c5bc8c889",
+      "family": "static",
+      "candidate_labels": [
+        "static[0]",
+        "static[2]",
+        "static[4]",
+        "static[6]",
+        "static[8]",
+        "static[10]"
+      ],
+      "candidate_scores": {
+        "static[0]": 0.24347684739029318,
+        "static[2]": 0.24269288415993567,
+        "static[4]": 4.354138545685779,
+        "static[6]": 2.5782816236075163,
+        "static[8]": 0.9706546323020363,
+        "static[10]": 0.8237086281844637
+      },
+      "selection_metric": "median_log_improvement",
+      "tie_break_rule": "lowest_flat_index",
+      "selected_label": "static[4]",
+      "selected_config": {
+        "flat_index": 4,
+        "damping_multiplier": 1.0,
+        "cg_budget": 3,
+        "step_size": 1.0,
+        "damping_absolute": null
+      },
+      "tuning_specs": [
+        "MicroNeuralSpec(input_dim=32, hidden_dim=128, n_classes=5, n_samples=512, regime='full_batch', batch_size=64, teacher_hidden_dim=256, label_noise=0.05, init_scale=1.0)",
+        "MicroNeuralSpec(input_dim=32, hidden_dim=128, n_classes=5, n_samples=512, regime='controlled_stochastic', batch_size=64, teacher_hidden_dim=256, label_noise=0.05, init_scale=1.0)"
+      ],
+      "tuning_seeds": [
+        2,
+        3,
+        4
+      ],
+      "n_tune": 6,
+      "semantics_version": 1,
+      "resolved": true,
+      "n_candidates": 6,
+      "n_tuning_instances": 6,
+      "tuning_object_ge": 5290.599999999999,
+      "tuning_wall_clock_sec": 0.0,
+      "equivalent_static_action": null,
+      "progress_clock": "",
+      "progress_evaluated_at": "before_step",
+      "realized_segment_counts": {},
+      "realized_ge_by_segment": {}
+    },
+    "open_loop": {
+      "selection_id": "23386095018c2986",
+      "family": "open_loop",
+      "candidate_labels": [
+        "open_loop[0]",
+        "open_loop[1]",
+        "open_loop[2]",
+        "open_loop[3]",
+        "open_loop[4]",
+        "open_loop[5]"
+      ],
+      "candidate_scores": {
+        "open_loop[0]": 3.008828484866999,
+        "open_loop[1]": 2.6839215736598216,
+        "open_loop[2]": 1.1700449238358352,
+        "open_loop[3]": 0.7430790671290519,
+        "open_loop[4]": 2.2216727692315312,
+        "open_loop[5]": 1.0674953083198409
+      },
+      "selection_metric": "median_log_improvement",
+      "tie_break_rule": "lowest_flat_index",
+      "selected_label": "open_loop[0]",
+      "selected_config": {
+        "schedule": [
+          {
+            "flat_index": 6,
+            "damping_multiplier": 1.0,
+            "cg_budget": 10,
+            "step_size": 1.0
+          },
+          {
+            "flat_index": 6,
+            "damping_multiplier": 1.0,
+            "cg_budget": 10,
+            "step_size": 1.0
+          },
+          {
+            "flat_index": 0,
+            "damping_multiplier": 0.3333333333333333,
+            "cg_budget": 3,
+            "step_size": 1.0
+          },
+          {
+            "flat_index": 4,
+            "damping_multiplier": 1.0,
+            "cg_budget": 3,
+            "step_size": 1.0
+          }
+        ],
+        "breakpoints": [
+          0.48733492690653135,
+          0.8764108986066186,
+          0.9189183977257255,
+          1.0
+        ],
+        "n_segments": 4
+      },
+      "tuning_specs": [
+        "MicroNeuralSpec(input_dim=32, hidden_dim=128, n_classes=5, n_samples=512, regime='full_batch', batch_size=64, teacher_hidden_dim=256, label_noise=0.05, init_scale=1.0)",
+        "MicroNeuralSpec(input_dim=32, hidden_dim=128, n_classes=5, n_samples=512, regime='controlled_stochastic', batch_size=64, teacher_hidden_dim=256, label_noise=0.05, init_scale=1.0)"
+      ],
+      "tuning_seeds": [
+        2,
+        3,
+        4
+      ],
+      "n_tune": 6,
+      "semantics_version": 1,
+      "resolved": true,
+      "n_candidates": 6,
+      "n_tuning_instances": 6,
+      "tuning_object_ge": 5312.200000000001,
+      "tuning_wall_clock_sec": 0.0,
+      "equivalent_static_action": null,
+      "progress_clock": "object_ge_fraction",
+      "progress_evaluated_at": "before_step",
+      "realized_segment_counts": {
+        "0": 11,
+        "1": 7,
+        "2": 1,
+        "3": 3
+      },
+      "realized_ge_by_segment": {
+        "0": 72.5,
+        "1": 53.099999999999994,
+        "2": 7.3,
+        "3": 15.899999999999999
+      }
+    }
+  },
+  "n_instances": 6,
+  "tuning_budget": 6,
+  "tuning_runs": {
+    "best_static": 6,
+    "best_open_loop": 6,
+    "heuristic": 1,
+    "onestep_narrow": 0,
+    "onestep_wide": 0,
+    "onestep_absolute": 0,
+    "shrinking_Q4_narrow": 0,
+    "committed_Q4_narrow": 0
+  },
+  "best_static_action": {
+    "damping_multiplier": 1.0,
+    "cg_budget": 3,
+    "step_size": 1.0,
+    "damping_absolute": null
+  },
+  "groups": {
+    "best_static": {
+      "controller": "best_static",
+      "target": "relative_loss<=0.2",
+      "n_runs": 6,
+      "n_reached": 6,
+      "median_cost_to_target_ge": 35.05,
+      "median_final_loss_ratio": 0.017525875112187728,
+      "median_log_improvement": 4.354138545685779,
+      "median_total_cost_ge": 148.95,
+      "median_search_cost_ge": 0.0,
+      "mean_rejection_rate": 0.10344827586206896,
+      "mean_failure_rate": 0.0,
+      "mean_cg_convergence_rate": 0.15517241379310345,
+      "median_damping": 0.17999999999999994
+    },
+    "best_open_loop": {
+      "controller": "best_open_loop",
+      "target": "relative_loss<=0.2",
+      "n_runs": 6,
+      "n_reached": 6,
+      "median_cost_to_target_ge": 74.44999999999999,
+      "median_final_loss_ratio": 0.04936428428412554,
+      "median_log_improvement": 3.008828484866999,
+      "median_total_cost_ge": 148.35000000000002,
+      "median_search_cost_ge": 0.0,
+      "mean_rejection_rate": 0.175,
+      "mean_failure_rate": 0.0,
+      "mean_cg_convergence_rate": 0.5119047619047619,
+      "median_damping": 0.2699999999999999
+    },
+    "heuristic": {
+      "controller": "heuristic",
+      "target": "relative_loss<=0.2",
+      "n_runs": 6,
+      "n_reached": 6,
+      "median_cost_to_target_ge": 64.19999999999999,
+      "median_final_loss_ratio": 0.11821000519208089,
+      "median_log_improvement": 3.2799497031901628,
+      "median_total_cost_ge": 139.5,
+      "median_search_cost_ge": 0.0,
+      "mean_rejection_rate": 0.19871794871794873,
+      "mean_failure_rate": 0.0,
+      "mean_cg_convergence_rate": 0.5147058823529411,
+      "median_damping": 0.4199999999999999
+    },
+    "onestep_narrow": {
+      "controller": "onestep_narrow",
+      "target": "relative_loss<=0.2",
+      "n_runs": 6,
+      "n_reached": 6,
+      "median_cost_to_target_ge": 17.9,
+      "median_final_loss_ratio": 0.008104813493888852,
+      "median_log_improvement": 11.985546248617712,
+      "median_total_cost_ge": 148.75,
+      "median_search_cost_ge": 2173.7,
+      "mean_rejection_rate": 0.02,
+      "mean_failure_rate": 0.0,
+      "mean_cg_convergence_rate": 0.0,
+      "median_damping": 0.13500098853947565
+    },
+    "onestep_wide": {
+      "controller": "onestep_wide",
+      "target": "relative_loss<=0.2",
+      "n_runs": 6,
+      "n_reached": 6,
+      "median_cost_to_target_ge": 7.949999999999999,
+      "median_final_loss_ratio": 0.010408100486949484,
+      "median_log_improvement": 11.50821163145834,
+      "median_total_cost_ge": 148.4,
+      "median_search_cost_ge": 4133.4,
+      "mean_rejection_rate": 0.0,
+      "mean_failure_rate": 0.0,
+      "mean_cg_convergence_rate": 0.041666666666666664,
+      "median_damping": 0.13500008161257318
+    },
+    "onestep_absolute": {
+      "controller": "onestep_absolute",
+      "target": "relative_loss<=0.2",
+      "n_runs": 6,
+      "n_reached": 6,
+      "median_cost_to_target_ge": 7.949999999999999,
+      "median_final_loss_ratio": 0.010178208905313436,
+      "median_log_improvement": 11.58275515026778,
+      "median_total_cost_ge": 148.4,
+      "median_search_cost_ge": 10881.4,
+      "mean_rejection_rate": 0.0,
+      "mean_failure_rate": 0.0,
+      "mean_cg_convergence_rate": 0.020833333333333332,
+      "median_damping": 0.16666667828195322
+    },
+    "shrinking_Q4_narrow": {
+      "controller": "shrinking_Q4_narrow",
+      "target": "relative_loss<=0.2",
+      "n_runs": 6,
+      "n_reached": 6,
+      "median_cost_to_target_ge": 16.9,
+      "median_final_loss_ratio": 0.02342942175021934,
+      "median_log_improvement": 11.532033195584102,
+      "median_total_cost_ge": 148.2,
+      "median_search_cost_ge": 211861.85,
+      "mean_rejection_rate": 0.0,
+      "mean_failure_rate": 0.0,
+      "mean_cg_convergence_rate": 0.020833333333333332,
+      "median_damping": 0.13500296561842703
+    },
+    "committed_Q4_narrow": {
+      "controller": "committed_Q4_narrow",
+      "target": "relative_loss<=0.2",
+      "n_runs": 6,
+      "n_reached": 6,
+      "median_cost_to_target_ge": 16.9,
+      "median_final_loss_ratio": 0.03953830025044688,
+      "median_log_improvement": 11.211837487825912,
+      "median_total_cost_ge": 148.59999999999997,
+      "median_search_cost_ge": 23916.699999999997,
+      "mean_rejection_rate": 0.376984126984127,
+      "mean_failure_rate": 0.0,
+      "mean_cg_convergence_rate": 0.0,
+      "median_damping": 2.2326750114311803e-05
+    },
+    "best_static@easy": {
+      "controller": "best_static@easy",
+      "target": "relative_loss<=0.5",
+      "n_runs": 6,
+      "n_reached": 6,
+      "median_cost_to_target_ge": 5.3,
+      "median_final_loss_ratio": 0.017525875112187728,
+      "median_log_improvement": 4.354138545685779,
+      "median_total_cost_ge": 148.95,
+      "median_search_cost_ge": 0.0,
+      "mean_rejection_rate": 0.10344827586206896,
+      "mean_failure_rate": 0.0,
+      "mean_cg_convergence_rate": 0.15517241379310345,
+      "median_damping": 0.17999999999999994
+    },
+    "shrinking_Q4@easy": {
+      "controller": "shrinking_Q4@easy",
+      "target": "relative_loss<=0.5",
+      "n_runs": 6,
+      "n_reached": 6,
+      "median_cost_to_target_ge": 5.3,
+      "median_final_loss_ratio": 0.008104818856821539,
+      "median_log_improvement": 11.135520256890533,
+      "median_total_cost_ge": 148.4,
+      "median_search_cost_ge": 3118.05,
+      "mean_rejection_rate": 0.0,
+      "mean_failure_rate": 0.0,
+      "mean_cg_convergence_rate": 0.0,
+      "median_damping": 0.13500076207895134
+    },
+    "best_static@medium": {
+      "controller": "best_static@medium",
+      "target": "relative_loss<=0.2",
+      "n_runs": 6,
+      "n_reached": 6,
+      "median_cost_to_target_ge": 35.05,
+      "median_final_loss_ratio": 0.017525875112187728,
+      "median_log_improvement": 4.354138545685779,
+      "median_total_cost_ge": 148.95,
+      "median_search_cost_ge": 0.0,
+      "mean_rejection_rate": 0.10344827586206896,
+      "mean_failure_rate": 0.0,
+      "mean_cg_convergence_rate": 0.15517241379310345,
+      "median_damping": 0.17999999999999994
+    },
+    "shrinking_Q4@medium": {
+      "controller": "shrinking_Q4@medium",
+      "target": "relative_loss<=0.2",
+      "n_runs": 6,
+      "n_reached": 6,
+      "median_cost_to_target_ge": 15.899999999999999,
+      "median_final_loss_ratio": 0.00997559500807545,
+      "median_log_improvement": 11.031678778201986,
+      "median_total_cost_ge": 148.4,
+      "median_search_cost_ge": 3476.3,
+      "mean_rejection_rate": 0.0,
+      "mean_failure_rate": 0.0,
+      "mean_cg_convergence_rate": 0.0,
+      "median_damping": 0.40500076207895125
+    },
+    "best_static@hard": {
+      "controller": "best_static@hard",
+      "target": "relative_loss<=0.1",
+      "n_runs": 6,
+      "n_reached": 6,
+      "median_cost_to_target_ge": 51.249999999999986,
+      "median_final_loss_ratio": 0.017525875112187728,
+      "median_log_improvement": 4.354138545685779,
+      "median_total_cost_ge": 148.95,
+      "median_search_cost_ge": 0.0,
+      "mean_rejection_rate": 0.10344827586206896,
+      "mean_failure_rate": 0.0,
+      "mean_cg_convergence_rate": 0.15517241379310345,
+      "median_damping": 0.17999999999999994
+    },
+    "shrinking_Q4@hard": {
+      "controller": "shrinking_Q4@hard",
+      "target": "relative_loss<=0.1",
+      "n_runs": 6,
+      "n_reached": 6,
+      "median_cost_to_target_ge": 27.5,
+      "median_final_loss_ratio": 0.0067027216938292476,
+      "median_log_improvement": 11.176943924807372,
+      "median_total_cost_ge": 147.75,
+      "median_search_cost_ge": 4146.95,
+      "mean_rejection_rate": 0.0,
+      "mean_failure_rate": 0.0,
+      "mean_cg_convergence_rate": 0.0,
+      "median_damping": 0.40500076207895125
+    }
+  },
+  "track_e_deltas": [
+    {
+      "baseline": "best_static",
+      "treatment": "onestep_absolute",
+      "metric": "log_improvement",
+      "n_pairs": 6,
+      "n_valid": 6,
+      "median_delta": 7.422759838096312,
+      "delta_ci": [
+        0.2246086740616411,
+        14.538922326309468
+      ],
+      "p_value": 0.03125,
+      "baseline_median": 4.354138545685779,
+      "treatment_median": 11.58275515026778,
+      "n_joint_saturated": 0,
+      "n_one_sided_saturated": 0,
+      "excluded_pairs": []
+    },
+    {
+      "baseline": "best_static",
+      "treatment": "shrinking_Q4_narrow",
+      "metric": "log_improvement",
+      "n_pairs": 6,
+      "n_valid": 6,
+      "median_delta": 7.73059796257003,
+      "delta_ci": [
+        -0.5228257371661782,
+        15.343683705823327
+      ],
+      "p_value": 0.21875,
+      "baseline_median": 4.354138545685779,
+      "treatment_median": 11.532033195584102,
+      "n_joint_saturated": 0,
+      "n_one_sided_saturated": 0,
+      "excluded_pairs": []
+    },
+    {
+      "baseline": "onestep_narrow",
+      "treatment": "onestep_absolute",
+      "metric": "log_improvement",
+      "n_pairs": 6,
+      "n_valid": 6,
+      "median_delta": -0.10914175520363711,
+      "delta_ci": [
+        -0.6382920548788213,
+        0.4370926733201985
+      ],
+      "p_value": 0.6875,
+      "baseline_median": 11.985546248617712,
+      "treatment_median": 11.58275515026778,
+      "n_joint_saturated": 0,
+      "n_one_sided_saturated": 0,
+      "excluded_pairs": []
+    },
+    {
+      "baseline": "onestep_narrow",
+      "treatment": "onestep_wide",
+      "metric": "log_improvement",
+      "n_pairs": 6,
+      "n_valid": 6,
+      "median_delta": -0.367817014409318,
+      "delta_ci": [
+        -0.6316171270407249,
+        0.3085231992494082
+      ],
+      "p_value": 0.3125,
+      "baseline_median": 11.985546248617712,
+      "treatment_median": 11.50821163145834,
+      "n_joint_saturated": 0,
+      "n_one_sided_saturated": 0,
+      "excluded_pairs": []
+    },
+    {
+      "baseline": "onestep_narrow",
+      "treatment": "shrinking_Q4_narrow",
+      "metric": "log_improvement",
+      "n_pairs": 6,
+      "n_valid": 6,
+      "median_delta": 0.2143803218885516,
+      "delta_ci": [
+        -1.0406029045325014,
+        0.8810465386414483
+      ],
+      "p_value": 1.0,
+      "baseline_median": 11.985546248617712,
+      "treatment_median": 11.532033195584102,
+      "n_joint_saturated": 0,
+      "n_one_sided_saturated": 0,
+      "excluded_pairs": []
+    },
+    {
+      "baseline": "committed_Q4_narrow",
+      "treatment": "shrinking_Q4_narrow",
+      "metric": "log_improvement",
+      "n_pairs": 6,
+      "n_valid": 6,
+      "median_delta": 0.5679894089290234,
+      "delta_ci": [
+        -0.3415484213899127,
+        2.4165591845798753
+      ],
+      "p_value": 0.21875,
+      "baseline_median": 11.211837487825912,
+      "treatment_median": 11.532033195584102,
+      "n_joint_saturated": 0,
+      "n_one_sided_saturated": 0,
+      "excluded_pairs": []
+    },
+    {
+      "baseline": "onestep_narrow",
+      "treatment": "shrinking_Q4_narrow",
+      "metric": "log_improvement",
+      "n_pairs": 6,
+      "n_valid": 6,
+      "median_delta": 0.2143803218885516,
+      "delta_ci": [
+        -1.0406029045325014,
+        0.8810465386414483
+      ],
+      "p_value": 1.0,
+      "baseline_median": 11.985546248617712,
+      "treatment_median": 11.532033195584102,
+      "n_joint_saturated": 0,
+      "n_one_sided_saturated": 0,
+      "excluded_pairs": []
+    },
+    {
+      "baseline": "best_static",
+      "treatment": "best_open_loop",
+      "metric": "log_improvement",
+      "n_pairs": 6,
+      "n_valid": 6,
+      "median_delta": -0.8968054156884455,
+      "delta_ci": [
+        -2.141844148303237,
+        0.28425147504382164
+      ],
+      "p_value": 0.15625,
+      "baseline_median": 4.354138545685779,
+      "treatment_median": 3.008828484866999,
+      "n_joint_saturated": 0,
+      "n_one_sided_saturated": 0,
+      "excluded_pairs": []
+    },
+    {
+      "baseline": "best_static",
+      "treatment": "heuristic",
+      "metric": "log_improvement",
+      "n_pairs": 6,
+      "n_valid": 6,
+      "median_delta": -0.8101912543215142,
+      "delta_ci": [
+        -2.1041333636269948,
+        0.30248379679613446
+      ],
+      "p_value": 0.15625,
+      "baseline_median": 4.354138545685779,
+      "treatment_median": 3.2799497031901628,
+      "n_joint_saturated": 0,
+      "n_one_sided_saturated": 0,
+      "excluded_pairs": []
+    }
+  ],
+  "track_t_ratios": {
+    "easy": {
+      "baseline": "best_static@easy",
+      "treatment": "shrinking_Q4@easy",
+      "metric": "cost_to_target_ge",
+      "n_pairs": 6,
+      "n_both_reached": 6,
+      "ratio_geometric_mean": 1.1693483421575481,
+      "ratio_ci": [
+        1.0,
+        1.598938327011053
+      ],
+      "p_value": null,
+      "baseline_median": 5.3,
+      "treatment_median": 5.3
+    },
+    "medium": {
+      "baseline": "best_static@medium",
+      "treatment": "shrinking_Q4@medium",
+      "metric": "cost_to_target_ge",
+      "n_pairs": 6,
+      "n_both_reached": 6,
+      "ratio_geometric_mean": 1.793794776185965,
+      "ratio_ci": [
+        1.3898851150295264,
+        2.1372723610906026
+      ],
+      "p_value": 0.0625,
+      "baseline_median": 35.05,
+      "treatment_median": 15.899999999999999
+    },
+    "hard": {
+      "baseline": "best_static@hard",
+      "treatment": "shrinking_Q4@hard",
+      "metric": "cost_to_target_ge",
+      "n_pairs": 6,
+      "n_both_reached": 6,
+      "ratio_geometric_mean": 1.9168624214511256,
+      "ratio_ci": [
+        1.6709832163903866,
+        2.1343387606386237
+      ],
+      "p_value": 0.03125,
+      "baseline_median": 51.249999999999986,
+      "treatment_median": 27.5
+    }
+  },
+  "gates": [
+    {
+      "name": "A1",
+      "track": "Track E",
+      "question": "현재 상태에서 좋은 damping 이 존재하는가 (instantaneous absolute-action headroom, H=1)",
+      "statistic": 7.422759838096312,
+      "unit": "nat",
+      "verdict": "GO",
+      "go_threshold": 1.0,
+      "pivot_threshold": 0.3,
+      "nonsaturated": "+7.423 nat (n=6)",
+      "detail": "loss 1673.65배 차이. 도달성 제약을 완전히 없앤 **순간적** 이득이다. 전역 상한이나 장기 헤드룸이 아니다."
+    },
+    {
+      "name": "A2",
+      "track": "Track E",
+      "question": "현실적인 multiplier action 으로 그 이득에 접근할 수 있는가 (shrinking Q=4xc_max, narrow/wide vs best_static)",
+      "statistic": 7.73059796257003,
+      "unit": "nat",
+      "verdict": "GO",
+      "go_threshold": 0.7,
+      "pivot_threshold": 0.2,
+      "nonsaturated": "[1] all-task floor-capped  +7.731 nat  n=6  CI -0.523~+15.344  joint=0 one-sided=0 unsat=6  (+4/0×0/−2)\n      [2] mlp_d32_h128_c5_n512_cs64          median -0.277 n=3 [-0.277, +0.641, -0.768]\n      [2] mlp_d32_h128_c5_n512_fb            median +15.176 n=3 [+15.176, +14.821, +15.512]\n      [3] pairwise nonsaturated 민감도  +7.731 nat  n=6  (비교마다 n 이 달라진다. primary 아님)",
+      "detail": "narrow +7.731, wide +nan nat. A1 대비 크게 낮으면 행동 공간 도달성이 병목이다."
+    },
+    {
+      "name": "B",
+      "track": "Track E",
+      "question": "행동 공간이 병목인가 (absolute vs narrow, 모두 H=1, 해상도 정렬)",
+      "statistic": -0.10914175520363711,
+      "unit": "nat",
+      "verdict": "재설계",
+      "go_threshold": 0.5,
+      "pivot_threshold": 0.1,
+      "nonsaturated": "-0.109 nat (n=6)",
+      "detail": "참고: wide - narrow = -0.368 nat"
+    },
+    {
+      "name": "C1",
+      "track": "Track E",
+      "question": "쿼터를 매 step 초기화하는 것이 실제 성능을 떨어뜨리는가 (shrinking - fresh)",
+      "statistic": null,
+      "unit": "nat",
+      "verdict": "판정불가",
+      "go_threshold": 0.3,
+      "pivot_threshold": 0.05,
+      "nonsaturated": "",
+      "detail": "쿼터 곡선(narrow): shrinking Q4:11.532 | committed Q4:11.212. **fresh 는 seed 0개에서만 돌린 진단 baseline 이다.** paired 비교는 겹치는 seed 에서만 이루어지므로 이 통계의 표본이 다른 게이트보다 작다. **연구 결과이지만 PPO 착수 게이트가 아니다.** 양수면 receding horizon 이 준비 행동만 반복하며 payoff 를 뒤로 미룬다는 증거다."
+    },
+    {
+      "name": "C2",
+      "track": "Track E",
+      "question": "시간 일관적인 다단계 재계획이 one-step 효율 제어보다 나은가 (shrinking Q=4 - C0)",
+      "statistic": 0.2143803218885516,
+      "unit": "nat",
+      "verdict": "조건부",
+      "go_threshold": 0.3,
+      "pivot_threshold": 0.05,
+      "nonsaturated": "[1] all-task floor-capped  +0.214 nat  n=6  CI -1.041~+0.881  joint=0 one-sided=0 unsat=6  (+3/0×0/−3)\n      [2] mlp_d32_h128_c5_n512_cs64          median -0.716 n=3 [-0.716, +0.846, -1.365]\n      [2] mlp_d32_h128_c5_n512_fb            median +0.547 n=3 [+0.547, -0.118, +0.916]\n      [3] pairwise nonsaturated 민감도  +0.214 nat  n=6  (비교마다 n 이 달라진다. primary 아님)",
+      "detail": "깊이/상한(shrinking): Q4:d>1=0.96,cap=0.00. 참고 Q=4(depth 1만 가능) - C0 = +0.214 nat. **GO 판정에는 두 조건이 모두 필요하다** (P3). 개선이 있고, 동시에 depth>1 이 실제로 채택돼야 한다. 개선만 있고 depth 가 계속 1 이면 planning 이 아니라 탐색량이 기여한 것이다. ``cap`` 이 0 이 아니면 계산 상한 때문에 쿼터를 다 쓰지 못한 step 이 있으므로 사다리 비교가 훼손된 것으로 보고한다. 이 게이트만으로 PPO 를 시작하지 않는다. P1~P4 를 함께 본다."
+    },
+    {
+      "name": "C3",
+      "track": "Track E",
+      "question": "상태를 관찰하며 재계획하는 것이 고정 실행보다 추가 이득인가 (shrinking - committed)",
+      "statistic": 0.5679894089290234,
+      "unit": "nat",
+      "verdict": "GO",
+      "go_threshold": 0.3,
+      "pivot_threshold": 0.05,
+      "nonsaturated": "[1] all-task floor-capped  +0.568 nat  n=6  CI -0.342~+2.417  joint=0 one-sided=0 unsat=6  (+4/0×0/−2)\n      [2] mlp_d32_h128_c5_n512_cs64          median +1.666 n=3 [+1.666, +3.168, +0.220]\n      [2] mlp_d32_h128_c5_n512_fb            median -0.095 n=3 [-0.095, -0.588, +0.916]\n      [3] pairwise nonsaturated 민감도  +0.568 nat  n=6  (비교마다 n 이 달라진다. primary 아님)",
+      "detail": "약 0 이면 좋은 sequence 는 존재하지만 feedback 자체의 추가 가치는 작다. 음수면 approximate replanning 이 계획을 훼손한다. **committed 는 초기 상태에 조건화된 oracle 이므로 open_loop baseline 과 다르다.** committed 가 open_loop 보다 좋다고 해서 feedback 이 필요하다는 뜻이 아니다."
+    },
+    {
+      "name": "D",
+      "track": "Track T",
+      "question": "cost-to-target 헤드룸이 있는가 (planner vs best_static, medium)",
+      "statistic": 1.793794776185965,
+      "unit": "배",
+      "verdict": "GO",
+      "go_threshold": 1.2,
+      "pivot_threshold": 1.05,
+      "nonsaturated": "",
+      "detail": "난이도별 easy:1.169x(도달 6/6), medium:1.794x(도달 6/6), hard:1.917x(도달 6/6). 게이트 A와 결론이 다르면 그 불일치 자체를 결과로 보고한다 (프로토콜 D9)."
+    }
+  ],
+  "n_failures": 0,
+  "raw_path": "results\\raw\\headroom_micro-neural_step_size_fixed_b8_7aac1b26.jsonl",
+  "raw_sha256": "0c1aa77aef8aaf7b9e78ee93b23b9073a3fb7163c51bb6e8a1da7321f7091047",
+  "raw_n_lines": 144,
+  "provenance": {
+    "git_commit": "0e5a182f",
+    "git_dirty": false,
+    "config_hash": "f8129de6bc9e101f",
+    "python_version": "3.12.12",
+    "platform": "Windows 11",
+    "torch_version": "2.13.0+cu130",
+    "cuda_available": true,
+    "cuda_runtime": "13.0",
+    "gpu_name": "NVIDIA GeForce RTX 3060 Ti",
+    "gpu_capability": "8.6",
+    "gpu_total_memory_mb": 8191.375,
+    "config": {
+      "mode": "micro-neural",
+      "condition": "step_size_fixed",
+      "phase": "challenge",
+      "seeds": [
+        2,
+        3,
+        4
+      ],
+      "budget_ge": 150.0,
+      "beam": 8,
+      "quotas": [
+        4.0
+      ],
+      "difficulty": "medium",
+      "n_specs": 2,
+      "narrow_only": false,
+      "environment": {
+        "platform": "Windows 11",
+        "processor": "AMD64 Family 25 Model 33 Stepping 2, AuthenticAMD",
+        "cpu_count": 12,
+        "torch_num_threads": 1,
+        "torch_num_interop_threads": 1,
+        "omp_num_threads": null,
+        "mkl_num_threads": null,
+        "pinned": 1
+      },
+      "concurrent_processes": 1
+    },
+    "diff": null
+  }
+}

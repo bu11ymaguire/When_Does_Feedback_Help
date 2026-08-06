@@ -1,0 +1,92 @@
+{
+  "export_version": "public-results-v1",
+  "source": {
+    "commit": "3a46f08459c518b0de1857a77db9f73c0ee28788",
+    "branch": "experiment/reproduction-package",
+    "dirty": false
+  },
+  "aggregation": {
+    "median": "rl_newton.benchmark.metrics.median_of",
+    "paired": "rl_newton.benchmark.metrics.compare_paired_delta",
+    "bootstrap_n": 10000,
+    "bootstrap_seed": 0,
+    "wilcoxon": "rl_newton.benchmark.metrics.wilcoxon_signed_rank_p",
+    "note": "compare_paired_delta 는 결정론적이다. 이 CSV 와 동봉된 metrics.py 로 median / CI / p 를 정확히 재현할 수 있다. scripts/verify_public_results.py 가 검사한다."
+  },
+  "log_improvement": {
+    "formula": "log(initial_loss) - log(max(final_loss, floor))",
+    "floor": "max(tiny, abs(initial_loss) * 100 * eps)   (프로토콜 D14)",
+    "note": "파생값이므로 initial_loss / final_loss 를 함께 공개한다"
+  },
+  "sources": [
+    {
+      "raw": "headroom_challenge-heldout_step_size_fixed_b8_9a18b6e9.jsonl",
+      "sha256": "95b0d3c2191b05cdeb2faff89fa9ca617c0acf06b798d1823d307b3f5cad5f7a",
+      "role": "held-out confirmation",
+      "acceptance_rule": "control",
+      "public_file": "heldout_quadratic.csv",
+      "rows": 1200
+    },
+    {
+      "raw": "headroom_challenge_step_size_fixed_b8_fed9aebd.jsonl",
+      "sha256": "d4dffaf1790a82184965f92b00862142ebc11173312634adb5ef6a14f56b78b4",
+      "role": "configuration selection",
+      "acceptance_rule": "control",
+      "public_file": "configuration_selection.csv",
+      "rows": 360
+    },
+    {
+      "raw": "headroom_challenge_step_size_fixed_b8_fc78c2ad.jsonl",
+      "sha256": "30ce464d73c4ecf8c63106e1ce5d7d2e5952a01f1e2f3a4328754085509d5329",
+      "role": "configuration selection (cost dry run, E1)",
+      "acceptance_rule": "control",
+      "public_file": "configuration_selection.csv",
+      "rows": 30
+    },
+    {
+      "raw": "headroom_micro-neural_step_size_fixed_b8_0bec1125.jsonl",
+      "sha256": "be11089349712219a2b2d82a23cec3d022684313b8d2f7827a09826a4d44b543",
+      "role": "exploratory ablation",
+      "acceptance_rule": "control",
+      "public_file": "micro_neural.csv",
+      "rows": 216
+    },
+    {
+      "raw": "headroom_micro-neural_step_size_fixed_b8_9f3194be.jsonl",
+      "sha256": "f10573dd4b0601d96774d79cfc99ec9ee0ef2f0ccdc31f9f312612b2919896cd",
+      "role": "exploratory ablation",
+      "acceptance_rule": "fixed_eval",
+      "public_file": "micro_neural.csv",
+      "rows": 216
+    },
+    {
+      "raw": "headroom_nonlinear-diagnostic_step_size_fixed_b8_2a09bd45.jsonl",
+      "sha256": "19390b4e9fcef0021f48dc00661c179f75297d1626e14bb6632e0bcdca442115",
+      "role": "diagnostic, unusable benchmark",
+      "acceptance_rule": "control",
+      "public_file": "nonlinear_diagnostic.csv",
+      "rows": 72
+    },
+    {
+      "raw": "headroom_pilot_step_size_fixed_b4_9d725689.jsonl",
+      "sha256": "7c7a280d34bfe9b108335cc70a323338462808e413cafb6acac9e5ac24fd3eb0",
+      "role": "dev pilot",
+      "acceptance_rule": "control",
+      "public_file": "dev_pilot.csv",
+      "rows": 324
+    }
+  ],
+  "excluded_raw": {
+    "headroom_pilot_step_size_fixed_b4_8e9cdd02.jsonl": "legacy pilot. 원고가 인용하지 않는다",
+    "headroom_pilot_step_size_fixed_b4_44e3242e.jsonl": "seed 1개 pilot. 원고가 인용하지 않는다",
+    "headroom_micro-neural_step_size_fixed_b8_7aac1b26.jsonl": "구 2-spec micro-neural. 3-spec 판(0bec1125)이 대체한다"
+  },
+  "files": {
+    "configuration_selection.csv": "fa9d20f65e093c6a563963c3bf4e42970560da918e27a63b8c52a784ddc1c22a",
+    "dev_pilot.csv": "37aa7617aa79330648cd3c7893f2b26854d3dbe5c291191b2bab2b4f8002676b",
+    "heldout_quadratic.csv": "b94f5d50e43826477ff4872a3f5b8d5fc74a2ce438635d31d548adc442e77132",
+    "micro_neural.csv": "3ecf147e2ef3ec0e4a66ba81084f9c7318dcd9c739eeaba33a5e17db618e7480",
+    "nonlinear_diagnostic.csv": "e2a9ec48845581c290c62c1773ffb18aef1cc84fe7451e90e33a905f5adb9249"
+  },
+  "privacy": "RunSummary 에는 host 나 경로 필드가 없다. 이 CSV 는 구성상 개인정보를 담지 않으며, 생성 시 금지 문자열 검사를 통과했다."
+}

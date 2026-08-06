@@ -1,0 +1,1027 @@
+{
+  "meta": {
+    "mode": "challenge",
+    "condition": "step_size_fixed",
+    "phase": "challenge",
+    "seeds": [
+      2,
+      3,
+      4
+    ],
+    "budget_ge": 150.0,
+    "beam": 8,
+    "quotas": [
+      2.0,
+      4.0
+    ],
+    "difficulty": "medium",
+    "n_specs": 4,
+    "narrow_only": false,
+    "environment": {
+      "platform": "Windows 11",
+      "processor": "AMD64 Family 25 Model 33 Stepping 2, AuthenticAMD",
+      "cpu_count": 12,
+      "torch_num_threads": 1,
+      "torch_num_interop_threads": 1,
+      "omp_num_threads": null,
+      "mkl_num_threads": null,
+      "pinned": 1
+    },
+    "concurrent_processes": 1
+  },
+  "experiment_id": "57b2e0de824efea6",
+  "sweep_id": "fd43dbfb3ffacc61",
+  "aggregation_id": "ec5019fa2cc67699",
+  "identity": {
+    "protocol_version": "stage2-v1",
+    "phase": "challenge",
+    "device": "cpu",
+    "cost_budget_ge": 150.0,
+    "max_steps": 200,
+    "initial_damping": 0.01,
+    "min_damping": 1e-08,
+    "max_damping": 100000000.0,
+    "cg_tolerance": 0.001,
+    "pap_eps": 1e-12,
+    "max_loss_increase_ratio": 1.5,
+    "safe_fallback": "gradient",
+    "compute_trust_ratio": true,
+    "quotas": [
+      2.0,
+      4.0
+    ],
+    "beam_width": 8,
+    "max_plan_depth": 24,
+    "fresh_diagnostic_seeds": 0,
+    "run_fresh_wide": false,
+    "tuning_budget": 6,
+    "n_schedule_segments": 4,
+    "tuning_seed": 0,
+    "primary_difficulty": "medium",
+    "specs": [
+      "QuadraticSpec(kind='ill_conditioned', dimension=100, condition_number=1000.0, negative_fraction=0.2, initial_scale=1.0)",
+      "QuadraticSpec(kind='ill_conditioned', dimension=100, condition_number=10000.0, negative_fraction=0.2, initial_scale=1.0)",
+      "QuadraticSpec(kind='ill_conditioned', dimension=100, condition_number=100000.0, negative_fraction=0.2, initial_scale=1.0)",
+      "QuadraticSpec(kind='ill_conditioned', dimension=100, condition_number=1000000.0, negative_fraction=0.2, initial_scale=1.0)"
+    ],
+    "seeds": [
+      2,
+      3,
+      4
+    ],
+    "targets": {
+      "spd": {
+        "easy": "relative_loss<=0.01",
+        "medium": "relative_loss<=0.0001",
+        "hard": "relative_loss<=1e-06"
+      },
+      "ill_conditioned": {
+        "easy": "relative_loss<=0.01",
+        "medium": "relative_loss<=0.0001",
+        "hard": "relative_loss<=1e-06"
+      },
+      "indefinite": {
+        "easy": "relative_loss<=0.1",
+        "medium": "relative_loss<=0.01",
+        "hard": "relative_loss<=0.001"
+      },
+      "rosenbrock": {
+        "easy": "absolute_loss<=0.1",
+        "medium": "absolute_loss<=0.01",
+        "hard": "absolute_loss<=0.0001"
+      }
+    },
+    "spaces": {
+      "narrow": {
+        "mode": "relative",
+        "damping_values": [
+          0.3333333333333333,
+          1.0,
+          3.0
+        ],
+        "cg_budgets": [
+          3,
+          5,
+          10,
+          20
+        ],
+        "step_sizes": [
+          1.0
+        ]
+      },
+      "wide": {
+        "mode": "relative",
+        "damping_values": [
+          0.037037037037037035,
+          0.1111111111111111,
+          0.3333333333333333,
+          1.0,
+          3.0,
+          9.0,
+          27.0
+        ],
+        "cg_budgets": [
+          3,
+          5,
+          10,
+          20
+        ],
+        "step_sizes": [
+          1.0
+        ]
+      },
+      "absolute": {
+        "mode": "absolute",
+        "damping_values": [
+          2.3230573125418773e-08,
+          6.969171937625632e-08,
+          2.0907515812876897e-07,
+          6.272254743863069e-07,
+          1.8816764231589208e-06,
+          5.645029269476762e-06,
+          1.6935087808430286e-05,
+          5.080526342529086e-05,
+          0.00015241579027587258,
+          0.0004572473708276177,
+          0.0013717421124828531,
+          0.00411522633744856,
+          0.012345679012345678,
+          0.037037037037037035,
+          0.1111111111111111,
+          0.3333333333333333,
+          1.0,
+          3.0,
+          9.0,
+          27.0,
+          81.0,
+          243.0,
+          729.0,
+          2187.0,
+          6561.0,
+          19683.0,
+          59049.0,
+          177147.0,
+          531441.0,
+          1594323.0,
+          4782969.0,
+          14348907.0,
+          43046721.0
+        ],
+        "cg_budgets": [
+          3,
+          5,
+          10,
+          20
+        ],
+        "step_sizes": [
+          1.0
+        ]
+      }
+    },
+    "code_dirty": false,
+    "n_tune": 6,
+    "mode": "headroom"
+  },
+  "execution_provenance": {
+    "git_commit": "",
+    "code_dirty": false,
+    "hostname": "host-a",
+    "platform": "Windows 11",
+    "recorded_at": "2026-08-04T04:49:47.050156+00:00"
+  },
+  "selections": {
+    "static": {
+      "selection_id": "a591986505767299",
+      "family": "static",
+      "candidate_labels": [
+        "static[0]",
+        "static[2]",
+        "static[4]",
+        "static[6]",
+        "static[8]",
+        "static[10]"
+      ],
+      "candidate_scores": {
+        "static[0]": 6.974773010988361,
+        "static[2]": 8.889022153922316,
+        "static[4]": 6.974789706561063,
+        "static[6]": 8.894886924458458,
+        "static[8]": 5.897952347348644,
+        "static[10]": 8.521713567127005
+      },
+      "selection_metric": "median_log_improvement",
+      "tie_break_rule": "lowest_flat_index",
+      "selected_label": "static[6]",
+      "selected_config": {
+        "flat_index": 6,
+        "damping_multiplier": 1.0,
+        "cg_budget": 10,
+        "step_size": 1.0,
+        "damping_absolute": null
+      },
+      "tuning_specs": [
+        "QuadraticSpec(kind='ill_conditioned', dimension=100, condition_number=1000.0, negative_fraction=0.2, initial_scale=1.0)",
+        "QuadraticSpec(kind='ill_conditioned', dimension=100, condition_number=10000.0, negative_fraction=0.2, initial_scale=1.0)",
+        "QuadraticSpec(kind='ill_conditioned', dimension=100, condition_number=100000.0, negative_fraction=0.2, initial_scale=1.0)",
+        "QuadraticSpec(kind='ill_conditioned', dimension=100, condition_number=1000000.0, negative_fraction=0.2, initial_scale=1.0)"
+      ],
+      "tuning_seeds": [
+        2,
+        3,
+        4
+      ],
+      "n_tune": 6,
+      "semantics_version": 1,
+      "resolved": true,
+      "n_candidates": 6,
+      "n_tuning_instances": 12,
+      "tuning_object_ge": 10669.4,
+      "tuning_wall_clock_sec": 0.0,
+      "equivalent_static_action": null,
+      "progress_clock": "",
+      "progress_evaluated_at": "before_step",
+      "realized_segment_counts": {},
+      "realized_ge_by_segment": {}
+    },
+    "open_loop": {
+      "selection_id": "be007f29f390a0c6",
+      "family": "open_loop",
+      "candidate_labels": [
+        "open_loop[0]",
+        "open_loop[1]",
+        "open_loop[2]",
+        "open_loop[3]",
+        "open_loop[4]",
+        "open_loop[5]"
+      ],
+      "candidate_scores": {
+        "open_loop[0]": 8.841995153639939,
+        "open_loop[1]": 8.358884263724182,
+        "open_loop[2]": 8.546950602865294,
+        "open_loop[3]": 6.895103802486378,
+        "open_loop[4]": 9.278173003736793,
+        "open_loop[5]": 7.228983727815456
+      },
+      "selection_metric": "median_log_improvement",
+      "tie_break_rule": "lowest_flat_index",
+      "selected_label": "open_loop[4]",
+      "selected_config": {
+        "schedule": [
+          {
+            "flat_index": 7,
+            "damping_multiplier": 1.0,
+            "cg_budget": 20,
+            "step_size": 1.0
+          },
+          {
+            "flat_index": 8,
+            "damping_multiplier": 3.0,
+            "cg_budget": 3,
+            "step_size": 1.0
+          },
+          {
+            "flat_index": 1,
+            "damping_multiplier": 0.3333333333333333,
+            "cg_budget": 5,
+            "step_size": 1.0
+          },
+          {
+            "flat_index": 5,
+            "damping_multiplier": 1.0,
+            "cg_budget": 5,
+            "step_size": 1.0
+          }
+        ],
+        "breakpoints": [
+          0.4407546519084053,
+          0.5997982760994215,
+          0.8717099479141084,
+          1.0
+        ],
+        "n_segments": 4
+      },
+      "tuning_specs": [
+        "QuadraticSpec(kind='ill_conditioned', dimension=100, condition_number=1000.0, negative_fraction=0.2, initial_scale=1.0)",
+        "QuadraticSpec(kind='ill_conditioned', dimension=100, condition_number=10000.0, negative_fraction=0.2, initial_scale=1.0)",
+        "QuadraticSpec(kind='ill_conditioned', dimension=100, condition_number=100000.0, negative_fraction=0.2, initial_scale=1.0)",
+        "QuadraticSpec(kind='ill_conditioned', dimension=100, condition_number=1000000.0, negative_fraction=0.2, initial_scale=1.0)"
+      ],
+      "tuning_seeds": [
+        2,
+        3,
+        4
+      ],
+      "n_tune": 6,
+      "semantics_version": 1,
+      "resolved": true,
+      "n_candidates": 6,
+      "n_tuning_instances": 12,
+      "tuning_object_ge": 10531.3,
+      "tuning_wall_clock_sec": 0.0,
+      "equivalent_static_action": null,
+      "progress_clock": "object_ge_fraction",
+      "progress_evaluated_at": "before_step",
+      "realized_segment_counts": {
+        "0": 3,
+        "1": 5,
+        "2": 6,
+        "3": 2
+      },
+      "realized_ge_by_segment": {
+        "0": 44.6,
+        "1": 43.49999999999999,
+        "2": 41.8,
+        "3": 14.6
+      }
+    }
+  },
+  "n_instances": 12,
+  "tuning_budget": 6,
+  "tuning_runs": {
+    "best_static": 6,
+    "best_open_loop": 6,
+    "heuristic": 1,
+    "onestep_narrow": 0,
+    "onestep_wide": 0,
+    "onestep_absolute": 0,
+    "shrinking_Q2_narrow": 0,
+    "committed_Q2_narrow": 0,
+    "shrinking_Q4_narrow": 0,
+    "committed_Q4_narrow": 0,
+    "shrinking_Q2_wide": 0,
+    "committed_Q2_wide": 0,
+    "shrinking_Q4_wide": 0,
+    "committed_Q4_wide": 0
+  },
+  "best_static_action": {
+    "damping_multiplier": 1.0,
+    "cg_budget": 10,
+    "step_size": 1.0,
+    "damping_absolute": null
+  },
+  "groups": {
+    "best_static": {
+      "controller": "best_static",
+      "target": "relative_loss<=0.0001",
+      "n_runs": 12,
+      "n_reached": 5,
+      "median_cost_to_target_ge": 86.1,
+      "median_final_loss_ratio": 0.00013876032899209624,
+      "median_log_improvement": 8.894886924458458,
+      "median_total_cost_ge": 147.6,
+      "median_search_cost_ge": 0.0,
+      "mean_rejection_rate": 0.0,
+      "mean_failure_rate": 0.0,
+      "mean_cg_convergence_rate": 0.0,
+      "median_damping": 0.01
+    },
+    "best_open_loop": {
+      "controller": "best_open_loop",
+      "target": "relative_loss<=0.0001",
+      "n_runs": 12,
+      "n_reached": 6,
+      "median_cost_to_target_ge": 69.55000000000001,
+      "median_final_loss_ratio": 9.575501216363554e-05,
+      "median_log_improvement": 9.278173003736793,
+      "median_total_cost_ge": 144.5,
+      "median_search_cost_ge": 0.0,
+      "mean_rejection_rate": 0.0,
+      "mean_failure_rate": 0.0,
+      "mean_cg_convergence_rate": 0.0,
+      "median_damping": 0.029999999999999995
+    },
+    "heuristic": {
+      "controller": "heuristic",
+      "target": "relative_loss<=0.0001",
+      "n_runs": 12,
+      "n_reached": 5,
+      "median_cost_to_target_ge": 86.1,
+      "median_final_loss_ratio": 0.00013977339545934457,
+      "median_log_improvement": 8.886213667400616,
+      "median_total_cost_ge": 147.6,
+      "median_search_cost_ge": 0.0,
+      "mean_rejection_rate": 0.0,
+      "mean_failure_rate": 0.0,
+      "mean_cg_convergence_rate": 0.0,
+      "median_damping": 1.3717421124828502e-05
+    },
+    "onestep_narrow": {
+      "controller": "onestep_narrow",
+      "target": "relative_loss<=0.0001",
+      "n_runs": 12,
+      "n_reached": 11,
+      "median_cost_to_target_ge": 97.1,
+      "median_final_loss_ratio": 3.771765069495578e-05,
+      "median_log_improvement": 10.18793728836053,
+      "median_total_cost_ge": 141.7,
+      "median_search_cost_ge": 1186.0,
+      "mean_rejection_rate": 0.0,
+      "mean_failure_rate": 0.0,
+      "mean_cg_convergence_rate": 0.0,
+      "median_damping": 0.0033333333333333322
+    },
+    "onestep_wide": {
+      "controller": "onestep_wide",
+      "target": "relative_loss<=0.0001",
+      "n_runs": 12,
+      "n_reached": 11,
+      "median_cost_to_target_ge": 107.1,
+      "median_final_loss_ratio": 3.6445135111399066e-05,
+      "median_log_improvement": 10.21970902864966,
+      "median_total_cost_ge": 144.0,
+      "median_search_cost_ge": 2754.0,
+      "mean_rejection_rate": 0.0,
+      "mean_failure_rate": 0.0,
+      "mean_cg_convergence_rate": 0.0,
+      "median_damping": 0.00037037037037037095
+    },
+    "onestep_absolute": {
+      "controller": "onestep_absolute",
+      "target": "relative_loss<=0.0001",
+      "n_runs": 12,
+      "n_reached": 11,
+      "median_cost_to_target_ge": 107.1,
+      "median_final_loss_ratio": 4.645567208425118e-05,
+      "median_log_improvement": 9.988892879803249,
+      "median_total_cost_ge": 141.2,
+      "median_search_cost_ge": 10552.3,
+      "mean_rejection_rate": 0.0,
+      "mean_failure_rate": 0.0,
+      "mean_cg_convergence_rate": 0.0,
+      "median_damping": 0.0016003657978966622
+    },
+    "shrinking_Q2_narrow": {
+      "controller": "shrinking_Q2_narrow",
+      "target": "relative_loss<=0.0001",
+      "n_runs": 12,
+      "n_reached": 11,
+      "median_cost_to_target_ge": 83.8,
+      "median_final_loss_ratio": 3.295387558411095e-05,
+      "median_log_improvement": 10.320832596498061,
+      "median_total_cost_ge": 144.65,
+      "median_search_cost_ge": 55801.5,
+      "mean_rejection_rate": 0.0,
+      "mean_failure_rate": 0.0,
+      "mean_cg_convergence_rate": 0.0,
+      "median_damping": 0.008333333333333333
+    },
+    "committed_Q2_narrow": {
+      "controller": "committed_Q2_narrow",
+      "target": "relative_loss<=0.0001",
+      "n_runs": 12,
+      "n_reached": 12,
+      "median_cost_to_target_ge": 92.6,
+      "median_final_loss_ratio": 3.9285086600319696e-05,
+      "median_log_improvement": 10.144766136876694,
+      "median_total_cost_ge": 139.65,
+      "median_search_cost_ge": 30780.0,
+      "mean_rejection_rate": 0.0,
+      "mean_failure_rate": 0.0,
+      "mean_cg_convergence_rate": 0.0,
+      "median_damping": 0.006666666666666666
+    },
+    "shrinking_Q4_narrow": {
+      "controller": "shrinking_Q4_narrow",
+      "target": "relative_loss<=0.0001",
+      "n_runs": 12,
+      "n_reached": 12,
+      "median_cost_to_target_ge": 88.3,
+      "median_final_loss_ratio": 2.670696612973963e-05,
+      "median_log_improvement": 10.530586432846512,
+      "median_total_cost_ge": 144.0,
+      "median_search_cost_ge": 193893.65,
+      "mean_rejection_rate": 0.0,
+      "mean_failure_rate": 0.0,
+      "mean_cg_convergence_rate": 0.0,
+      "median_damping": 0.006666666666666666
+    },
+    "committed_Q4_narrow": {
+      "controller": "committed_Q4_narrow",
+      "target": "relative_loss<=0.0001",
+      "n_runs": 12,
+      "n_reached": 12,
+      "median_cost_to_target_ge": 88.3,
+      "median_final_loss_ratio": 2.5877396422917275e-05,
+      "median_log_improvement": 10.56600913037815,
+      "median_total_cost_ge": 143.65,
+      "median_search_cost_ge": 69336.0,
+      "mean_rejection_rate": 0.0,
+      "mean_failure_rate": 0.0,
+      "mean_cg_convergence_rate": 0.0,
+      "median_damping": 0.0033333333333333322
+    },
+    "shrinking_Q2_wide": {
+      "controller": "shrinking_Q2_wide",
+      "target": "relative_loss<=0.0001",
+      "n_runs": 12,
+      "n_reached": 11,
+      "median_cost_to_target_ge": 84.1,
+      "median_final_loss_ratio": 3.138962550070895e-05,
+      "median_log_improvement": 10.369129713329354,
+      "median_total_cost_ge": 144.65,
+      "median_search_cost_ge": 127609.05,
+      "mean_rejection_rate": 0.0,
+      "mean_failure_rate": 0.0,
+      "mean_cg_convergence_rate": 0.0,
+      "median_damping": 0.006111111111111107
+    },
+    "committed_Q2_wide": {
+      "controller": "committed_Q2_wide",
+      "target": "relative_loss<=0.0001",
+      "n_runs": 12,
+      "n_reached": 11,
+      "median_cost_to_target_ge": 78.8,
+      "median_final_loss_ratio": 3.811224580096856e-05,
+      "median_log_improvement": 10.175639044640373,
+      "median_total_cost_ge": 144.3,
+      "median_search_cost_ge": 72270.1,
+      "mean_rejection_rate": 0.0,
+      "mean_failure_rate": 0.0,
+      "mean_cg_convergence_rate": 0.0,
+      "median_damping": 0.002222222222222221
+    },
+    "shrinking_Q4_wide": {
+      "controller": "shrinking_Q4_wide",
+      "target": "relative_loss<=0.0001",
+      "n_runs": 12,
+      "n_reached": 12,
+      "median_cost_to_target_ge": 88.44999999999999,
+      "median_final_loss_ratio": 3.667950625779931e-05,
+      "median_log_improvement": 10.250812033919384,
+      "median_total_cost_ge": 144.0,
+      "median_search_cost_ge": 441612.30000000005,
+      "mean_rejection_rate": 0.0,
+      "mean_failure_rate": 0.0,
+      "mean_cg_convergence_rate": 0.0,
+      "median_damping": 0.002777777777777778
+    },
+    "committed_Q4_wide": {
+      "controller": "committed_Q4_wide",
+      "target": "relative_loss<=0.0001",
+      "n_runs": 12,
+      "n_reached": 12,
+      "median_cost_to_target_ge": 87.44999999999999,
+      "median_final_loss_ratio": 2.559082790932803e-05,
+      "median_log_improvement": 10.574135790078767,
+      "median_total_cost_ge": 144.15,
+      "median_search_cost_ge": 162654.2,
+      "mean_rejection_rate": 0.0,
+      "mean_failure_rate": 0.0,
+      "mean_cg_convergence_rate": 0.0,
+      "median_damping": 0.0027777777777777766
+    },
+    "best_static@easy": {
+      "controller": "best_static@easy",
+      "target": "relative_loss<=0.01",
+      "n_runs": 12,
+      "n_reached": 12,
+      "median_cost_to_target_ge": 12.3,
+      "median_final_loss_ratio": 0.00013876032899209624,
+      "median_log_improvement": 8.894886924458458,
+      "median_total_cost_ge": 147.6,
+      "median_search_cost_ge": 0.0,
+      "mean_rejection_rate": 0.0,
+      "mean_failure_rate": 0.0,
+      "mean_cg_convergence_rate": 0.0,
+      "median_damping": 0.01
+    },
+    "shrinking_Q4@easy": {
+      "controller": "shrinking_Q4@easy",
+      "target": "relative_loss<=0.01",
+      "n_runs": 12,
+      "n_reached": 12,
+      "median_cost_to_target_ge": 12.3,
+      "median_final_loss_ratio": 0.0008681733900054246,
+      "median_log_improvement": 7.061990201950843,
+      "median_total_cost_ge": 144.79999999999998,
+      "median_search_cost_ge": 4147.2,
+      "mean_rejection_rate": 0.0,
+      "mean_failure_rate": 0.0,
+      "mean_cg_convergence_rate": 0.0,
+      "median_damping": 0.019999999999999997
+    },
+    "best_static@medium": {
+      "controller": "best_static@medium",
+      "target": "relative_loss<=0.0001",
+      "n_runs": 12,
+      "n_reached": 5,
+      "median_cost_to_target_ge": 86.1,
+      "median_final_loss_ratio": 0.00013876032899209624,
+      "median_log_improvement": 8.894886924458458,
+      "median_total_cost_ge": 147.6,
+      "median_search_cost_ge": 0.0,
+      "mean_rejection_rate": 0.0,
+      "mean_failure_rate": 0.0,
+      "mean_cg_convergence_rate": 0.0,
+      "median_damping": 0.01
+    },
+    "shrinking_Q4@medium": {
+      "controller": "shrinking_Q4@medium",
+      "target": "relative_loss<=0.0001",
+      "n_runs": 12,
+      "n_reached": 12,
+      "median_cost_to_target_ge": 82.0,
+      "median_final_loss_ratio": 8.061627545763656e-05,
+      "median_log_improvement": 9.426466629252307,
+      "median_total_cost_ge": 146.15,
+      "median_search_cost_ge": 90828.3,
+      "mean_rejection_rate": 0.0,
+      "mean_failure_rate": 0.0,
+      "mean_cg_convergence_rate": 0.0,
+      "median_damping": 0.019999999999999997
+    },
+    "best_static@hard": {
+      "controller": "best_static@hard",
+      "target": "relative_loss<=1e-06",
+      "n_runs": 12,
+      "n_reached": 1,
+      "median_cost_to_target_ge": 159.9,
+      "median_final_loss_ratio": 0.00013876032899209624,
+      "median_log_improvement": 8.894886924458458,
+      "median_total_cost_ge": 147.6,
+      "median_search_cost_ge": 0.0,
+      "mean_rejection_rate": 0.0,
+      "mean_failure_rate": 0.0,
+      "mean_cg_convergence_rate": 0.0,
+      "median_damping": 0.01
+    },
+    "shrinking_Q4@hard": {
+      "controller": "shrinking_Q4@hard",
+      "target": "relative_loss<=1e-06",
+      "n_runs": 12,
+      "n_reached": 3,
+      "median_cost_to_target_ge": 84.5,
+      "median_final_loss_ratio": 2.670696612973963e-05,
+      "median_log_improvement": 10.530586432846512,
+      "median_total_cost_ge": 146.0,
+      "median_search_cost_ge": 191500.59999999998,
+      "mean_rejection_rate": 0.0,
+      "mean_failure_rate": 0.0,
+      "mean_cg_convergence_rate": 0.0,
+      "median_damping": 0.006666666666666666
+    }
+  },
+  "track_e_deltas": [
+    {
+      "baseline": "best_static",
+      "treatment": "onestep_absolute",
+      "metric": "log_improvement",
+      "n_pairs": 12,
+      "n_valid": 12,
+      "median_delta": 1.2626420540729892,
+      "delta_ci": [
+        0.9046028772306443,
+        3.957153803144095
+      ],
+      "p_value": 0.00048828125,
+      "baseline_median": 8.894886924458458,
+      "treatment_median": 9.988892879803249,
+      "n_joint_saturated": 0,
+      "n_one_sided_saturated": 0,
+      "excluded_pairs": []
+    },
+    {
+      "baseline": "best_static",
+      "treatment": "shrinking_Q4_narrow",
+      "metric": "log_improvement",
+      "n_pairs": 12,
+      "n_valid": 12,
+      "median_delta": 1.501699698622743,
+      "delta_ci": [
+        1.1598495659080443,
+        4.402107223759423
+      ],
+      "p_value": 0.00048828125,
+      "baseline_median": 8.894886924458458,
+      "treatment_median": 10.530586432846512,
+      "n_joint_saturated": 0,
+      "n_one_sided_saturated": 0,
+      "excluded_pairs": []
+    },
+    {
+      "baseline": "best_static",
+      "treatment": "shrinking_Q4_wide",
+      "metric": "log_improvement",
+      "n_pairs": 12,
+      "n_valid": 12,
+      "median_delta": 1.4776736738090879,
+      "delta_ci": [
+        1.168584673443096,
+        4.521890990368915
+      ],
+      "p_value": 0.00048828125,
+      "baseline_median": 8.894886924458458,
+      "treatment_median": 10.250812033919384,
+      "n_joint_saturated": 0,
+      "n_one_sided_saturated": 0,
+      "excluded_pairs": []
+    },
+    {
+      "baseline": "onestep_narrow",
+      "treatment": "onestep_absolute",
+      "metric": "log_improvement",
+      "n_pairs": 12,
+      "n_valid": 12,
+      "median_delta": 0.01503035672154951,
+      "delta_ci": [
+        -0.06988259737886615,
+        0.05508472528859354
+      ],
+      "p_value": 0.90966796875,
+      "baseline_median": 10.18793728836053,
+      "treatment_median": 9.988892879803249,
+      "n_joint_saturated": 0,
+      "n_one_sided_saturated": 0,
+      "excluded_pairs": []
+    },
+    {
+      "baseline": "onestep_narrow",
+      "treatment": "onestep_wide",
+      "metric": "log_improvement",
+      "n_pairs": 12,
+      "n_valid": 12,
+      "median_delta": 0.043658855354463455,
+      "delta_ci": [
+        -0.058812076179011186,
+        0.31259635717793
+      ],
+      "p_value": 0.38037109375,
+      "baseline_median": 10.18793728836053,
+      "treatment_median": 10.21970902864966,
+      "n_joint_saturated": 0,
+      "n_one_sided_saturated": 0,
+      "excluded_pairs": []
+    },
+    {
+      "baseline": "onestep_narrow",
+      "treatment": "shrinking_Q4_narrow",
+      "metric": "log_improvement",
+      "n_pairs": 12,
+      "n_valid": 12,
+      "median_delta": 0.2505235449411112,
+      "delta_ci": [
+        -0.03607309919791657,
+        0.4868994953318566
+      ],
+      "p_value": 0.0771484375,
+      "baseline_median": 10.18793728836053,
+      "treatment_median": 10.530586432846512,
+      "n_joint_saturated": 0,
+      "n_one_sided_saturated": 0,
+      "excluded_pairs": []
+    },
+    {
+      "baseline": "committed_Q4_narrow",
+      "treatment": "shrinking_Q4_narrow",
+      "metric": "log_improvement",
+      "n_pairs": 12,
+      "n_valid": 12,
+      "median_delta": -0.04378585249351108,
+      "delta_ci": [
+        -0.5902491497660352,
+        0.07039107435182945
+      ],
+      "p_value": 0.38037109375,
+      "baseline_median": 10.56600913037815,
+      "treatment_median": 10.530586432846512,
+      "n_joint_saturated": 0,
+      "n_one_sided_saturated": 0,
+      "excluded_pairs": []
+    },
+    {
+      "baseline": "onestep_narrow",
+      "treatment": "shrinking_Q2_narrow",
+      "metric": "log_improvement",
+      "n_pairs": 12,
+      "n_valid": 12,
+      "median_delta": 0.08199180295426434,
+      "delta_ci": [
+        0.018855066880546723,
+        0.34191067651679674
+      ],
+      "p_value": 0.12939453125,
+      "baseline_median": 10.18793728836053,
+      "treatment_median": 10.320832596498061,
+      "n_joint_saturated": 0,
+      "n_one_sided_saturated": 0,
+      "excluded_pairs": []
+    },
+    {
+      "baseline": "best_static",
+      "treatment": "best_open_loop",
+      "metric": "log_improvement",
+      "n_pairs": 12,
+      "n_valid": 12,
+      "median_delta": 0.4129525812200372,
+      "delta_ci": [
+        0.3168666423205684,
+        0.7540970419278104
+      ],
+      "p_value": 0.00048828125,
+      "baseline_median": 8.894886924458458,
+      "treatment_median": 9.278173003736793,
+      "n_joint_saturated": 0,
+      "n_one_sided_saturated": 0,
+      "excluded_pairs": []
+    },
+    {
+      "baseline": "best_static",
+      "treatment": "heuristic",
+      "metric": "log_improvement",
+      "n_pairs": 12,
+      "n_valid": 12,
+      "median_delta": -1.3051730988422605e-05,
+      "delta_ci": [
+        -6.525957667413707e-05,
+        0.00018139646904824502
+      ],
+      "p_value": 0.791015625,
+      "baseline_median": 8.894886924458458,
+      "treatment_median": 8.886213667400616,
+      "n_joint_saturated": 0,
+      "n_one_sided_saturated": 0,
+      "excluded_pairs": []
+    }
+  ],
+  "track_t_ratios": {
+    "easy": {
+      "baseline": "best_static@easy",
+      "treatment": "shrinking_Q4@easy",
+      "metric": "cost_to_target_ge",
+      "n_pairs": 12,
+      "n_both_reached": 12,
+      "ratio_geometric_mean": 1.0573945635643962,
+      "ratio_ci": [
+        1.0,
+        1.1497215799891667
+      ],
+      "p_value": null,
+      "baseline_median": 12.3,
+      "treatment_median": 12.3
+    },
+    "medium": {
+      "baseline": "best_static@medium",
+      "treatment": "shrinking_Q4@medium",
+      "metric": "cost_to_target_ge",
+      "n_pairs": 12,
+      "n_both_reached": 5,
+      "ratio_geometric_mean": 1.7344754948782102,
+      "ratio_ci": [
+        1.538880672920671,
+        1.939327302106923
+      ],
+      "p_value": 0.0625,
+      "baseline_median": 86.1,
+      "treatment_median": 49.900000000000006
+    },
+    "hard": {
+      "baseline": "best_static@hard",
+      "treatment": "shrinking_Q4@hard",
+      "metric": "cost_to_target_ge",
+      "n_pairs": 12,
+      "n_both_reached": 1,
+      "ratio_geometric_mean": 1.8923076923076925,
+      "ratio_ci": [
+        null,
+        null
+      ],
+      "p_value": null,
+      "baseline_median": 159.9,
+      "treatment_median": 84.5
+    }
+  },
+  "gates": [
+    {
+      "name": "A1",
+      "track": "Track E",
+      "question": "현재 상태에서 좋은 damping 이 존재하는가 (instantaneous absolute-action headroom, H=1)",
+      "statistic": 1.2626420540729892,
+      "unit": "nat",
+      "verdict": "GO",
+      "go_threshold": 1.0,
+      "pivot_threshold": 0.3,
+      "nonsaturated": "+1.263 nat (n=12)",
+      "detail": "loss 3.53배 차이. 도달성 제약을 완전히 없앤 **순간적** 이득이다. 전역 상한이나 장기 헤드룸이 아니다."
+    },
+    {
+      "name": "A2",
+      "track": "Track E",
+      "question": "현실적인 multiplier action 으로 그 이득에 접근할 수 있는가 (shrinking Q=4xc_max, narrow/wide vs best_static)",
+      "statistic": 1.501699698622743,
+      "unit": "nat",
+      "verdict": "GO",
+      "go_threshold": 0.7,
+      "pivot_threshold": 0.2,
+      "nonsaturated": "[1] all-task floor-capped  +1.502 nat  n=12  CI +1.160~+4.402  joint=0 one-sided=0 unsat=12  (+12/0×0/−0)\n      [2] quad_ill_conditioned_d100_k1e+03   median +6.584 n=3 [+6.329, +7.152, +6.584]\n      [2] quad_ill_conditioned_d100_k1e+04   median +2.361 n=3 [+2.476, +1.523, +2.361]\n      [2] quad_ill_conditioned_d100_k1e+05   median +0.735 n=3 [+1.464, +0.735, +0.605]\n      [2] quad_ill_conditioned_d100_k1e+06   median +1.232 n=3 [+1.480, +1.232, +1.087]\n      [3] pairwise nonsaturated 민감도  +1.502 nat  n=12  (비교마다 n 이 달라진다. primary 아님)",
+      "detail": "narrow +1.502, wide +1.478 nat. A1 대비 크게 낮으면 행동 공간 도달성이 병목이다."
+    },
+    {
+      "name": "B",
+      "track": "Track E",
+      "question": "행동 공간이 병목인가 (absolute vs narrow, 모두 H=1, 해상도 정렬)",
+      "statistic": 0.01503035672154951,
+      "unit": "nat",
+      "verdict": "재설계",
+      "go_threshold": 0.5,
+      "pivot_threshold": 0.1,
+      "nonsaturated": "+0.015 nat (n=12)",
+      "detail": "참고: wide - narrow = +0.044 nat"
+    },
+    {
+      "name": "C1",
+      "track": "Track E",
+      "question": "쿼터를 매 step 초기화하는 것이 실제 성능을 떨어뜨리는가 (shrinking - fresh)",
+      "statistic": null,
+      "unit": "nat",
+      "verdict": "판정불가",
+      "go_threshold": 0.3,
+      "pivot_threshold": 0.05,
+      "nonsaturated": "",
+      "detail": "쿼터 곡선(narrow): shrinking Q2:10.321 → Q4:10.531 | committed Q2:10.145 → Q4:10.566. **fresh 는 seed 0개에서만 돌린 진단 baseline 이다.** paired 비교는 겹치는 seed 에서만 이루어지므로 이 통계의 표본이 다른 게이트보다 작다. **연구 결과이지만 PPO 착수 게이트가 아니다.** 양수면 receding horizon 이 준비 행동만 반복하며 payoff 를 뒤로 미룬다는 증거다."
+    },
+    {
+      "name": "C2",
+      "track": "Track E",
+      "question": "시간 일관적인 다단계 재계획이 one-step 효율 제어보다 나은가 (shrinking Q=4 - C0)",
+      "statistic": 0.2505235449411112,
+      "unit": "nat",
+      "verdict": "조건부",
+      "go_threshold": 0.3,
+      "pivot_threshold": 0.05,
+      "nonsaturated": "[1] all-task floor-capped  +0.251 nat  n=12  CI -0.036~+0.487  joint=0 one-sided=0 unsat=12  (+8/0×0/−4)\n      [2] quad_ill_conditioned_d100_k1e+03   median +0.299 n=3 [+0.193, +0.657, +0.299]\n      [2] quad_ill_conditioned_d100_k1e+04   median +0.560 n=3 [+1.320, -0.468, +0.560]\n      [2] quad_ill_conditioned_d100_k1e+05   median -0.056 n=3 [+0.229, -0.056, -0.199]\n      [2] quad_ill_conditioned_d100_k1e+06   median +0.272 n=3 [+0.272, +0.413, -0.016]\n      [3] pairwise nonsaturated 민감도  +0.251 nat  n=12  (비교마다 n 이 달라진다. primary 아님)",
+      "detail": "깊이/상한(shrinking): Q2:d>1=0.68,cap=0.00 Q4:d>1=0.85,cap=0.00. 참고 Q=2(depth 1만 가능) - C0 = +0.082 nat. **GO 판정에는 두 조건이 모두 필요하다** (P3). 개선이 있고, 동시에 depth>1 이 실제로 채택돼야 한다. 개선만 있고 depth 가 계속 1 이면 planning 이 아니라 탐색량이 기여한 것이다. ``cap`` 이 0 이 아니면 계산 상한 때문에 쿼터를 다 쓰지 못한 step 이 있으므로 사다리 비교가 훼손된 것으로 보고한다. 이 게이트만으로 PPO 를 시작하지 않는다. P1~P4 를 함께 본다."
+    },
+    {
+      "name": "C3",
+      "track": "Track E",
+      "question": "상태를 관찰하며 재계획하는 것이 고정 실행보다 추가 이득인가 (shrinking - committed)",
+      "statistic": -0.04378585249351108,
+      "unit": "nat",
+      "verdict": "재설계",
+      "go_threshold": 0.3,
+      "pivot_threshold": 0.05,
+      "nonsaturated": "[1] all-task floor-capped  -0.044 nat  n=12  CI -0.590~+0.070  joint=0 one-sided=0 unsat=12  (+6/0×0/−6)\n      [2] quad_ill_conditioned_d100_k1e+03   median +0.000 n=3 [-1.428, +0.000, +1.339]\n      [2] quad_ill_conditioned_d100_k1e+04   median -0.088 n=3 [+0.087, -0.627, -0.088]\n      [2] quad_ill_conditioned_d100_k1e+05   median -0.410 n=3 [+0.010, -0.553, -0.410]\n      [2] quad_ill_conditioned_d100_k1e+06   median +0.053 n=3 [+0.053, +0.096, -0.724]\n      [3] pairwise nonsaturated 민감도  -0.044 nat  n=12  (비교마다 n 이 달라진다. primary 아님)",
+      "detail": "약 0 이면 좋은 sequence 는 존재하지만 feedback 자체의 추가 가치는 작다. 음수면 approximate replanning 이 계획을 훼손한다. **committed 는 초기 상태에 조건화된 oracle 이므로 open_loop baseline 과 다르다.** committed 가 open_loop 보다 좋다고 해서 feedback 이 필요하다는 뜻이 아니다."
+    },
+    {
+      "name": "D",
+      "track": "Track T",
+      "question": "cost-to-target 헤드룸이 있는가 (planner vs best_static, medium)",
+      "statistic": 1.7344754948782102,
+      "unit": "배",
+      "verdict": "GO",
+      "go_threshold": 1.2,
+      "pivot_threshold": 1.05,
+      "nonsaturated": "",
+      "detail": "난이도별 easy:1.057x(도달 12/12), medium:1.734x(도달 5/12), hard:1.892x(도달 1/12). 게이트 A와 결론이 다르면 그 불일치 자체를 결과로 보고한다 (프로토콜 D9)."
+    }
+  ],
+  "n_failures": 0,
+  "raw_path": "results\\raw\\headroom_challenge_step_size_fixed_b8_fed9aebd.jsonl",
+  "raw_sha256": "d4dffaf1790a82184965f92b00862142ebc11173312634adb5ef6a14f56b78b4",
+  "raw_n_lines": 360,
+  "provenance": {
+    "git_commit": "aac429e2",
+    "git_dirty": false,
+    "config_hash": "34b7a936f5070493",
+    "python_version": "3.12.12",
+    "platform": "Windows 11",
+    "torch_version": "2.13.0+cu130",
+    "cuda_available": true,
+    "cuda_runtime": "13.0",
+    "gpu_name": "NVIDIA GeForce RTX 3060 Ti",
+    "gpu_capability": "8.6",
+    "gpu_total_memory_mb": 8191.375,
+    "config": {
+      "mode": "challenge",
+      "condition": "step_size_fixed",
+      "phase": "challenge",
+      "seeds": [
+        2,
+        3,
+        4
+      ],
+      "budget_ge": 150.0,
+      "beam": 8,
+      "quotas": [
+        2.0,
+        4.0
+      ],
+      "difficulty": "medium",
+      "n_specs": 4,
+      "narrow_only": false,
+      "environment": {
+        "platform": "Windows 11",
+        "processor": "AMD64 Family 25 Model 33 Stepping 2, AuthenticAMD",
+        "cpu_count": 12,
+        "torch_num_threads": 1,
+        "torch_num_interop_threads": 1,
+        "omp_num_threads": null,
+        "mkl_num_threads": null,
+        "pinned": 1
+      },
+      "concurrent_processes": 1
+    },
+    "diff": null
+  }
+}

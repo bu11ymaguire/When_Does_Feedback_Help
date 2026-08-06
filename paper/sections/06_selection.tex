@@ -1,0 +1,70 @@
+\section{Configuration selection}
+\label{sec:selection}
+
+The results in this section are used \emph{only} as the basis for configuration
+selection. They are not effect estimates.
+
+\subsection{Predeclared promotion targets}
+
+We did not choose the quota from beam-4 results. Under some conditions beam~4 gave
+$-4.21$~nat where beam~8 gave $+4.59$~nat, so judging promise with a shallow beam
+would discard configurations that are in fact good.
+
+\begin{center}
+\begin{tabular}{ll}
+\toprule
+Quota & Re-evaluated at beam 8 \\
+\midrule
+$Q = 1$ & not needed (only depth 1 is possible) \\
+$Q = 2$ & \ctrl{narrow} and \ctrl{wide} \\
+$Q = 4$ & \ctrl{narrow} and \ctrl{wide} \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\subsection{Selection rule}
+
+The selection statistic was fixed to a single quantity before execution: the
+median $\JE$ of \ctrl{shrinking} itself over the twelve challenge instances,
+maximized. Ties within $0.05$~nat were broken by, in order, smaller
+decision-search GE, smaller $Q$, then \ctrl{narrow}.
+
+We did not select on the difference against a baseline. The ranking of the
+strongest baseline was not stable in the sample (two baselines returned identical
+values, $p = 0.91$). Dividing by an unstable reference point would make
+configuration selection track baseline noise.
+
+\subsection{Results}
+
+\begin{table}[!ht]
+  \centering
+  \begin{tabular}{lrrr}
+  \toprule
+  Configuration & $n$ & Median $\JE$ & Decision-search GE \\
+  \midrule
+  \ctrl{shrinking\_Q4\_narrow} & 12 & \textbf{10.5306} & 193{,}894 \\
+  \ctrl{shrinking\_Q2\_wide}   & 12 & 10.3691          & 127{,}609 \\
+  \ctrl{shrinking\_Q2\_narrow} & 12 & 10.3208          & 55{,}802 \\
+  \ctrl{shrinking\_Q4\_wide}   & 12 & 10.2508          & 441{,}612 \\
+  \bottomrule
+  \end{tabular}
+  \caption{Configuration selection on development seeds. The margin to second
+  place is $0.16$~nat, outside the tie window, so the selection was unique and no
+  tie-break was applied.}
+  \label{tab:selection}
+\end{table}
+
+\ctrl{Q4\_wide} scores below \ctrl{Q4\_narrow}. Increasing the quota enlarges the
+searchable set by inclusion, but \emph{realized performance is not
+non-decreasing}.
+
+\subsection{Protocol deviation}
+\label{sec:deviation-selection}
+
+To measure cost we first ran a single-instance dry run (quad $d = 100$,
+$\kappa = 10^3$, seed 2, 30 runs) and inspected its gate table before finalizing
+the selection rule. Planner rankings by $Q \times \text{space}$ were not opened,
+but the order of operations was not ``fix the rule, then execute''.
+
+For this reason we use the beam-8 results \emph{only} for configuration selection
+and hypothesis refinement, and estimate effects on separate held-out seeds.

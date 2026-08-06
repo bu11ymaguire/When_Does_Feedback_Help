@@ -1,0 +1,81 @@
+\section{Why we did not train a policy}
+\label{sec:nopolicy}
+
+This section separates two things: the scientific conclusion the data supports, and
+a project decision about resource commitment.
+
+\subsection{Scientific conclusion}
+\label{sec:scientific-conclusion}
+
+\begin{enumerate}
+  \item Multi-step planning improved over one-step control on held-out instances
+        ($+0.456$~nat, CI $+0.254$ to $+0.720$, $35/40$).
+  \item Replanning during execution did not meaningfully improve over committed
+        planning: $+0.010$~nat, $21/40$.
+
+        \begin{quote}
+        The confidence interval was narrow and included zero, and we did not
+        observe a practically large feedback benefit.
+        \end{quote}
+
+        We do not write ``equivalent'' or ``statistically the same''; there is no
+        prior equivalence margin
+        \citep{schuirmann1987tost,lakens2017equivalence}.
+  \item Under stochastic model mismatch the committed plan was fragile. The
+        rejection rate rose from $0.00$ to $0.66$--$0.79$ and terminal improvement
+        fell below the tuned constant.
+  \item Replanning reduced that fragility but did not consistently outperform
+        inexpensive one-step control: $\text{replanning} - \text{one-step}$ was
+        $-1.111$ and $-0.716$ in the two minibatch conditions
+        ($n = 3$ per regime, exploratory).
+\end{enumerate}
+
+\subsection{Project decision}
+
+\begin{quote}
+PPO training was a conditional next stage, not a required component of the study. We
+predeclared empirical gates to determine whether the added implementation and
+computational cost was justified. Because feedback replanning did not consistently
+outperform committed planning or inexpensive one-step control, we did not proceed to
+PPO.
+\end{quote}
+
+That decision-search cost is $1{,}294$ times the deployment budget also enters this
+judgement.
+
+We state the distinction explicitly:
+
+\begin{itemize}
+  \item PPO did not fail.
+  \item We did not run PPO.
+  \item This is not a rejection of reinforcement learning in general.
+  \item We did not establish headroom that would justify a learned state-dependent
+        feedback policy in the present environment.
+\end{itemize}
+
+\subsection{The status of the gates}
+
+The gate thresholds (for example $\gate{C3} \geq 0.3$~nat) are \emph{not} universal
+theoretical criteria. Their character is as follows:
+
+\begin{itemize}
+  \item Policy learning requires a separate, large experimental stage.
+  \item We therefore registered in advance a minimum effect size, a sign-consistency
+        requirement, whether multi-step plans were used, and transfer conditions.
+  \item The gates are a scope-control device, not a statistical truth verdict.
+  \item We did not change the thresholds after seeing results.
+\end{itemize}
+
+The thresholds were fixed before the results were seen and were not changed
+afterwards. Their particular values are a scope-control choice, not a claim of
+correctness.
+
+\subsection{Follow-up direction}
+\label{sec:followup}
+
+That \gate{C2} is GO on held-out instances means a good multi-step sequence exists,
+and that \gate{C3} is small means that sequence can be determined at the initial
+state. This combination points less towards a per-step feedback policy than towards
+an \emph{amortized approach that predicts a schedule from initial problem features}
+\citep{amos2023amortized,andrychowicz2016l2l,bae2022apo}. We did not implement it
+and mention it only as a direction.

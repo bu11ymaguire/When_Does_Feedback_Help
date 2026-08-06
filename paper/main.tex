@@ -1,0 +1,103 @@
+% =========================================================================
+% When Does Feedback Help? Planning and Model Mismatch in Hessian-Free
+% Newton Control
+%
+% **표현 계층이다.** 내용의 source of truth 는 `paper/draft.md` 다.
+% 주장 강도는 `paper/claim_ledger.md` 가 통제하고, 인용 내용 검증은
+% `paper/CITATIONS.md` 에 있다.
+%
+% 규칙
+%   1. 표의 숫자를 이 파일이나 sections/ 에 쓰지 않는다.
+%      `scripts/make_tables.py` 가 `tables/*.tex` 를 생성한다
+%   2. 그림은 `scripts/make_figures.py` 가 생성한다
+%   3. 새 주장을 여기서 만들지 않는다. draft.md 에 없는 문장을 넣지 않는다
+%
+% 빌드
+%   pdflatex main && bibtex main && pdflatex main && pdflatex main
+% =========================================================================
+\documentclass[11pt]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[english]{babel}
+\usepackage{lmodern}
+\usepackage{microtype}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{graphicx}
+\usepackage{subcaption}
+% float 이 자기 절 제목을 추월하지 못하게 막는다. `[t]` 만 쓰면 표가 페이지 최상단으로
+% 올라가 제목 위에 놓인다 (§9 의 Table 7 이 그랬다). 절 경계에서 float 를 flush 한다.
+\usepackage[section]{placeins}
+% placeins 의 `section` 옵션은 \section 에만 barrier 를 넣는다. 표만 있는 절
+% (§7.4 Search cost, §10.2 Results, §11.3 Results) 은 subsection 단위라 barrier 가
+% 없으면 표가 제목을 앞지른다. \subsection 에도 같은 barrier 를 넣는다.
+\let\rlnOldSubsection\subsection
+\renewcommand{\subsection}{\FloatBarrier\rlnOldSubsection}
+% barrier 를 넣으면 표만 있는 절의 제목이 페이지 맨 아래에 고아로 남는다. 제목 뒤에
+% 최소 공간을 요구해서 제목과 내용이 갈라지지 않게 한다.
+\usepackage{needspace}
+
+% 마지막 수단으로 줄 늘림을 조금 허용한다. §12.1 의 enumerate 항목 한 줄이 들여쓰기
+% 때문에 4.96pt 넘쳤다. 문장을 고치는 대신 조판으로 닫는다. 값이 커지면 줄이 헐거워
+% 지므로 1em 로 제한하고, Underfull 이 생기지 않는지 빌드 로그로 확인한다.
+\setlength{\emergencystretch}{1em}
+\usepackage{xcolor}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage[hidelinks]{hyperref}
+
+\graphicspath{{figures/}}
+
+% 컨트롤러 이름을 본문에서 일관되게 쓴다.
+\newcommand{\ctrl}[1]{\texttt{#1}}
+\newcommand{\GE}{\text{GE}}
+\newcommand{\JE}{J_E}
+
+% 사전 등록 게이트 표기.
+\newcommand{\gate}[1]{\textsf{#1}}
+
+% 아직 존재하지 않는 값의 자리. **눈에 보이게** 조판한다. 조용히 비워 두면 존재하지
+% 않는 태그나 URL 을 실재하는 artifact 처럼 제시하는 사고가 난다(E12 와 같은 유형).
+% scripts/check_latex.py 가 이 표시를 검출하고 --strict 에서 실패한다.
+% 제출 전에 남은 자리가 0 이어야 한다.
+\newcommand{\PLACEHOLDER}[1]{\textbf{[TO BE FILLED: #1]}}
+
+\title{When Does Feedback Help?\\
+Planning and Model Mismatch in Hessian-Free Newton Control}
+
+\author{%
+  Jin-Uk Kim \\
+  Department of Data Science \\
+  Hanyang University \\
+  Seoul, Republic of Korea \\
+  \texttt{jwkim628@gmail.com}
+}
+\date{}
+
+\begin{document}
+\maketitle
+
+\input{sections/00_abstract}
+\input{sections/01_introduction}
+\input{sections/02_setup}
+\input{sections/03_controllers}
+\input{sections/04_protocol}
+\input{sections/05_eligibility}
+\input{sections/06_selection}
+\input{sections/07_heldout}
+\input{sections/08_decomposition}
+\input{sections/09_conditioning}
+\input{sections/10_mismatch}
+\input{sections/11_ablation}
+\input{sections/12_nopolicy}
+\input{sections/13_discussion}
+\input{sections/14_limitations}
+\input{sections/15_reproducibility}
+
+\bibliographystyle{plainnat}
+\bibliography{references}
+
+\end{document}

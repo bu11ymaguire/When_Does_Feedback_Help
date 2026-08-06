@@ -1,0 +1,65 @@
+# MNIST MLP 784-128-10 (약 101,770 파라미터). 가장 저렴한 신경망 benchmark.
+#
+# 주의 (D1): 이 규모에서 GPU 시간은 커널 런치 오버헤드에 지배된다.
+# RTX 3060 Ti 실측 결과 is_launch_bound = true 이며, 배치를 256 -> 4096 으로
+# 16배 늘려도 gradient 시간이 0.657 -> 0.706 ms 로 거의 변하지 않았다.
+# 따라서 wall-clock 단독 결론을 내지 않는다. Stage 5 의 CIFAR-10 CNN 이
+# wall-clock 검증을 담당한다 (그쪽은 flop-bound 로 확인됨).
+#
+# 예산 감각 (실측): B_c=B_g, k=10 이면 Newton step 1회 ≈ 17 GE.
+# 200 step = 3,400 GE = B=512 기준 약 29 에폭.
+# AdamW 는 5 에폭(약 600 GE)에 98% 에 도달한다. 즉 동등 예산 경쟁을 위해서는
+# 약 35 step 안에 target 에 도달해야 한다.
+
+defaults: base.yaml
+
+device: cuda
+
+experiment:
+  task: mnist
+  model: mlp
+  total_steps: 200
+  eval_interval: 20
+  gradient_batch_size: 512
+  curvature_batch_ratio: 1.0
+  data_dir: data
+  validation_size: 10000
+
+model:
+  kind: mlp
+  hidden_sizes: [128]
+  activation: relu
+  # meta-train task 분포용 랜덤화 (Stage 5)
+  randomize:
+    hidden_width: [64, 128, 256]
+    init_scale: { distribution: uniform, low: 0.5, high: 2.0 }
+
+# D6 사전 등록 target
+targets:
+  primary: { metric: train_loss, value: 0.10 }
+  secondary:
+    - { metric: validation_accuracy, value: 0.970 }
+
+# D5 탐색 예산: 모든 baseline 에 동일하게 36회를 부여한다.
+tuning:
+  budget: 36
+  select_on: meta_train      # meta_test 성능으로 고르지 않는다
+  search:
+    adamw:
+      learning_rate: { distribution: log_uniform, low: 1.0e-4, high: 1.0e-2 }
+      weight_decay: { distribution: log_uniform, low: 1.0e-5, high: 1.0e-1 }
+    sgd_momentum:
+      learning_rate: { distribution: log_uniform, low: 1.0e-3, high: 5.0e-1 }
+      momentum: [0.9, 0.95, 0.99]
+    fixed_newton_cg:
+      grid: controller        # 36개 action 조합 전수
+    heuristic_newton_cg:
+      rho_low: { distribution: uniform, low: 0.05, high: 0.40 }
+      rho_high: { distribution: uniform, low: 0.60, high: 0.95 }
+      damping_up: { distribution: log_uniform, low: 1.5, high: 10.0 }
+      damping_down: { distribution: log_uniform, low: 0.1, high: 0.8 }
+
+cost_model:
+  # Stage 1 에서 실측해 채운다. 파일이 없으면 벤치마크 실행이 중단된다.
+  path: configs/cost_model.mnist_mlp.yaml
+  model_id: mnist_mlp_bg512_bc512_rtx3060ti

@@ -1,0 +1,96 @@
+\section{Experimental protocol}
+\label{sec:protocol}
+
+\subsection{Paired design}
+\label{sec:paired}
+
+A seed is not a random-number seed but \emph{the name of an experimental
+condition}. For $\text{seed} = s$, every controller sees the same instance, the
+same initial point, and the same minibatch order. The random stream used to
+generate tasks is fully separated from the stream used to execute the optimizer,
+so the instance is identical regardless of how much randomness a controller
+consumes. This is a property of our runner, not a claim taken from the
+literature; we verify it with the bitwise reproduction check of
+Section~\ref{sec:identity}.
+
+Statistics are computed on paired differences using the Wilcoxon signed-rank test
+\citep{wilcoxon1945} and bootstrap confidence intervals for the median
+\citep{efron1979bootstrap}. We write $p < 0.0001$ rather than $p = 0.0000$.
+
+\subsection{Separation of seed roles}
+\label{sec:seeds}
+
+\begin{center}
+\begin{tabular}{lll}
+\toprule
+Role & Seeds & Used for \\
+\midrule
+\texttt{CALIBRATION\_SEEDS} & 0, 1        & benchmark spec selection only \\
+\texttt{SELECTION\_SEEDS}   & 2, 3, 4     & configuration selection only \\
+\texttt{HELD\_OUT\_SEEDS}   & 100--109    & final effect estimation only \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\emph{The configuration was not chosen using held-out results.} It was fixed once
+on development seeds in Section~\ref{sec:selection} and not reopened in
+Section~\ref{sec:heldout}.
+
+We disclose one remaining overlap. \texttt{quad\_d100\_k1e5} appears both in the
+initial dev subset and in the final spec set, so
+$(\texttt{quad\_d100\_k1e5}, \text{seed } 2)$ is the same instance in two phases.
+This is one of the twelve instances used for configuration selection.
+
+\subsection{Result identity}
+\label{sec:identity}
+
+Editing aggregation code or documentation must not cause the optimizer to rerun.
+We separate identity into three layers:
+
+\begin{center}
+\begin{tabular}{ll}
+\toprule
+Identifier & Content \\
+\midrule
+\texttt{run\_semantics\_id} & only the optimizer settings this controller actually uses \\
+\texttt{sweep\_id}          & the set of runs this execution requested \\
+\texttt{aggregation\_id}    & the aggregation policy \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\texttt{git\_commit} and \texttt{code\_dirty} enter none of these identifiers and
+are recorded as separate provenance. If a hash changed when only documentation
+was edited, the meaning of ``which set was requested'' would be broken.
+
+To check that this separation actually holds, we compared planner trajectories
+before and after changes to identity, logging, and the baseline clock. On the same
+CPU, single-threaded, with the same seed, the expectation is bitwise equality. All
+$72$ predeclared pairs matched bitwise.
+
+\subsection{Predeclared gates}
+\label{sec:gates}
+
+\begin{center}
+\begin{tabular}{llr}
+\toprule
+Gate & Question & GO threshold \\
+\midrule
+\gate{A1} & Instantaneous headroom of the one-step absolute action space & $\geq 1.0$~nat \\
+\gate{A2} & Is that headroom reachable with realistic multiplier actions? & $\geq 0.7$~nat \\
+\gate{B}  & Is the action space the bottleneck? & $\geq 0.5$~nat \\
+\gate{C1} & Does resetting the quota each step hurt? (diagnostic only) & $\geq 0.3$~nat \\
+\gate{C2} & Is multi-step replanning better than one-step? & $\geq 0.3$~nat \\
+\gate{C3} & Is state-observing replanning better than fixed execution? & $\geq 0.3$~nat \\
+\gate{D}  & Cost-to-target headroom & $\geq 1.2\times$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+A GO verdict on \gate{C2} requires \emph{both} conditions: an improvement must be
+present, and plans of depth greater than one must actually be adopted. If only the
+improvement is present while the depth stays at one, the contribution came from
+search volume rather than from planning.
+
+\gate{C1} uses a single-seed diagnostic baseline and is therefore not used for any
+verdict.

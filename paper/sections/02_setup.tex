@@ -1,0 +1,104 @@
+\section{Problem setup and cost accounting}
+\label{sec:setup}
+
+\subsection{Newton--CG step and action space}
+
+At each step we solve the damped Newton system with truncated conjugate
+gradients \citep{hestenes1952cg,steihaug1983cg}, forming no matrix and using
+only Hessian-vector products \citep{pearlmutter1994hvp}:
+\begin{equation}
+  (H + \lambda I)\, p = -g,
+  \qquad \text{terminated after $k$ CG iterations.}
+\end{equation}
+
+The controller chooses along two axes: a damping multiplier $m$, applied as
+$\lambda \leftarrow \mathrm{clip}(\lambda \cdot m)$ and accumulated in log space,
+and a CG iteration budget $k \in \{3, 5, 10, 20\}$.
+
+The step size is fixed at $1.0$. It aliases with the damping axis, so leaving it
+free would make the two axes' contributions inseparable.
+
+We use three action spaces:
+
+\begin{center}
+\begin{tabular}{llr}
+\toprule
+Name & Actions & Damping range ($\log_{10}$) \\
+\midrule
+\ctrl{narrow}   & 12  & 0.95 \\
+\ctrl{wide}     & 28  & 2.86 \\
+\ctrl{absolute} & 132 & 15.27 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\ctrl{narrow} is the deployment target; \ctrl{absolute} exists to remove
+reachability constraints for analysis. \ctrl{absolute} has \emph{the same
+logarithmic resolution} as \ctrl{narrow}, so that the comparison ``is the action
+space the bottleneck?'' is not confounded by a difference in resolution.
+
+\subsection{Cost accounting and its scope}
+\label{sec:ge}
+
+We do not use wall-clock time as the primary metric. At this scale (thousands to
+tens of thousands of parameters) time is dominated by kernel launch and
+interpreter overhead rather than floating-point work, so measurements would
+reflect implementation overhead rather than optimization efficiency.
+
+We use a hardware-independent unit instead. One gradient-equivalent (GE) is one
+forward plus one backward pass over a gradient batch, and the per-step cost is
+\begin{equation}
+  \mathrm{cost}_{\GE}(k) = c_{\text{grad-graph}} + k \cdot c_{\text{hvp}}
+    + c_{\text{fwd}} .
+\end{equation}
+
+All comparisons are made at an \emph{identical GE budget}. In Newton--CG the
+per-step cost varies strongly with the action ($k = 3$ versus $k = 20$ differs by
+more than a factor of six), so matching step counts and comparing final loss
+would compare runs of unequal cost.
+
+We state the scope of this definition in advance.
+
+\begin{quote}
+GE normalizes gradient-equivalent oracle calls within a regime, not total
+floating-point operations across different batch sizes. Cross-regime absolute
+performance comparisons are therefore descriptive rather than compute-normalized.
+\end{quote}
+
+The quadratic comparisons of Section~\ref{sec:heldout} all take place on the same
+objective and are unaffected by this limitation. It applies only to absolute
+cross-regime comparisons in Section~\ref{sec:mismatch}.
+
+\subsection{Execution environment and the nature of GE}
+\label{sec:cpu}
+
+\begin{quote}
+All Stage~2 optimization and planning experiments were executed on CPU. The
+GPU-derived cost-model files in the repository originate from an earlier Stage~1
+calibration and were not used in Stage~2; Stage~2 GE accounting used
+HVP-equivalent oracle counts.
+\end{quote}
+
+The repository retains those Stage~1 configuration files, including their
+\texttt{device: cuda:0} entries, for provenance. They do not describe the Stage~2
+execution environment.
+
+Reading the search cost also requires a distinction.
+
+\begin{quote}
+Search GE measures simulated oracle work rather than wall-clock GPU compute.
+\end{quote}
+
+The factor of $1{,}294$ reported in Section~\ref{sec:cost} is a ratio of
+\emph{oracle calls} performed by the planner, not a ratio of GPU wall-clock time.
+
+\subsection{Evaluation metric}
+
+We measure improvement at a fixed budget as a logarithmic improvement in nats,
+\begin{equation}
+  \JE = \log L_0 - \log L_{\text{final}} .
+\end{equation}
+
+We place a numerical floor at a relative value of $100 \cdot \varepsilon$ and cap
+values below it. We report both the uncapped pairs and the full set of pairs.
+Whenever a pair is dropped from a statistic, the reason is recorded.

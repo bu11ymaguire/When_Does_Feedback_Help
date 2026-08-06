@@ -1,0 +1,24 @@
+% 이 파일은 scripts/make_tables.py 가 생성한다. **손으로 수정하지 않는다.**
+% 표: acceptance criterion ablation (exploratory, n=3 per regime)
+% raw: headroom_micro-neural_step_size_fixed_b8_0bec1125.jsonl
+% raw: headroom_micro-neural_step_size_fixed_b8_9f3194be.jsonl
+% raw 의 SHA-256 은 paper/evidence_map.md 에 있다.
+% 공개 저장소에는 raw 가 없다. results/public/*.csv 에서 --public-dir 로 만들면
+% 이 파일과 바이트 단위로 같아진다 (scripts/verify_public_results.py).
+\begin{tabular}{lllrr}
+\toprule
+Gate & Regime & & Control & Fixed evaluation \\
+\midrule
+A2 & R1 full-batch & & $+15.176$ (3/3) & $+14.065$ (3/3) \\
+ & R2 batch 128 & & $-0.900$ (1/3) & $-0.598$ (0/3) \\
+ & R2 batch 64 & & $-0.277$ (1/3) & $-0.093$ (0/3) \\
+\midrule
+C2 & R1 full-batch & & $+0.547$ (2/3) & $-0.080$ (1/3) \\
+ & R2 batch 128 & & $-1.111$ (1/3) & $-0.118$ (1/3) \\
+ & R2 batch 64 & & $-0.716$ (1/3) & $+0.104$ (2/3) \\
+\midrule
+C3 & R1 full-batch & & $-0.095$ (1/3) & $-0.949$ (0/3) \\
+ & R2 batch 128 & & $+2.941$ (3/3) & $+1.110$ (3/3) \\
+ & R2 batch 64 & & $+1.666$ (3/3) & $+0.973$ (3/3) \\
+\bottomrule
+\end{tabular}

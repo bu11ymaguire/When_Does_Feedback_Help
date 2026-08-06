@@ -1,0 +1,63 @@
+# Quadratic / Rosenbrock 계열. Stage 1 수치 검증과 Stage 2 헤드룸 측정에 사용한다.
+#
+# L(x) = 0.5 x^T A x 로 구성해 L* = 0 이 되도록 한다 (D3: log L 보상 정의를 위해).
+# quadratic 은 minibatch 개념이 없으므로 배치 관련 항목은 무시된다.
+
+defaults: base.yaml
+
+device: cpu   # d <= 500 규모에서는 CPU 가 GPU 보다 빠르다. Stage 1 에서 실측 후 확정.
+
+experiment:
+  task: quadratic
+  total_steps: 50
+  eval_interval: 5
+  gradient_batch_size: null
+  curvature_batch_ratio: 1.0
+
+# meta-train / meta-test 분포 분리 (Stage 5, D 없음 -> 프로토콜 §4 Stage 5)
+task_distribution:
+  meta_train:
+    kind: [spd, ill_conditioned, indefinite]
+    condition_number:
+      distribution: log_uniform
+      low: 1.0e1
+      high: 1.0e4
+    dimension: [50, 100, 200]
+    indefinite_negative_fraction: 0.2   # 음의 고유값 비율
+  meta_test:
+    kind: [spd, ill_conditioned]
+    condition_number: [1.0e5]           # 학습 분포 밖
+    dimension: [500]
+
+rosenbrock:
+  dimension: [2, 10]
+  total_steps: 100
+
+# D6 사전 등록 target. L_0 기준 상대값.
+targets:
+  spd:
+    primary: { metric: relative_loss, value: 1.0e-6 }
+    secondary:
+      - { metric: relative_loss, value: 1.0e-3 }
+      - { metric: relative_loss, value: 1.0e-9 }
+  ill_conditioned:
+    primary: { metric: relative_loss, value: 1.0e-4 }
+    secondary:
+      - { metric: relative_loss, value: 1.0e-2 }
+  rosenbrock:
+    primary: { metric: absolute_loss, value: 1.0e-4 }
+    secondary:
+      - { metric: absolute_loss, value: 1.0e-2 }
+
+# Stage 2 헤드룸 측정 설정
+headroom:
+  n_task_instances: 20
+  arms:
+    - best_static        # 36개 action 조합 고정
+    - best_open_loop     # progress 만 보는 스케줄, 랜덤 서치 36회
+    - greedy_oracle      # 매 step 36개 전수 시도, Δlog L / cost_GE 최대 선택
+  # go/no-go 게이트: cost_to_target(best_static) / cost_to_target(greedy_oracle)
+  gate:
+    go_threshold: 1.30           # 이상이면 Stage 3 진행
+    pivot_threshold: 1.10        # 미만이면 중단하고 재설계
+  save_oracle_trajectories: results/raw/oracle

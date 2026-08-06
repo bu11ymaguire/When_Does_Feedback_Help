@@ -123,7 +123,8 @@ def header(name: str, raw: str | tuple[str, ...]) -> list[str]:
     lines.append(
         "% 공개 저장소에는 raw 가 없다. results/public/*.csv 에서 --public-dir 로 만들면"
     )
-    lines.append("% 이 파일과 바이트 단위로 같아진다 (scripts/verify_public_results.py).")
+    lines.append("% **고정된 환경에서** 이 파일과 바이트 단위로 같아진다.")
+    lines.append("% 판본이 다른 환경에서의 비트 수준 일치는 주장하지 않는다.")
     return lines
 
 

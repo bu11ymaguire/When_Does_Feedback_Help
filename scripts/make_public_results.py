@@ -369,9 +369,11 @@ def main() -> int:
             "bootstrap_seed": 0,
             "wilcoxon": "rl_newton.benchmark.metrics.wilcoxon_signed_rank_p",
             "note": (
-                "compare_paired_delta 는 결정론적이다. 이 CSV 와 동봉된 metrics.py 로 "
-                "median / CI / p 를 정확히 재현할 수 있다. "
-                "scripts/verify_public_results.py 가 검사한다."
+                "부트스트랩은 Python 표준 라이브러리의 random.Random(seed) 를 쓴다. "
+                "NumPy 나 SciPy 에 의존하지 않는다. **고정된 환경에서** 이 CSV 와 "
+                "동봉된 metrics.py 로 median / CI / p 를 다시 계산할 수 있고 "
+                "scripts/verify_public_results.py 가 그것을 검사한다. "
+                "판본이 다른 환경에서의 비트 수준 일치는 주장하지 않는다."
             ),
         },
         "log_improvement": {

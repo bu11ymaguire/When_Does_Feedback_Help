@@ -238,8 +238,10 @@ def paired(
 ) -> PairedDelta:
     """`baseline` 대 `treatment` 의 쌍별 차이.
 
-    원고와 **같은 함수**(`compare_paired_delta`)를 쓴다. 기본값
-    `n_boot=10000`, `seed=0` 이 결정론적이므로 CI 가 정확히 재현된다.
+    원고와 **같은 함수**(`compare_paired_delta`)를 쓴다. 기본값 `n_boot=10000`,
+    `seed=0` 이고 리샘플링이 Python 표준 라이브러리 난수라 NumPy/SciPy 판본에
+    의존하지 않는다. 같은 환경에서 CI 가 재현된다. 판본이 다른 환경에서의 비트 수준
+    일치는 주장하지 않는다.
 
     Args:
         runs: 한 CSV 에서 읽은 run 목록.

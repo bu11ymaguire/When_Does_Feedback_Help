@@ -120,10 +120,16 @@ python scripts/make_tables.py --public-dir results/public --out-dir paper/tables
 python scripts/make_figures.py --public-dir results/public --out-dir paper/figures
 ```
 
-Steps 2 and 3 are byte-for-byte reproducible: the outputs generated from
-`results/public/*.csv` are identical to those generated from the private raw records.
-The paired comparison uses 10,000 bootstrap resamples at a fixed seed, so medians,
-confidence intervals, and `p`-values reproduce **exactly** rather than approximately.
+Under the pinned environment of `uv.lock`, steps 2 and 3 are byte-for-byte reproducible:
+the outputs generated from `results/public/*.csv` are identical to those generated from
+the private raw records. The paired analysis draws 10,000 bootstrap resamples at a fixed
+seed using the Python standard library rather than the numerical stack, so the reported
+medians, confidence intervals, and `p`-values can be recomputed from the published rows.
+
+We do not claim bit-level agreement across different library versions or platforms. The
+resampling itself does not depend on NumPy or SciPy, but figure bytes depend on the
+matplotlib version, and floating-point accumulation order is not guaranteed across
+platforms.
 
 Run the test suite to check the installation and the published numbers together:
 

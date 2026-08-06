@@ -48,9 +48,12 @@ source commit and a SHA-256 for every exported file, so the two trees can be che
 against each other in one direction without publishing the private history.
 
 The export includes row-level result files sufficient to recompute every paired
-statistic reported here. The paired comparison is deterministic (10{,}000 bootstrap
-resamples at a fixed seed), so the medians, confidence intervals, and $p$-values
-reproduce exactly rather than approximately.
+statistic reported here. Under the pinned software environment the paired analysis is
+deterministic --- it draws $10{,}000$ bootstrap resamples at a fixed seed, using the
+Python standard library rather than the numerical stack --- so the reported medians,
+confidence intervals, and $p$-values can be recomputed from the public row-level
+results. We do not claim bit-level agreement across different library versions or
+platforms.
 
 All numbers in this manuscript originate in \texttt{docs/results\_stage2.md}, whose
 sources are pinned by the SHA-256 values in \texttt{paper/evidence\_map.md}. The

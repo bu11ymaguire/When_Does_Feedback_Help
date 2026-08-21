@@ -33,7 +33,7 @@ authors:
     affiliation: Department of Data Science, Hanyang University, Seoul, Republic of Korea
 repository-code: https://github.com/bu11ymaguire/When_Does_Feedback_Help
 license: MIT
-version: 1.0.0
+version: 1.1.0
 date-released: '2026-08-21'
 keywords:
   - Hessian-free optimization

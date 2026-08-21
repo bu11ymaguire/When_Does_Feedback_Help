@@ -71,8 +71,11 @@ Any value formed by adding or subtracting paired medians
     Stage~2 commit rather than at the freeze commit. It therefore cannot attest that
     the configuration was fixed before the held-out runs; that ordering is attested by
     the dated decision record and by the freeze commit itself. We did not move the tag
-    retroactively. The tag was not published, because the commit it marks precedes the
-    removal of device names from committed artifacts.
+    retroactively. The tag is not part of the public export: the commit it marks
+    precedes the removal of device names from committed artifacts, and the public
+    repository does not share history with the private one. It is, however, present on
+    the private repository's remote, so withholding it from the export limits the
+    exposure to that repository rather than eliminating it.
 \end{description}
 
 \subsection{Scope and confounds}

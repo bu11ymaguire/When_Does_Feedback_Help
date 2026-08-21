@@ -1,9 +1,17 @@
 # Citation metadata. https://citation-file-format.github.io/
 #
-# `version` 과 `date-released` 는 릴리스 태그를 만들 때 확정한다. arXiv 식별자와 DOI 는
-# 제출 후에야 발급되므로 지금 넣지 않는다. **없는 식별자를 미리 적지 않는다.**
+# No `doi` and no `identifiers` block appears here. This work carries no DOI and no
+# preprint identifier, and writing a placeholder for one would assert an artifact that
+# does not exist. `version` and `date-released` track the release tag.
+#
+# `type: software` is deliberate. The citable artifact is this repository. The
+# accompanying manuscript (paper/main.tex) is an unrefereed technical report, not a
+# published paper, so it is not listed as a `preferred-citation`.
 cff-version: 1.2.0
-message: If you use this software or the published results, please cite the manuscript.
+message: >-
+  If you use this code or the published row-level results, please cite this repository.
+  The accompanying manuscript is an unrefereed technical report and has not been peer
+  reviewed.
 title: >-
   When Does Feedback Help? Planning and Model Mismatch in Hessian-Free Newton
   Control
@@ -25,6 +33,8 @@ authors:
     affiliation: Department of Data Science, Hanyang University, Seoul, Republic of Korea
 repository-code: https://github.com/bu11ymaguire/When_Does_Feedback_Help
 license: MIT
+version: 1.0.0
+date-released: '2026-08-21'
 keywords:
   - Hessian-free optimization
   - truncated Newton

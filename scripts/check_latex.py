@@ -20,7 +20,7 @@ Overfull/Underfull box, float 배치, 페이지 나눔 같은 조판 결과는 �
 9  원고가 인용한 공개 저장소와 릴리스 태그가 **실제로 존재하는가** (--check-remote)
 ```
 
-**제출 전 게이트는 `--strict --check-remote` 다.**
+**공개 전 게이트는 `--strict --check-remote` 다.**
 
 `[8]` 은 자리를 채웠는지만 본다. 이름을 채우는 것으로는 그 artifact 가 존재하는지 알 수
 없으므로 `[9]` 가 원격을 조회한다. 존재하지 않는 태그나 URL 을 실재하는 artifact 처럼
@@ -154,7 +154,7 @@ def main() -> int:
     parser.add_argument(
         "--check-remote",
         action="store_true",
-        help="원고가 인용한 공개 저장소와 릴리스 태그를 원격에서 조회한다. 제출 전 게이트",
+        help="원고가 인용한 공개 저장소와 릴리스 태그를 원격에서 조회한다. 공개 전 게이트",
     )
     parser.add_argument("--strict", action="store_true", help="경고도 실패로 취급한다")
     args = parser.parse_args()
@@ -256,7 +256,7 @@ def main() -> int:
     if total == 0:
         print("  없음")
 
-    # 8. 아직 채우지 않은 자리. **제출 전 게이트다.**
+    # 8. 아직 채우지 않은 자리. **공개 전 게이트다.**
     print()
     print("[8] 미해결 채움 표시 (\\PLACEHOLDER)")
     print("    존재하지 않는 URL·태그를 실재하는 artifact 처럼 제시하는 사고를 막는다")
@@ -268,12 +268,12 @@ def main() -> int:
                 print(f"  {path.name}:{i}  {what}")
     if pending:
         warnings.append(
-            f"채움 표시 {pending}개가 남아 있다. 제출 전에 0 이어야 한다"
+            f"채움 표시 {pending}개가 남아 있다. 공개 전에 0 이어야 한다"
         )
     else:
         print("  없음")
 
-    # 9. 인용한 artifact 가 실제로 존재하는가. **제출 전 게이트다.**
+    # 9. 인용한 artifact 가 실제로 존재하는가. **공개 전 게이트다.**
     print()
     print("[9] 인용한 공개 저장소와 릴리스 태그의 실재")
     joined = "\n".join(bodies.values())
@@ -289,7 +289,7 @@ def main() -> int:
         if urls or tags:
             warnings.append(
                 "인용한 저장소와 태그의 실재를 확인하지 않았다. "
-                "제출 전에 --check-remote 로 확인한다"
+                "공개 전에 --check-remote 로 확인한다"
             )
     elif not urls:
         print("  인용한 저장소가 없다. 확인할 것이 없다")
@@ -308,7 +308,7 @@ def main() -> int:
                     print(f"    **없음**  {tag}")
                     errors.append(
                         f"원고가 인용한 릴리스 태그 {tag} 가 {url} 에 없다. "
-                        "제출 전에 push 한다"
+                        "공개 전에 push 한다"
                     )
 
     print()
@@ -326,10 +326,10 @@ def main() -> int:
     elif not errors:
         print("통과 (경고 있음)")
     print()
-    print("**주의.** 이 검사는 조판 오류를 잡지 못한다. 제출 전에 TeX 환경에서")
+    print("**주의.** 이 검사는 조판 오류를 잡지 못한다. 공개 전에 TeX 환경에서")
     print("  pdflatex main && bibtex main && pdflatex main && pdflatex main")
     print("을 한 번 실행해야 한다.")
-    print("제출 전 게이트: scripts/check_latex.py --strict --check-remote")
+    print("공개 전 게이트: scripts/check_latex.py --strict --check-remote")
     return 1 if errors or (args.strict and warnings) else 0
 
 

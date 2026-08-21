@@ -11,7 +11,7 @@
 5  draft 의 claim ID 가 ledger 에 존재하는가
 6  draft 의 `[@key]` 가 references.bib 에 있고 서지정보가 TODO 가 아닌가
    `[CITATION NEEDED]` 가 남아 있지 않은가 (실패)
-   `[TO BE FILLED: ...]` 가 남아 있지 않은가 (경고. 제출 전에 0 이어야 한다)
+   `[TO BE FILLED: ...]` 가 남아 있지 않은가 (경고. 공개 전에 0 이어야 한다)
 ```
 
 **[6] 이 검사하지 않는 것.** 인용한 논문의 *내용*이 우리 주장을 실제로 지지하는지는
@@ -292,7 +292,7 @@ def main() -> int:
     for line_no in todo_lines:
         print(f"  {args.draft.name}:{line_no}  [CITATION NEEDED] 가 남아 있다")
         errors.append(f"{args.draft.name}:{line_no} [CITATION NEEDED] 미해결")
-    # 아직 존재하지 않는 값의 자리. 인용과 달리 제출 직전에 채우므로 경고로 둔다.
+    # 아직 존재하지 않는 값의 자리. 인용과 달리 공개 직전에 채우므로 경고로 둔다.
     fill_lines = [
         (i, line.strip()[:90])
         for i, line in enumerate(draft_text.splitlines(), start=1)
@@ -302,7 +302,7 @@ def main() -> int:
         print(f"  {args.draft.name}:{line_no}  채움 표시  {text}")
     if fill_lines:
         warnings.append(
-            f"draft 에 채움 표시 {len(fill_lines)}개가 남아 있다. 제출 전에 0 이어야 한다"
+            f"draft 에 채움 표시 {len(fill_lines)}개가 남아 있다. 공개 전에 0 이어야 한다"
         )
     unused = sorted(set(bib) - used)
     if unused:

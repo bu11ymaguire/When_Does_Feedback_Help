@@ -7,6 +7,20 @@ a study of how much benefit comes from **planning** versus **execution-time feed
 when a controller allocates damping and conjugate-gradient effort inside Hessian-free
 Newton--CG.
 
+> **Status.** Unrefereed technical report by an undergraduate, released as a
+> self-contained artifact. It is **not peer reviewed, not published, and not available
+> from any preprint server.** Read it as an engineering and measurement exercise whose
+> claims you can check yourself, not as a validated contribution to the literature.
+> AI assistants were used throughout, including in drafting the manuscript — see
+> [AI-assisted research disclosure](#ai-assisted-research-disclosure) for what was
+> delegated and what was not.
+
+The part worth your attention is not the effect size. It is that every number here is
+recomputable from published row-level data in a few minutes, every claim is registered
+against its evidence, and the places where the study fell short are written down rather
+than smoothed over. Twelve protocol deviations are recorded, one of which is a
+correction to an earlier revision of the deviation record.
+
 ---
 
 ## The question
@@ -185,12 +199,18 @@ results/public/           row-level results and a manifest with checksums
 paper/                    manuscript source, tables, figures, bibliography
 docs/reproduce.md         full reproduction commands
 notebooks/                overview and reproduction notebook
-tests/                    497 tests
+tests/                    490 tests on CPU
 ```
 
-Of the 497 tests, 465 cover the study's implementation and 32 cover this published
+Of the 490 tests, 458 cover the study's implementation and 32 cover this published
 reproduction package: that the row-level CSVs reproduce the manuscript's headline
 numbers, and that the notebook stays runnable and free of stored output.
+
+The count is device-dependent, which is worth knowing before you conclude the number is
+wrong. Seven numerical-accuracy tests in `tests/test_cg.py` and `tests/test_hvp.py` are
+parameterized over the available devices, so `pytest` collects 497 on a machine with
+CUDA and 490 without. Everything in this repository runs on CPU, so 490 is the number
+you should see.
 
 ### The published results
 
@@ -292,12 +312,39 @@ from the result files by script.
 
 ## AI-assisted research disclosure
 
-Claude Opus, accessed through Kiro, assisted with implementation, refactoring, test
-generation, experiment orchestration, and report generation. GPT-5.6 Sol, accessed
-through ChatGPT, assisted with methodological critique, confound analysis, claim
-calibration, and manuscript review. The human author formulated the research questions,
-approved protocol changes, verified the reported results, determined their
-interpretation, and assumes full responsibility for the work.
+AI assistants were used throughout this work, including in the drafting of the
+manuscript. Claude Opus, accessed through Kiro, assisted with implementation,
+refactoring, test generation, experiment orchestration, and report generation. GPT-5.6
+Sol, accessed through ChatGPT, assisted with methodological critique, confound analysis,
+claim calibration, and manuscript review.
+
+The human author formulated the research questions, set and froze the experimental
+protocol, approved every protocol change, verified the reported results, determined
+their interpretation, and assumes full responsibility for the work, including its
+errors.
+
+That division of labour is stated rather than merely asserted, because an assertion of
+human oversight is not checkable and this one is:
+
+```text
+docs/experiment_protocol.md   decisions D1-D32 in order, each with the date it was
+                              fixed. The claim that gate thresholds preceded the
+                              confirmatory run is checkable against commit history
+paper/claim_ledger.md         every claim with its evidence, plus twelve protocol
+                              deviations E1-E12. E12 is a correction to an earlier
+                              revision of the deviation record itself
+scripts/check_claims.py       mechanically rejects manuscript sentences that assert
+                              what the ledger marks unsupported, and numerical claims
+                              with no evidence source
+scripts/check_latex.py        refuses to pass if the manuscript cites a repository or
+                              release tag that does not exist on the remote
+```
+
+What this does not establish is the part tooling cannot reach. Mechanical checks show
+that the manuscript does not overstate the recorded evidence. They do not show that the
+research questions were worth asking, or that the experimental design is the one a
+domain expert would have chosen. **This work has not been reviewed by an independent
+researcher.** If you find a defect in it, an issue on this repository is welcome.
 
 ## Citation
 

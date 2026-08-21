@@ -62,7 +62,7 @@
 % 아직 존재하지 않는 값의 자리. **눈에 보이게** 조판한다. 조용히 비워 두면 존재하지
 % 않는 태그나 URL 을 실재하는 artifact 처럼 제시하는 사고가 난다(E12 와 같은 유형).
 % scripts/check_latex.py 가 이 표시를 검출하고 --strict 에서 실패한다.
-% 제출 전에 남은 자리가 0 이어야 한다.
+% 공개 전에 남은 자리가 0 이어야 한다.
 \newcommand{\PLACEHOLDER}[1]{\textbf{[TO BE FILLED: #1]}}
 
 \title{When Does Feedback Help?\\
@@ -75,7 +75,12 @@ Planning and Model Mismatch in Hessian-Free Newton Control}
   Seoul, Republic of Korea \\
   \texttt{jwkim628@gmail.com}
 }
-\date{}
+% 이 문서의 지위를 표지에서 명시한다. 조판된 PDF 만 따로 돌아다닐 때 심사를 통과한
+% 논문으로 오독되는 것을 막는다. 날짜를 `\today` 로 두지 않는 이유는 빌드할 때마다
+% PDF 가 달라져 재현성이 깨지기 때문이다.
+\date{Technical report, August 2026\\[4pt]
+  \normalsize Unrefereed. This document has not been peer reviewed and is not
+  available from any preprint server.}
 
 \begin{document}
 \maketitle

@@ -283,9 +283,9 @@ starting point sits in the basin of a strict local minimum, so every baseline re
 the identical value and the problem could not discriminate between controllers. That is
 a benchmark defect, not a finding about nonlinear problems.
 
-The manuscript records eleven further protocol deviations (E1–E12) in its Limitations
-section, including one case where an earlier revision of our own deviation record was
-itself wrong.
+The manuscript records twelve protocol deviations (E1–E12) in its Limitations section,
+including one case where an earlier revision of our own deviation record was itself
+wrong.
 
 ## Reproducibility conventions
 
@@ -346,10 +346,103 @@ research questions were worth asking, or that the experimental design is the one
 domain expert would have chosen. **This work has not been reviewed by an independent
 researcher.** If you find a defect in it, an issue on this repository is welcome.
 
+### Where the question came from
+
+The disclosure above covers who did what. It does not say where the question started, and
+for a project criticised as AI-generated that seems worth putting on the record. This is
+the first thing I asked, in Korean, before any code existed:
+
+> 딥러닝 역전파에서 GD말고 뉴턴 메소드를 쓰고 싶은데, Hessian 역행렬 연산이 병목이잖아.
+> 행렬의 역행렬 연산 최적화 기법을 탐구해줘. 아니면 Optimizer 문제를 강화학습의 에이전트가
+> 최적화를 찾아가는 방식으로 접근한 문제는 없어? 애초에 에이전트를 사전학습 시키려면
+> Optimizer가 필요한가?ㅋㅋ
+
+> I want to use Newton's method instead of GD in deep learning backpropagation, but
+> inverting the Hessian is the bottleneck. Look into techniques for optimizing matrix
+> inversion. Or, has anyone approached the optimizer problem as an RL agent searching for
+> the optimum? Then again, wouldn't you need an optimizer in the first place to pretrain
+> the agent? lol
+
+It is not a well-posed research question. It is an undergraduate who had just met
+Newton's method in a calculus course, noticed the Hessian was the obstacle, wondered
+whether the obstacle could be handed to a learned controller, and then immediately
+spotted the circularity in his own idea and laughed at it.
+
+That last throwaway line is the one that survived. Training a policy needs an optimizer,
+and the compute to train it has to be justified before you spend it. That is why this
+project never trained a policy and instead built an oracle planner to measure how much
+headroom a policy could possibly capture — the question of *whether the benefit is there
+at all* had to come first. The `committed` versus `shrinking` comparison, which is the
+entire point of the study, is a direct descendant of a joke in that first message.
+
+The path from that question to this repository runs through a long conversation with
+ChatGPT: [shared transcript](https://chatgpt.com/share/6a884aef-fd20-83ee-893e-c91e3b2d57d4).
+Two caveats, because this link does not meet the standard the rest of the repository
+holds itself to. It is a share link the author can revoke at any time, so it is a
+convenience, not a citable artifact — nothing in the manuscript depends on it. And it is
+only the ChatGPT half; the implementation work happened with Claude Opus through Kiro and
+is not in it.
+
+## What a reviewer told me, and what I did about it
+
+The sentence above is not there because no review was sought. In August 2026 I asked a
+senior researcher in the field to endorse the manuscript for arXiv. He declined, and
+gave a reason worth more than the endorsement would have been: the paper reads as
+AI-generated, the field is already absorbing enough of that, and the thing an
+undergraduate should be doing instead is finding people at their own university who can
+help develop the work and carry it into the community.
+
+I am not naming him or reproducing his message. He replied privately to a stranger's
+request when he could have ignored it, and I did not ask permission to publish it. What
+I can publish is my own reply:
+
+> Thank you very much for taking the time, despite your busy schedule, to read my
+> manuscript and share your honest feedback.
+>
+> This project began with a simple curiosity: what would happen if I applied the idea
+> behind Newton's method, which I first encountered in an undergraduate calculus course,
+> to optimization instead of relying only on gradient descent? As an undergraduate,
+> developing that initial question into an implementation and a series of experiments
+> with the help of generative AI was sometimes confusing, but also a genuinely new and
+> exciting experience.
+>
+> At the same time, your comments made me reflect on the important distinction between
+> implementing an idea and developing it into mature research through discussion with an
+> academic community and in one's own scholarly voice. Moving forward, I will seek more
+> feedback from faculty members and fellow students at my university, and work to ensure
+> that I can independently explain, defend, and take responsibility for every part of
+> the manuscript.
+>
+> Thank you again for your time and thoughtful advice. I believe this exchange will
+> remain a valuable experience as I continue pursuing research and a career in machine
+> learning.
+
+Three things in this repository changed as a direct result, and they are the reason this
+section exists rather than a quiet deletion of the arXiv references:
+
+```text
+title page      now carries "Technical report. Unrefereed. Not peer reviewed and not
+                available from any preprint server." A PDF travels on its own, and
+                without that line it can be read as a reviewed paper
+release tag     arxiv-submission-v1 was deleted. It named a submission that never
+                happened, which is precisely the error the \PLACEHOLDER mechanism and
+                the check_latex.py remote check exist to prevent. It is now
+                stage2-report-v1
+disclosure      the section above no longer asserts human oversight. It points at the
+                dated decision log, the claim ledger, and the checkers that make the
+                assertion falsifiable
+```
+
+The distinction he drew is the one I would keep if I could keep only one thing from this
+project: **implementing an idea and developing it into research are different acts, and
+the second one requires other people.** This repository is an honest record of the first,
+with the boundary marked.
+
 ## Citation
 
-See [`CITATION.cff`](CITATION.cff). If you use this code or the published results,
-please cite the manuscript.
+See [`CITATION.cff`](CITATION.cff). If you use this code or the published row-level
+results, please cite this repository. The manuscript is an unrefereed technical report
+and carries no DOI or preprint identifier.
 
 ## License
 

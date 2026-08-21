@@ -1,7 +1,7 @@
 {
   "export_version": "public-v1",
   "source": {
-    "commit": "b6982befee237b98552a7c59438b0393c692c2f6",
+    "commit": "616b79de0f13cd3ea9d7037109b4f0cadae46616",
     "branch": "main",
     "dirty": false
   },
@@ -9,6 +9,7 @@
   "method": "allowlist export. .git 을 복사하지 않으므로 공개 저장소는 private 이력을 공유하지 않는다. 아래 files 의 SHA-256 으로 두 트리를 한 방향으로 대조한다.",
   "renamed": {
     "public/README.md": "README.md",
+    "public/README.en.md": "README.en.md",
     "public/LICENSE": "LICENSE",
     "public/CITATION.cff": "CITATION.cff",
     "public/.gitignore": ".gitignore"
@@ -34,6 +35,7 @@
     "contact_checked": true,
     "contact_allowed_in": [
       "CITATION.cff",
+      "README.en.md",
       "README.md",
       "paper/main.tex"
     ],
@@ -46,16 +48,17 @@
     ],
     "note": "marked_files 는 개인정보 정리 도구다. 금지 문자열 패턴을 담을 수밖에 없어 스스로 표식을 선언했다. 실제 장치 이름이나 사용자 경로는 담지 않는다."
   },
-  "readme_reference_check": "통과. 공개 README 가 가리키는 저장소 경로가 모두 export 안에 있다.",
+  "readme_reference_check": "통과. 검사한 README README.md, README.en.md 가 가리키는 저장소 경로가 모두 export 안에 있다.",
   "counts": {
-    "files": 150,
+    "files": 151,
     "marked": 4
   },
   "files": {
     ".gitignore": "80e5343fecb7f243bc7d6c7455146b24eb70c47e922c272968eb56ada4b44bf0",
     "CITATION.cff": "4e69301c53878ee65932e998a8bfd297174db82498489404e6ac7e112450135c",
     "LICENSE": "372f21d96e38581003f17f3c4713b17243acb05fc802a15902a217ef70d599d0",
-    "README.md": "12d2de5d73a60fadbc4ff8d9e4e04a23d036ec92e6bda6d63f5fe64e821840ac",
+    "README.en.md": "050e48a407c5972d39df65937d8a05fa6a8b35c73dcf73b6be9684287e833a5e",
+    "README.md": "ec63795293a7c08d3591822aabdbe01d94549a6a02cc80cab794b8a90c1c25d1",
     "configs/base.yaml": "a2ab5edd9fa485b735747bd05dd73ec10fdf25ff267b0c2fb7448a1759be3185",
     "configs/cost_model.mnist_mlp.yaml": "28ed4f5f372257d277f933fa44be8fd776b36b9c114309d83ee9d4ae9c7e9794",
     "configs/cost_model.small_cnn.yaml": "4d3878d529a44125ec316ddd539e2b8ae7dec679189cc1c5f9ab52cd8e24c1be",
@@ -131,7 +134,7 @@
     "scripts/compare_controllers.py": "fdab1713f003e7d33986f2f234bc77ddede1caa21b57b5d5a353ad2f0348fff1",
     "scripts/diagnose_excluded_pairs.py": "8b2a7c2d5d4e96816c0558448c57e4a8f346c3fe1158f652c801469dbc123af4",
     "scripts/diagnose_rosen.py": "d68af5ad0af71a79220114857f8224bcda54bfb451df4692825cfad9802b9713",
-    "scripts/export_public_repo.py": "086469fcfa4bf857d5ee7123940f3b275882d248c7306130bf3883e2669e7b2e",
+    "scripts/export_public_repo.py": "532227e3869bf6d6373d42a630726ba854cce6250ace1f78eeb1f7e8edc2910f",
     "scripts/make_figures.py": "8496a4c3f067e5adc21e811cf42db041d49be3dca70ec97b3623f540971809c6",
     "scripts/make_manifest.py": "69761e104f1e141fa7c416669b9fbc50148289ba085d8be0dfdec57c0acae8d6",
     "scripts/make_public_results.py": "1aeda4110ba9d991568100a7579631a22229c90294c4ae1d8ccf8121aaee128a",

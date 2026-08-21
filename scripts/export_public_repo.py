@@ -91,6 +91,7 @@ ALLOWLIST = (
 # 이름을 바꿔 내보내는 것. private 루트의 README 를 덮지 않기 위한 장치다.
 RENAMES = {
     "public/README.md": "README.md",
+    "public/README.en.md": "README.en.md",
     "public/LICENSE": "LICENSE",
     "public/CITATION.cff": "CITATION.cff",
     "public/.gitignore": ".gitignore",
@@ -126,6 +127,7 @@ FORBIDDEN = ("DESKTOP-", "OneDrive", "C:\\Users", "/Users/jwkim")
 CONTACT_ALLOWED = {
     "CITATION.cff",
     "README.md",
+    "README.en.md",
     "paper/main.tex",
 }
 
@@ -339,10 +341,17 @@ def main() -> int:
         return 1
 
     # --- README 가 없는 파일을 가리키는지 --------------------------------
-    readme = sources.get("README.md")
+    # 한국어판과 영문판 **둘 다** 본다. 한쪽만 검사하면 다른 쪽의 깨진 경로가
+    # 조용히 공개된다.
     dangling: list[str] = []
-    if readme is not None:
-        dangling = check_references(readme.read_text(encoding="utf-8"), set(sources))
+    checked_readmes: list[str] = []
+    for name in ("README.md", "README.en.md"):
+        readme = sources.get(name)
+        if readme is None:
+            continue
+        checked_readmes.append(name)
+        for text in check_references(readme.read_text(encoding="utf-8"), set(sources)):
+            dangling.append(f"{name}: {text}")
     if dangling:
         print(f"**중단** 공개 README 가 없는 경로를 가리킨다 ({len(dangling)}건)")
         for text in dangling:
@@ -402,9 +411,10 @@ def main() -> int:
             ),
         },
         "readme_reference_check": (
-            "통과. 공개 README 가 가리키는 저장소 경로가 모두 export 안에 있다."
-            if readme is not None
-            else "건너뜀. README.md 가 export 대상에 없다."
+            f"통과. 검사한 README {', '.join(checked_readmes)} 가 가리키는 "
+            "저장소 경로가 모두 export 안에 있다."
+            if checked_readmes
+            else "건너뜀. README 가 export 대상에 없다."
         ),
         "counts": {"files": len(files), "marked": len(marked_files)},
         "files": files,
